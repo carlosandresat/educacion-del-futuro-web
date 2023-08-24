@@ -1,6 +1,6 @@
 import { InicioMenubar } from "@/components/inicio-menubar";
 import { ModeToggle } from "@/components/toggle-theme";
-import { PuntajesTable } from "@/components/puntajes-table";
+import { NoticiaCard } from "@/components/noticia-card";
 import { Separator } from "@/components/ui/separator";
 import { PuntajesForm } from "@/components/puntajes-form";
 import { MissionVision } from "@/components/mision-vision";
@@ -44,44 +44,61 @@ export default function Home() {
       <Separator />
 
       <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 py-6">
+        Noticias
+      </h2>
+
+      <div className="my-8 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 max-w-screen-xl">
+        <NoticiaCard></NoticiaCard>
+        <NoticiaCard></NoticiaCard>
+
+        <NoticiaCard></NoticiaCard>
+
+
+        <NoticiaCard></NoticiaCard>
+        <NoticiaCard></NoticiaCard>
+
+        <NoticiaCard></NoticiaCard>
+        <NoticiaCard></NoticiaCard>
+        <NoticiaCard></NoticiaCard>
+
+      </div>
+
+      <Separator />
+
+      <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 py-6">
         Puntajes Referenciales
       </h2>
 
-      <div className="flex">
-        <Sidebar />
-        <div className="flex-grow p-4">
-          {/* Your website content goes here */}
-        </div>
-      </div>
+      <Sidebar />
+
       <PuntajesForm></PuntajesForm>
 
-      <Separator/>
+      <Separator />
 
-     
       <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 py-6 my-5">
         Nuestros Cursos
       </h2>
 
       <CursosAccordion></CursosAccordion>
 
-      <Separator/>
-
-
+      <Separator />
 
       <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 py-6 mt-5">
         Nuestros Profesores
       </h2>
 
-        <div className="mt-5 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 max-w-screen-xl">
+      <div className="mt-5 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 max-w-screen-xl">
         {profesoresActivos.map((profesor) => (
-            <ProfesorCard key={profesor.name} profesor={profesor} className="w-auto"
+          <ProfesorCard
+            key={profesor.name}
+            profesor={profesor}
+            className="w-auto"
             aspectRatio="portrait"
             width={250}
-            height={330}/>
-          ))}
-        </div>
-          
-       
+            height={330}
+          />
+        ))}
+      </div>
     </div>
   );
 }
