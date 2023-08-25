@@ -1,13 +1,13 @@
 "use client"
 
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
+import { set, useForm } from "react-hook-form"
 import * as z from "zod"
 import { getPuntajesData } from "@/lib/scraping"
 import { useState } from "react"
 import { PuntajesTable } from "@/components/puntajes-table"
-
 import { Button } from "@/components/ui/button"
+
 import {
   Form,
   FormControl,
@@ -16,6 +16,7 @@ import {
 
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { Skeleton } from "./ui/skeleton"
 
 const FormSchema = z.object({
   oferta: z.string().min(2, {
@@ -26,6 +27,16 @@ const FormSchema = z.object({
 export function PuntajesForm() {
 
   const [tableData, setTableData] = useState<any>([])
+  const [loading, setLoading] = useState<boolean>(false)
+
+  const loadingSkeleton = [{ 
+    universidad: <Skeleton className="h-4 w-full"/>, 
+    carrera: <Skeleton className="h-4 w-full"/>, 
+    campus: <Skeleton className="h-4 w-[200px]"/>, 
+    modalidad: <Skeleton className="h-4 w-full"/>, 
+    jornada: <Skeleton className="h-4 w-[50px]"/>, 
+    puntaje: <Skeleton className="h-4 w-[200px]"/> 
+  }]
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -33,8 +44,10 @@ export function PuntajesForm() {
   
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
+    setLoading(true)
     const response = await getPuntajesData(data.oferta)
     setTableData(response as any)
+    setLoading(false)
   }
 
   return (
@@ -54,11 +67,13 @@ export function PuntajesForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Buscar</Button>
+        <Button type="submit" disabled={loading}>Buscar</Button>
         </div>
       </form>
     </Form>
-    <PuntajesTable tableData={tableData}></PuntajesTable>
+
+      <PuntajesTable tableData={loading ? loadingSkeleton : tableData}/>
+    
     </>
   )
 }
