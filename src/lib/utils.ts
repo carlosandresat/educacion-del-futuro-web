@@ -3,7 +3,7 @@ import { twMerge } from "tailwind-merge"
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
-export function delay(time) {
+export function delay(time:number) {
   return new Promise(function(resolve) { 
       setTimeout(resolve, time)
   });

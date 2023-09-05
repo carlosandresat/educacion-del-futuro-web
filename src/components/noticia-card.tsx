@@ -15,8 +15,8 @@ export function NoticiaCard() {
     <Card className="transition-all hover:scale-105">
       
       <CardContent>
-        <div className="w-full pt-4 ">
-        <AspectRatio ratio={4 / 3}>
+        <div className="w-full pt-4">
+        <AspectRatio ratio={16 / 9}>
         <Image
           src="/profesor.jpeg"
           alt="Logo"
