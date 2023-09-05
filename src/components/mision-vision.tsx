@@ -30,14 +30,14 @@ export function MissionVision() {
           : he would tax the jokes in the kingdom.
         </p>
         <blockquote className="mt-6 border-l-2 pl-6 italic">
-          "After all," he said, "everyone enjoys a good joke, so it's only fair
-          that they should pay for the privilege."
+        &quot;After all,&quot; he said, &quot;everyone enjoys a good joke, so its only fair
+          that they should pay for the privilege.
         </blockquote>
         <h3 className="mt-8 scroll-m-20 text-2xl font-semibold tracking-tight">
           The Joke Tax
         </h3>
         <p className="leading-7 [&:not(:first-child)]:mt-6">
-          The king's subjects were not amused. They grumbled and complained, but
+          The kings subjects were not amused. They grumbled and complained, but
           the king was firm:
         </p>
         <ul className="my-6 ml-6 list-disc [&>li]:mt-2">
@@ -47,7 +47,7 @@ export function MissionVision() {
         </ul>
         <p className="leading-7 [&:not(:first-child)]:mt-6">
           As a result, people stopped telling jokes, and the kingdom fell into a
-          gloom. But there was one person who refused to let the king's
+          gloom. But there was one person who refused to let the kings
           foolishness get him down: a court jester named Jokester.
         </p>
       </div>
@@ -68,14 +68,14 @@ export function MissionVision() {
           : he would tax the jokes in the kingdom.
         </p>
         <blockquote className="mt-6 border-l-2 pl-6 italic">
-          "After all," he said, "everyone enjoys a good joke, so it's only fair
-          that they should pay for the privilege."
+          After all, he said, everyone enjoys a good joke, so its only fair
+          that they should pay for the privilege.
         </blockquote>
         <h3 className="mt-8 scroll-m-20 text-2xl font-semibold tracking-tight">
           The Joke Tax
         </h3>
         <p className="leading-7 [&:not(:first-child)]:mt-6">
-          The king's subjects were not amused. They grumbled and complained, but
+          The kings subjects were not amused. They grumbled and complained, but
           the king was firm:
         </p>
         <ul className="my-6 ml-6 list-disc [&>li]:mt-2">
@@ -85,7 +85,7 @@ export function MissionVision() {
         </ul>
         <p className="leading-7 [&:not(:first-child)]:mt-6">
           As a result, people stopped telling jokes, and the kingdom fell into a
-          gloom. But there was one person who refused to let the king's
+          gloom. But there was one person who refused to let the kings
           foolishness get him down: a court jester named Jokester.
         </p>
       </div>
