@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
+import {OfertaTable} from "@/components/shadcn-tables";
 
 const FormSchema = z.object({
   username: z.string().min(2, {
@@ -66,7 +67,7 @@ export default function InputForm() {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="w-2/3 space-y-6"
+          className="w-full space-y-6"
         >
           <FormField
             control={form.control}

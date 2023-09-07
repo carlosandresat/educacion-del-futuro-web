@@ -40,7 +40,7 @@ export function MainNavbar() {
   useEffect(() => {
     const delayTimer = setTimeout(() => {
         setScrollDir("scrolling up");
-    }, 1000);
+    }, 200);
     return () => clearTimeout(delayTimer);
     }, []);
 
