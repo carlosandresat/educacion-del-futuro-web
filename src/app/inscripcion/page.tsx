@@ -67,7 +67,7 @@ export default function InputForm() {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="w-full space-y-6"
+          className="w-full space-y-6 max-w-screen-xl"
         >
           <FormField
             control={form.control}
