@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
+import Image from "next/image"
 
 import { cn } from "@/lib/utils"
 
@@ -20,36 +21,36 @@ const components: { title: string; href: string; description: string }[] = [
     title: "Curso 1",
     href: "/docs/primitives/alert-dialog",
     description:
-      "A modal dialog that interrupts the user with important content and expects a response.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   },
   {
     title: "Curso 2",
     href: "/docs/primitives/hover-card",
     description:
-      "For sighted users to preview content available behind a link.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   },
   {
     title: "Curso 3",
     href: "/docs/primitives/progress",
     description:
-      "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   },
   {
     title: "Curso 4",
     href: "/docs/primitives/scroll-area",
-    description: "Visually or semantically separates content.",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   },
   {
     title: "Curso 5",
     href: "/docs/primitives/tabs",
     description:
-      "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   },
   {
     title: "Curso 6",
     href: "/docs/primitives/tooltip",
     description:
-      "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   },
 ]
 
@@ -67,25 +68,24 @@ export function MainMenu() {
                     className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
                     href="/"
                   >
-                    <div className="mb-2 text-lg font-medium">
-                      Logo     </div>
+                    <Image src="next.svg" alt="EDF" width={100} height={100} />
                     <div className="mb-2 mt-4 text-lg font-medium">
                       Educación del Futuro
                     </div>
                     <p className="text-sm leading-tight text-muted-foreground">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique quis tempus id, ultrices in lorem. Nam quis lorem non lectus tincidunt aliquam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec vitae nisl sed dolor gravida tempor.
+                      En EDF estamos comprometidos con empoderar a través de la educación integral, creando líderes del mañana y transformando el sistema educativo ecuatoriano con innovación y excelencia.
                     </p>
                   </a>
                 </NavigationMenuLink>
               </li>
-              <ListItem href="/#mision_vision" title="Misión y Visión">
-                Re-usable components built using Radix UI and Tailwind CSS.
+              <ListItem href="/#mision_vision" title="Nuestro ¿Por qué?, Visión y Misión">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec imperdiet erat in mi molestie, eu lacinia odio ultricies. Etiam mollis leo nec nunc posuere sodales. Aliquam eu nulla cursus, lobortis tortor id, consequat leo. 
               </ListItem>
-              <ListItem href="/#noticias" title="Noticias">
-                How to install dependencies and structure your app.
+              <ListItem href="/#recursos" title="Recursos">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec imperdiet erat in mi molestie, eu lacinia odio ultricies. Etiam mollis leo nec nunc posuere sodales. Aliquam eu nulla cursus, lobortis tortor id, consequat leo. 
               </ListItem>
               <ListItem href="/#puntajes_referenciales" title="Puntajes Referenciales">
-                Styles for headings, paragraphs, lists...etc
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec imperdiet erat in mi molestie, eu lacinia odio ultricies. Etiam mollis leo nec nunc posuere sodales. Aliquam eu nulla cursus, lobortis tortor id, consequat leo. 
               </ListItem>
             </ul>
           </NavigationMenuContent>

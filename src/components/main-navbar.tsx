@@ -1,7 +1,8 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { ModeToggle } from "@/components/toggle-theme";
+import { Login } from "@/components/login";
+
 import { MainMenu } from "@/components/main-menu";
 
 export function MainNavbar() {
@@ -39,11 +40,10 @@ export function MainNavbar() {
 
   useEffect(() => {
     const delayTimer = setTimeout(() => {
-        setScrollDir("scrolling up");
+      setScrollDir("scrolling up");
     }, 200);
     return () => clearTimeout(delayTimer);
-    }, []);
-
+  }, []);
 
   return (
     <nav
@@ -66,6 +66,8 @@ export function MainNavbar() {
           <div className="">
             <MainMenu></MainMenu>
           </div>
+          
+          <Login></Login>
 
           {/*<div className=" self-center fixed  right-2 md:right-8">
             <ModeToggle></ModeToggle>
