@@ -1,13 +1,10 @@
 import Image from "next/image";
 
 const socialNetworks = [
-    { name: 'facebook', link: '#' },
-    { name: 'linkedin', link: '#' },
     { name: 'whatsapp', link: '#'},
-    { name: 'whatsapp-outline', link: '#'},
-    { name: 'email', link: '#'},
-    { name: 'email-outline', link: '#'},
-
+    { name: 'instagram', link: '#'},
+    { name: 'tik-tok', link: '#'},
+    { name: 'telegram', link: '#'},
   ];
   
   const Sidebar = () => {
