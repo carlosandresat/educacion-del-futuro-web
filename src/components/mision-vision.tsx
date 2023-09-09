@@ -6,7 +6,7 @@ export function MissionVision() {
     <>
       <div className="flex items-center flex-wrap my-10 max-w-screen-xl">
       <div className="w-full md:w-1/2 lg:w-1/2 p-4">
-          <h2 className="mt-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 text-left pl-4">
+          <h2 className="mt-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 text-left">
             Nuestro ¿Por Qué?
           </h2>
           <blockquote className="mt-6 border-l-2 pl-6 italic">
@@ -19,7 +19,7 @@ export function MissionVision() {
             sueños, se conviertan en agentes de cambio y lideren a la sociedad
             hacia un futuro de bienestar y desarrollo.
           </p>
-          <h2 className="mt-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 text-left pl-4">
+          <h2 className="mt-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 text-left">
             Nuestra Visión
           </h2>
           <blockquote className="mt-6 border-l-2 pl-6 italic">
@@ -31,7 +31,7 @@ export function MissionVision() {
             la educación no se detenga en las aulas, sino que se convierte en un
             viaje de autodescubrimiento, crecimiento y realización.
           </p>
-          <h2 className="mt-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 text-left pl-4">
+          <h2 className="mt-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 text-left">
             Nuestra Misión
           </h2>
           <blockquote className="mt-6 border-l-2 pl-6 italic">

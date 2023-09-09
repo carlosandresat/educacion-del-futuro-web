@@ -33,7 +33,7 @@ export default function Home() {
       <Separator />
 
       <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 py-6" id="noticias">
-        Noticias
+        Recursos
       </h2>
 
       <div className="my-8 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 max-w-screen-xl">

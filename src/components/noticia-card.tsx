@@ -8,10 +8,10 @@ import {
 } from "@/components/ui/card";
 import Image from "next/image";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { Button } from "@/components/ui/button";
 
 export function NoticiaCard() {
   return (
+    <a target="_blank" href="https://www.youtube.com/">
     <Card className="transition-all hover:scale-105">
       
       <CardContent>
@@ -27,17 +27,16 @@ export function NoticiaCard() {
         </div>
       </CardContent>
       <CardHeader>
-        <CardTitle>Título Noticia 1</CardTitle>
+        <CardTitle>Título Recurso 1</CardTitle>
         <CardDescription>Este es un ejemplo de descripción de noticia, debe ser reemplazado con noticias nuevas.</CardDescription>
       </CardHeader>
       <CardFooter>
         
         {/*Link Externo. Cuando sea dentro de pagina cambiar por Link */}
-        <a target="_blank" href="https://www.youtube.com/">
-        <Button>Ver más...
-          </Button>
-        </a>
+
+        
       </CardFooter>
     </Card>
+    </a>
   );
 }
