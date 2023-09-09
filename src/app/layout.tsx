@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={`${inter.className}`}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <div>
             <MainNavbar></MainNavbar>
             <div className="mx-auto mt-8">{children}</div>

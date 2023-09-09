@@ -67,9 +67,9 @@ export function MainNavbar() {
             <MainMenu></MainMenu>
           </div>
 
-          <div className=" self-center fixed  right-2 md:right-8">
+          {/*<div className=" self-center fixed  right-2 md:right-8">
             <ModeToggle></ModeToggle>
-          </div>
+    </div>*/}
         </div>
       </div>
     </nav>
