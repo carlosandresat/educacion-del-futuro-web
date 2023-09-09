@@ -9,7 +9,7 @@ const socialNetworks = [
   
   const Sidebar = () => {
     return (
-      <div className="fixed top-1/2 right-0 transform -translate-y-1/2 bg-secondary p-4">
+      <div className="fixed top-1/2 right-2 transform -translate-y-1/2 bg-secondary p-4 rounded-full">
         {socialNetworks.map((network) => (
           <a
             key={network.name}
