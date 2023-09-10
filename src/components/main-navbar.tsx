@@ -40,15 +40,19 @@ export function MainNavbar() {
   }, [scrollDir]);
 
   useEffect(() => {
+    if(window.location.pathname === "/") {
     const delayTimer = setTimeout(() => {
       setScrollDir("scrolling up");
-    }, 200);
+    }, 800);
     return () => clearTimeout(delayTimer);
+  } else {
+    setScrollDir("scrolling up");
+  }
   }, []);
 
   return (
     <nav
-      className={`bg-secondary p-4 sticky top-0 z-10 duration-500 ${
+      className={`bg-secondary p-4 sticky top-0 z-10 duration-300 ${
         scrollDir === "scrolling down" ? "-translate-y-full" : "translate-y-0"
       }`}
     >
