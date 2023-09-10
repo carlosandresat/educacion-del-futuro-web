@@ -17,7 +17,7 @@ import { Label } from "@/components/ui/label";
 export function Login() {
   return (
     <Dialog>
-      <DialogTrigger className="flex items-center justify-center self-center w-12 h-12 fixed right-2 md:right-8 rounded-full bg-primary">
+      <DialogTrigger className="flex items-center justify-center self-center w-12 h-12 fixed right-2 md:right-8 rounded-full bg-primary z-10">
         
           <PersonIcon className="invert"></PersonIcon>
         
