@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Login } from "@/components/login";
+import Link from "next/link";
 
 import { MainMenu } from "@/components/main-menu";
 
@@ -53,7 +54,7 @@ export function MainNavbar() {
     >
       <div className="container flex flex-col justify-center items-center w-full">
         {/* className="hidden md:flex space-x-4"o */}
-        <div className="">
+        <a href="/">
           <Image
             src="/next.svg"
             alt="Logo"
@@ -61,7 +62,7 @@ export function MainNavbar() {
             height={200}
             className="dark:invert"
           />
-        </div>
+        </a>
         <div className="flex flex-row justify-center w-full pt-6">
           <div className="">
             <MainMenu></MainMenu>

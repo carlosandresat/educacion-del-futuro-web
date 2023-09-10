@@ -66,7 +66,7 @@ export function MainMenu() {
                 <NavigationMenuLink asChild>
                   <a
                     className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                    href="/"
+                    href="/inicio"
                   >
                     <Image src="next.svg" alt="EDF" width={100} height={100} />
                     <div className="mb-2 mt-4 text-lg font-medium">
@@ -78,13 +78,13 @@ export function MainMenu() {
                   </a>
                 </NavigationMenuLink>
               </li>
-              <ListItem href="/#mision_vision" title="Nuestro ¿Por qué?, Visión y Misión">
+              <ListItem href="/inicio#mision_vision" title="Nuestro ¿Por qué?, Visión y Misión">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec imperdiet erat in mi molestie, eu lacinia odio ultricies. Etiam mollis leo nec nunc posuere sodales. Aliquam eu nulla cursus, lobortis tortor id, consequat leo. 
               </ListItem>
-              <ListItem href="/#recursos" title="Recursos">
+              <ListItem href="/inicio#recursos" title="Recursos">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec imperdiet erat in mi molestie, eu lacinia odio ultricies. Etiam mollis leo nec nunc posuere sodales. Aliquam eu nulla cursus, lobortis tortor id, consequat leo. 
               </ListItem>
-              <ListItem href="/#puntajes_referenciales" title="Puntajes Referenciales">
+              <ListItem href="/inicio#puntajes_referenciales" title="Puntajes Referenciales">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec imperdiet erat in mi molestie, eu lacinia odio ultricies. Etiam mollis leo nec nunc posuere sodales. Aliquam eu nulla cursus, lobortis tortor id, consequat leo. 
               </ListItem>
             </ul>

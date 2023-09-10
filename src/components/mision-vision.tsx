@@ -4,9 +4,9 @@ import Image from "next/image";
 export function MissionVision() {
   return (
     <>
-      <div className="flex items-center flex-wrap my-10 max-w-screen-xl">
+      <div className="flex items-center flex-wrap pb-10 max-w-screen-xl">
       <div className="w-full md:w-1/2 lg:w-1/2 p-4">
-          <h2 className="mt-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 text-left">
+          <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 text-left">
             Nuestro ¿Por Qué?
           </h2>
           <blockquote className="mt-6 border-l-2 pl-6 italic">
