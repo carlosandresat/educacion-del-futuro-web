@@ -59,7 +59,10 @@ export function MainMenu() {
     <NavigationMenu>
       <NavigationMenuList className="flex  flex-wrap">
         <NavigationMenuItem>
+          <Link href="/inicio" passHref className="h-[60px] w-full">
           <NavigationMenuTrigger className="h-[60px] w-full">Inicio</NavigationMenuTrigger>
+          </Link>
+          
           <NavigationMenuContent>
             <ul className="grid gap-3 p-4 w-[325px] md:w-[500px] lg:w-[600px] lg:grid-cols-[.75fr_1fr]">
               <li className="row-span-3">
@@ -91,7 +94,10 @@ export function MainMenu() {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
+          <Link href="/cursos" passHref className="h-[60px] w-full">
+
           <NavigationMenuTrigger className="h-[60px] w-full">Cursos</NavigationMenuTrigger>
+          </Link>
           <NavigationMenuContent>
             <ul className="grid w-[350px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
               {components.map((component) => (

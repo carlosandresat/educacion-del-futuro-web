@@ -2,8 +2,6 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Login } from "@/components/login";
-import Link from "next/link";
-
 import { MainMenu } from "@/components/main-menu";
 
 export function MainNavbar() {
@@ -43,7 +41,7 @@ export function MainNavbar() {
     if(window.location.pathname === "/") {
     const delayTimer = setTimeout(() => {
       setScrollDir("scrolling up");
-    }, 800);
+    }, 1000);
     return () => clearTimeout(delayTimer);
   } else {
     setScrollDir("scrolling up");

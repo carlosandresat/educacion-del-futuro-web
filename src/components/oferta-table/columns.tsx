@@ -49,5 +49,13 @@ export const columns: ColumnDef<OfertaAcademica>[] = [
         </Button>
       );
     },
+    cell: ({ row }) => {
+      const puntaje:string = row.getValue("puntaje");
+      return (
+        <div className="flex items-center justify-center">
+          {puntaje}
+        </div>
+      );
+    },
   },
 ];
