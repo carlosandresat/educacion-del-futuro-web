@@ -71,24 +71,26 @@ export function MainMenu({isTransparent}: {isTransparent: boolean}) {
                     className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
                     href="/inicio"
                   >
-                    <Image src="next.svg" alt="EDF" width={100} height={100} />
-                    <div className="mb-2 mt-4 text-lg font-medium">
+                    <div className="mb-2 text-lg font-medium">
                       Educación del Futuro
                     </div>
+                    <div className="mb-2 text-lg text-muted-foreground font-medium">
+                      Conócenos
+                    </div>
                     <p className="text-sm leading-tight text-muted-foreground">
-                      En EDF estamos comprometidos con empoderar a través de la educación integral, creando líderes del mañana y transformando el sistema educativo ecuatoriano con innovación y excelencia.
+                    Creemos firmemente que la educación es la herramienta más poderosa para el cambio.
                     </p>
                   </a>
                 </NavigationMenuLink>
               </li>
-              <ListItem href="/inicio#mision_vision" title="Nuestro ¿Por qué?, Visión y Misión">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec imperdiet erat in mi molestie, eu lacinia odio ultricies. Etiam mollis leo nec nunc posuere sodales. Aliquam eu nulla cursus, lobortis tortor id, consequat leo. 
+              <ListItem href="/inicio#mision_vision" title="Nuestro Equipo">
+              Conoce al equipo de Educación del Futuro.
               </ListItem>
               <ListItem href="/inicio#recursos" title="Recursos">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec imperdiet erat in mi molestie, eu lacinia odio ultricies. Etiam mollis leo nec nunc posuere sodales. Aliquam eu nulla cursus, lobortis tortor id, consequat leo. 
+                Revisa los recursos que tenemos para ti.
               </ListItem>
               <ListItem href="/inicio#puntajes_referenciales" title="Puntajes Referenciales">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec imperdiet erat in mi molestie, eu lacinia odio ultricies. Etiam mollis leo nec nunc posuere sodales. Aliquam eu nulla cursus, lobortis tortor id, consequat leo. 
+              Consulta los puntajes referenciales de la carrera de tus sueños.
               </ListItem>
             </ul>
           </NavigationMenuContent>
