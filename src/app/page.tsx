@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import Sidebar from "@/components/sidebar";
 
 export default function Cursos() {
   return (
@@ -21,8 +20,6 @@ export default function Cursos() {
         <Button className="rounded-full p-6 opacity-80 w-60">Clases gratis</Button>
       </Link>
       </div>
-      
-      <Sidebar />
-      </>
+    </>
   );
 }

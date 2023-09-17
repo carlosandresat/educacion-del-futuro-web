@@ -2,7 +2,6 @@
 import { NoticiaCard } from "@/components/noticia-card";
 import { Separator } from "@/components/ui/separator";
 import { MissionVision } from "@/components/mision-vision";
-import Sidebar from "@/components/sidebar";
 import {OfertaTable} from "@/components/shadcn-tables";
 
 
@@ -32,8 +31,6 @@ export default function Home() {
       <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 py-6" id="puntajes_referenciales">
         Puntajes Referenciales
       </h2>
-
-      <Sidebar />
 
       <OfertaTable></OfertaTable>
       <Separator />
