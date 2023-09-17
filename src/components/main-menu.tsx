@@ -54,13 +54,13 @@ const components: { title: string; href: string; description: string }[] = [
   },
 ]
 
-export function MainMenu() {
+export function MainMenu({isTransparent}: {isTransparent: boolean}) {
   return (
     <NavigationMenu>
       <NavigationMenuList className="flex  flex-wrap">
         <NavigationMenuItem>
           <Link href="/inicio" passHref className="h-[60px] w-full">
-          <NavigationMenuTrigger className="h-[60px] w-full">Inicio</NavigationMenuTrigger>
+          <NavigationMenuTrigger className={`h-[60px] w-full ${isTransparent ? "bg-transparent" : ""}`}>Inicio</NavigationMenuTrigger>
           </Link>
           
           <NavigationMenuContent>
@@ -96,7 +96,7 @@ export function MainMenu() {
         <NavigationMenuItem>
           <Link href="/cursos" passHref className="h-[60px] w-full">
 
-          <NavigationMenuTrigger className="h-[60px] w-full">Cursos</NavigationMenuTrigger>
+          <NavigationMenuTrigger className={`h-[60px] w-full ${isTransparent ? "bg-transparent" : ""}`}>Cursos</NavigationMenuTrigger>
           </Link>
           <NavigationMenuContent>
             <ul className="grid w-[350px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">

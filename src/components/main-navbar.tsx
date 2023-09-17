@@ -3,6 +3,8 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Login } from "@/components/login";
 import { MainMenu } from "@/components/main-menu";
+import { usePathname } from "next/navigation"
+
 
 export function MainNavbar() {
   const [scrollDir, setScrollDir] = useState("scrolling down");
@@ -48,9 +50,11 @@ export function MainNavbar() {
   }
   }, []);
 
+  const pathname = usePathname()
+
   return (
     <nav
-      className={`bg-secondary p-4 sticky top-0 z-10 duration-300 ${
+      className={`${pathname === "/" ? "bg-transparent" : "bg-secondary"} p-4 sticky top-0 z-10 duration-300 ${
         scrollDir === "scrolling down" ? "-translate-y-full" : "translate-y-0"
       }`}
     >
@@ -67,7 +71,7 @@ export function MainNavbar() {
         </a>
         <div className="flex flex-row justify-center w-full pt-6">
           <div className="">
-            <MainMenu></MainMenu>
+            <MainMenu isTransparent = {pathname === "/"}></MainMenu>
           </div>
           
           <Login></Login>
