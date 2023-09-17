@@ -40,6 +40,7 @@ export function ProfesorDialog() {
           </p>
         </div>
         <DialogFooter>
+            <div>
           <Button variant="default" className="w-12 h-12 p-0">
             <Image
               src="/icons/email-outline.png"
@@ -94,6 +95,7 @@ export function ProfesorDialog() {
               className="h-auto w-auto object-cover transition-all hover:scale-105"
             />
           </Button>
+          </div>
         </DialogFooter>
       </DialogContent>
     </Dialog>
