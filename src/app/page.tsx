@@ -13,11 +13,11 @@ export default function Cursos() {
         src="https://www.espoch.edu.ec/wp-content/uploads/2023/03/video_pag_web2.mp4"
       ></video>
       <div className="flex absolute bottom-12 w-full justify-center flex-wrap md:space-x-4">
-      <Link href="/inscripcion" >
-        <Button variant="secondary" className="rounded-full p-6 opacity-80 w-60">Inscríbete ahora</Button>
+      <Link href="/cursos" >
+        <Button variant="secondary" className="rounded-full p-6 opacity-80 w-60">Inscríbete Ahora</Button>
       </Link>
       <Link href="/cursos" >
-        <Button className="rounded-full p-6 opacity-80 w-60">Clases gratis</Button>
+        <Button className="rounded-full p-6 opacity-80 w-60">Clases Gratis</Button>
       </Link>
       </div>
     </>

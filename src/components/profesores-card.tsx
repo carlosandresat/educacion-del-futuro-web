@@ -1,5 +1,8 @@
 import Image from "next/image";
 import { Profesor } from "@/data/profesores";
+import { Button } from "@/components/ui/button";
+import { ProfesorDialog } from "@/components/profesor-dialog";
+
 
 import { cn } from "@/lib/utils";
 
@@ -19,7 +22,7 @@ export function ProfesorCard({
   ...props
 }: ProfesorCardProps) {
   return (
-    <div className={cn("space-y-3", className)} {...props}>
+    <div className={cn("space-y-3 flex flex-col items-center", className)} {...props}>
       <div className="overflow-hidden rounded-md">
         <Image
           src={profesor.photo}
@@ -33,9 +36,10 @@ export function ProfesorCard({
         />
       </div>
       <div className="space-y-1 text-sm">
-        <h3 className="font-medium leading-none">{profesor.name}</h3>
-        <p className="text-xs text-muted-foreground">{profesor.description}</p>
+        <h3 className="font-medium leading-none text-center">{profesor.name}</h3>
+        <p className="text-xs text-muted-foreground text-center">{profesor.description}</p>
       </div>
+      <ProfesorDialog></ProfesorDialog>
     </div>
   );
 }
