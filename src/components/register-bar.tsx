@@ -56,13 +56,13 @@ export function RegisterBar() {
 
   return (
     <div
-      className={`bg-secondary/75 bottom-0 p-4 sticky top-0 z-10  duration-300 ${
+      className={`bottom-0 p-4 sticky top-0 z-10  duration-300 ${
         scrollDir === "scrolling up" ? "translate-y-full" : "translate-y-0"
       }`}
     >
       <div className="flex w-full justify-center flex-wrap md:space-x-4">
       <Link href="/cursos" >
-        <Button variant="secondary" className="rounded-full p-6 w-60">Inscríbete Ahora</Button>
+        <Button variant="secondary" className="rounded-full p-6 w-60 border">Inscríbete Ahora</Button>
       </Link>
       <Link href="/cursos" >
         <Button className="rounded-full p-6 w-60">Clases Gratis</Button>
