@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import Link from "next/link"
-import Image from "next/image"
 
 import { cn } from "@/lib/utils"
 
@@ -55,12 +54,14 @@ const components: { title: string; href: string; description: string }[] = [
 ]
 
 export function MainMenu({isTransparent}: {isTransparent: boolean}) {
+
+
   return (
     <NavigationMenu>
       <NavigationMenuList className="flex  flex-wrap">
         <NavigationMenuItem>
           <Link href="/inicio" passHref className="h-[60px] w-full">
-          <NavigationMenuTrigger className={`h-[60px] w-full ${isTransparent ? "bg-transparent" : ""}`}>Inicio</NavigationMenuTrigger>
+          <NavigationMenuTrigger className={`h-[60px] w-full  ${isTransparent ? "bg-transparent text-xl font-semibold text-primary-foreground data-[state=open]:text-primary" : ""} `}>Inicio</NavigationMenuTrigger>
           </Link>
           
           <NavigationMenuContent>
@@ -98,7 +99,7 @@ export function MainMenu({isTransparent}: {isTransparent: boolean}) {
         <NavigationMenuItem>
           <Link href="/cursos" passHref className="h-[60px] w-full">
 
-          <NavigationMenuTrigger className={`h-[60px] w-full ${isTransparent ? "bg-transparent" : ""}`}>Cursos</NavigationMenuTrigger>
+          <NavigationMenuTrigger className={`h-[60px] w-full ${isTransparent ? "bg-transparent text-xl font-semibold text-primary-foreground data-[state=open]:text-primary" : ""}`}>Cursos</NavigationMenuTrigger>
           </Link>
           <NavigationMenuContent>
             <ul className="grid w-[350px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
@@ -115,10 +116,12 @@ export function MainMenu({isTransparent}: {isTransparent: boolean}) {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <Link href="/inscripcion" legacyBehavior passHref className="h-[60px] w-full">
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+          <Link href="/inscripcion" legacyBehavior passHref className="h-[60px] w-full ">
+            {isTransparent ? <NavigationMenuLink className="bg-transparent group inline-flex h-[60px] w-max items-center justify-center rounded-md px-4 py-2  transition-colors hover:bg-background hover:text-accent-foreground focus:bg-background focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-background data-[state=open]:bg-background text-xl font-semibold text-primary-foreground data-[state=open]:text-primary">
               Inscripciones
-            </NavigationMenuLink>
+            </NavigationMenuLink> : <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              Inscripciones
+            </NavigationMenuLink>}
           </Link>
         </NavigationMenuItem>
       </NavigationMenuList>

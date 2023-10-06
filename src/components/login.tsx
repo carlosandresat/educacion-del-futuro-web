@@ -29,16 +29,16 @@ export function Login() {
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
-              Correo
+            <Label htmlFor="cedula" className="text-right">
+              Cédula
             </Label>
-            <Input id="name" className="col-span-3" />
+            <Input id="cedula" className="col-span-3" />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="username" className="text-right">
+            <Label htmlFor="password" className="text-right">
               Contraseña
             </Label>
-            <Input id="username" type="password" className="col-span-3" />
+            <Input id="password" type="password" className="col-span-3" />
           </div>
         </div>
         <DialogFooter>
