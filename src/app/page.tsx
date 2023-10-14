@@ -14,10 +14,10 @@ export default function Cursos() {
       ></video>
       <div className="flex absolute bottom-12 w-full justify-center flex-wrap md:space-x-4">
       <Link href="/cursos" >
-        <Button variant="secondary" className="rounded-full p-6 bg-secondary/80 hover:bg-secondary w-60">Inscríbete Ahora</Button>
+        <Button variant="secondary" className="rounded-full p-6 bg-secondary/80 hover:bg-secondary w-60 text-lg">Inscríbete Ahora</Button>
       </Link>
       <Link href="/cursos" >
-        <Button className="rounded-full p-6 bg-primary/80 hover:bg-primary w-60">Clases Gratis</Button>
+        <Button className="rounded-full p-6 bg-primary/80 hover:bg-primary w-60 text-lg">Clases Gratis</Button>
       </Link>
       </div>
     </>

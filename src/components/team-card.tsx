@@ -15,8 +15,8 @@ import { Button } from "@/components/ui/button";
     return (
       <Card className="transition-all w-96">
         
-          {//<div className="w-full p-4 xl:px-10">
-          }
+          <div className="w-full p-4 xl:px-10">
+          
           <AspectRatio ratio={3 / 4} className="w-full p-4 xl:px-10">
           <Image
             src="/profesor.jpeg"
@@ -25,8 +25,8 @@ import { Button } from "@/components/ui/button";
             className="justify-start rounded-md object-cover"
           />
           </AspectRatio>
-          {//</div>
-          }
+          </div>
+          
         <CardHeader>
           <CardTitle className="self-center">Carlos Arévalo</CardTitle>
           <CardDescription className="text-center">Ingeniero en Tecnologías de la Información</CardDescription>

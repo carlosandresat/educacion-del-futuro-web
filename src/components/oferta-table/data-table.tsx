@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 import {
   ColumnDef,
@@ -11,6 +11,7 @@ import {
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
+
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
@@ -38,6 +39,7 @@ export function DataTable<TData, TValue>({
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(
     []
   )
+  const [globalFilter, setGlobalFilter] = useState("")
 
   const table = useReactTable({
     data,
@@ -47,24 +49,54 @@ export function DataTable<TData, TValue>({
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
     onColumnFiltersChange: setColumnFilters,
+    onGlobalFilterChange: setGlobalFilter,
     getFilteredRowModel: getFilteredRowModel(),
     state: {
       sorting,
-      columnFilters
+      columnFilters,
+      globalFilter,
     },
   })
+
+  function DebouncedInput({
+    value: initialValue,
+    onChange,
+    debounce = 500,
+    ...props
+  }: {
+    value: string | number
+    onChange: (value: string | number) => void
+    debounce?: number
+  } & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'>) {
+    const [value, setValue] = useState(initialValue)
+  
+    useEffect(() => {
+      setValue(initialValue)
+    }, [initialValue])
+  
+    useEffect(() => {
+      const timeout = setTimeout(() => {
+        onChange(value)
+      }, debounce)
+  
+      return () => clearTimeout(timeout)
+    }, [value])
+  
+    return (
+      <input {...props} value={value} onChange={e => setValue(e.target.value)} />
+    )
+  }
 
   return (
     <div>
       <div className="flex items-center py-4">
-        <Input
-          placeholder="Buscar carrera..."
-          value={(table.getColumn("carrera")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("carrera")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
+        <DebouncedInput
+          placeholder="Buscar institución, carrera o campus..."
+          value={String(globalFilter) ?? ''}
+          onChange={value => setGlobalFilter(String(value))}
+          className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 max-w-xs"
         />
+        <p className="text-sm text-muted-foreground ml-4">Recuerda las tildes adecuadas</p>
       </div>
 
     <div className="rounded-md border">
