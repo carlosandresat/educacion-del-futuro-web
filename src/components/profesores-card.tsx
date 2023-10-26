@@ -1,8 +1,5 @@
 import Image from "next/image";
 import { Profesor } from "@/data/profesores";
-import { Button } from "@/components/ui/button";
-import { ProfesorDialog } from "@/components/profesor-dialog";
-
 
 import { cn } from "@/lib/utils";
 
@@ -39,7 +36,6 @@ export function ProfesorCard({
         <h3 className="font-medium leading-none text-center">{profesor.name}</h3>
         <p className="text-xs text-muted-foreground text-center">{profesor.description}</p>
       </div>
-      <ProfesorDialog></ProfesorDialog>
-    </div>
+\    </div>
   );
 }
