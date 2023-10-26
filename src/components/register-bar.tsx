@@ -62,10 +62,10 @@ export function RegisterBar() {
     >
       <div className="flex w-full justify-center flex-wrap md:space-x-4">
       <Link href="/cursos" >
-        <Button variant="secondary" className="rounded-full p-6 w-60 border">Inscríbete Ahora</Button>
+        <Button variant="secondary" className="rounded-full p-6 w-60 border md:text-lg">Inscríbete Ahora</Button>
       </Link>
       <Link href="/cursos" >
-        <Button className="rounded-full p-6 w-60">Clases Gratis</Button>
+        <Button className="rounded-full p-6 w-60 md:text-lg">Clases Gratis</Button>
       </Link>
       </div>
     </div>

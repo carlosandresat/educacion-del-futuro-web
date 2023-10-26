@@ -10,7 +10,17 @@ import {
 } from "@/components/ui/dialog";
 import Image from "next/image";
 
-export function ProfesorDialog() {
+export function ProfesorDialog({
+  name,
+  position,
+  description,
+  networks,
+}: {
+  name: string;
+  position: string;
+  description: React.ReactNode;
+  networks: { name: string; url: string }[];
+}) {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -18,8 +28,8 @@ export function ProfesorDialog() {
       </DialogTrigger>
       <DialogContent className="md:max-w-xl">
         <DialogHeader>
-          <DialogTitle>Nombre del Profesor</DialogTitle>
-          <DialogDescription>Título del Profesor</DialogDescription>
+          <DialogTitle>{name}</DialogTitle>
+          <DialogDescription>{position}</DialogDescription>
         </DialogHeader>
         <div className="grid py-4">
           <p className="leading-7 [&:not(:first-child)]:mt-6">
@@ -40,61 +50,26 @@ export function ProfesorDialog() {
           </p>
         </div>
         <DialogFooter>
-            <div>
-          <Button variant="default" className="w-12 h-12 p-0">
-            <Image
-              src="/icons/email-outline.png"
-              alt="Educación del Futuro"
-              width={30}
-              height={30}
-              className="h-auto w-auto object-cover transition-all hover:scale-105 invert"
-            />
-          </Button>
-          <Button variant="outline" className="w-12 h-12 p-0">
-            <Image
-              src="/icons/facebook.png"
-              alt="Educación del Futuro"
-              width={30}
-              height={30}
-              className="h-auto w-auto object-cover transition-all hover:scale-105"
-            />
-          </Button>
-          <Button variant="outline" className="w-12 h-12 p-0">
-            <Image
-              src="/icons/whatsapp.png"
-              alt="Educación del Futuro"
-              width={30}
-              height={30}
-              className="h-auto w-auto object-cover transition-all hover:scale-105"
-            />
-          </Button>
-          <Button variant="secondary" className="w-12 h-12 p-0">
-            <Image
-              src="/icons/linkedin.png"
-              alt="Educación del Futuro"
-              width={30}
-              height={30}
-              className="h-auto w-auto object-cover transition-all hover:scale-105"
-            />
-          </Button>
-          <Button variant="link" className="w-12 h-12 p-0">
-            <Image
-              src="/icons/tik-tok.png"
-              alt="Educación del Futuro"
-              width={30}
-              height={30}
-              className="h-auto w-auto object-cover transition-all hover:scale-105"
-            />
-          </Button>
-          <Button variant="ghost" className="w-12 h-12 p-0">
-            <Image
-              src="/icons/twitter.png"
-              alt="Educación del Futuro"
-              width={30}
-              height={30}
-              className="h-auto w-auto object-cover transition-all hover:scale-105"
-            />
-          </Button>
+          <div>
+            {networks.map((network) => (
+              <a
+                href={network.url}
+                className="inline-block mr-4"
+                key={network.name}
+                target="_blank"
+              >
+                            <Button variant="default" className="w-12 h-12 p-0 hover:scale-105">
+
+                <Image
+                src={`/icons/${network.name}.png`}
+                alt="Educación del Futuro"
+                width={30}
+                height={30}
+                className="h-auto w-auto object-cover transition-all  invert"
+              />
+            </Button>
+              </a>
+            ))}
           </div>
         </DialogFooter>
       </DialogContent>

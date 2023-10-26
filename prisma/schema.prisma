@@ -1,0 +1,32 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model registro {
+  id                  Int     @id @default(autoincrement())
+  curso               String
+  horario             String
+  nombres             String
+  cedula              String
+  telefono            String
+  genero              String
+  academic_year       String
+  colegio             String
+  condicion_salud     String
+  representante_nombres String
+  representante_celular String
+  representante_convencional String
+  correo              String
+  direccion           String
+  carrera             String
+  no_examenes         Int
+  espectativas        String
+  descubierto_por      String
+  deposito            String
+}

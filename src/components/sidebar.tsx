@@ -1,4 +1,6 @@
+"use client"
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 const socialNetworks = [
   { name: "tik-tok", link: "#" },
@@ -9,8 +11,24 @@ const socialNetworks = [
 ];
 
 const Sidebar = () => {
+
+  const [isSideBarVisible, setIsSideBarVisible] = useState(false);
+
+  useEffect(() => {
+    if(window.location.pathname === "/") {
+    const delayTimer = setTimeout(() => {
+      setIsSideBarVisible(true);
+    }, 1000);
+    return () => clearTimeout(delayTimer);
+  } else {
+    setIsSideBarVisible(true);
+  }
+  }, []);
+
   return (
-    <div className="fixed top-1/2 right-2 md:right-4 transform -translate-y-1/2 bg-secondary/80 p-4 rounded-full visible md:visible">
+    <div className={`fixed top-1/2 right-2 md:right-4 transform -translate-y-1/2 bg-secondary/80 p-4 rounded-full duration-300 ${
+      !isSideBarVisible ? "translate-x-32" : "translate-x-0"
+    }`}>
       {socialNetworks.map((network) => (
         <a
           key={network.name}

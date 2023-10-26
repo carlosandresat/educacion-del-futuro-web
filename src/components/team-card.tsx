@@ -10,8 +10,15 @@ import {
 import { Button } from "@/components/ui/button";
   import { AspectRatio } from "@/components/ui/aspect-ratio";
   import { ProfesorDialog } from "./profesor-dialog";
+import { ReactNode } from "react";
+
+interface Network {
+    name: string;
+    url: string;
+}
   
-  export function TeamCard() {
+  export function TeamCard({name, position, title, description, networks, pic} : {name:string, position:string, title:string, description:ReactNode , networks: Network[], pic:string}) {
+  
     return (
       <Card className="transition-all w-96">
         
@@ -19,8 +26,8 @@ import { Button } from "@/components/ui/button";
           
           <AspectRatio ratio={3 / 4} className="w-full p-4 xl:px-10">
           <Image
-            src="/profesor.jpeg"
-            alt="Logo"
+            src={`/equipo/${pic}.jpg`}
+            alt={name}
             fill={true}
             className="justify-start rounded-md object-cover"
           />
@@ -28,11 +35,12 @@ import { Button } from "@/components/ui/button";
           </div>
           
         <CardHeader>
-          <CardTitle className="self-center">Carlos Arévalo</CardTitle>
-          <CardDescription className="text-center">Ingeniero en Tecnologías de la Información</CardDescription>
+          <CardTitle className="self-center">{name}</CardTitle>
+          <CardDescription className="text-center">{position}</CardDescription>
+          <CardDescription className="text-center">{title}</CardDescription>
         </CardHeader>
         <CardFooter className="justify-center">
-        <ProfesorDialog></ProfesorDialog>  
+        <ProfesorDialog name={name} position={position} description={description} networks={networks}></ProfesorDialog>  
         </CardFooter>
       </Card>
     );

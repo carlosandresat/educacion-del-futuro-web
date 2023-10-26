@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Login } from "@/components/login";
 import { MainMenu } from "@/components/main-menu";
 import { usePathname } from "next/navigation"
-
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 export function MainNavbar() {
   const [scrollDir, setScrollDir] = useState("scrolling down");
@@ -58,18 +58,20 @@ export function MainNavbar() {
         scrollDir === "scrolling down" ? "-translate-y-full" : "translate-y-0"
       }`}
     >
-      <div className="container flex flex-col justify-center items-center w-full">
+      <div className="container flex flex-col justify-center items-center">
         {/* className="hidden md:flex space-x-4"o */}
-        <a href="/">
+        <a href="/" className=" max-w-[240px] w-full">
+        <AspectRatio ratio={10 / 4}>
+
           <Image
-            src="/next.svg"
+            src="/logoEDF.png"
             alt="Logo"
-            width={200}
-            height={200}
-            className="dark:invert"
+            fill={true}
+            className="justify-start rounded-md object-cover"
           />
+          </AspectRatio>
         </a>
-        <div className="flex flex-row justify-center w-full pt-6">
+        <div className="flex flex-row justify-center w-full">
           <div className="">
             <MainMenu isTransparent = {pathname === "/"}></MainMenu>
           </div>
