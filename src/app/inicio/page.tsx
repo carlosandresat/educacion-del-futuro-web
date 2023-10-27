@@ -2,13 +2,8 @@ import { NoticiaCard } from "@/components/noticia-card";
 import { Separator } from "@/components/ui/separator";
 import { MissionVision } from "@/components/mision-vision";
 import { OfertaTable } from "@/components/shadcn-tables";
-import { ProfesorCard } from "@/components/profesores-card";
-import { profesoresActivos } from "@/data/profesores";
-import { TeamCard } from "@/components/team-card";
-import { register } from 'swiper/element/bundle';
 import { TeamArea } from "@/components/team-area";
 
-register();
 
 export default function Home() {
   return (

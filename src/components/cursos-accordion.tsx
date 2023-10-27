@@ -6,6 +6,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { useState } from "react";
+import { Separator } from "@/components/ui/separator";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -58,7 +59,7 @@ export function CursosAccordion() {
               </DialogTrigger>
               <DialogContent className="sm:max-w-[425px] md:max-w-screen-sm md:w-fit max-h-full py-6">
                 <Image
-                  src="/testimonio1.jpg"
+                  src="/testimonio2.jpg"
                   alt="Logo"
                   width={899}
                   height={1280}
@@ -92,7 +93,7 @@ export function CursosAccordion() {
               </DialogTrigger>
               <DialogContent className="sm:max-w-[425px] md:max-w-screen-lg">
                 <Image
-                  src="/testimonio2.jpg"
+                  src="/testimonio1.jpg"
                   alt="Logo"
                   width={1280}
                   height={720}
@@ -142,6 +143,8 @@ export function CursosAccordion() {
           </div>
         </div>
 
+        <Separator className="my-10" />
+
         <Accordion
           type="single"
           collapsible
@@ -150,7 +153,7 @@ export function CursosAccordion() {
         >
           <AccordionItem value="item-1">
             <AccordionTrigger className=" text-xl">
-              Expedición Científica (Curso de Conocimientos)
+              Curso de Conocimientos: Expedición Científica
             </AccordionTrigger>
             <AccordionContent>
               <div className="flex items-center flex-wrap w-full">
@@ -201,7 +204,7 @@ export function CursosAccordion() {
           </AccordionItem>
           <AccordionItem value="item-2">
             <AccordionTrigger className=" text-xl">
-              Ruta del Genio (Curso de Razonamiento)
+              Curso de Razonamiento: Ruta del Genio
             </AccordionTrigger>
             <AccordionContent>
               <div className="flex items-center flex-wrap w-full">
@@ -249,7 +252,7 @@ export function CursosAccordion() {
           </AccordionItem>
           <AccordionItem value="item-3">
             <AccordionTrigger className=" text-xl">
-              Sendero del Guerrero (Curso para Carreras Focalizadas)
+              Curso para Carreras Focalizadas: Sendero del Guerrero
             </AccordionTrigger>
             <AccordionContent>
               <div className="flex items-center flex-wrap w-full">
