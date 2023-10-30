@@ -68,6 +68,20 @@
     --ring: 212.7 26.8% 83.9%;
   }
 }
+
+html::-webkit-scrollbar{
+  width: .8rem;
+}
+
+html::-webkit-scrollbar-track{
+  background: hsl(var(--secondary));
+  z-index: -999;
+}
+
+html::-webkit-scrollbar-thumb{
+  background: hsl(var(--border));
+  border-radius: 5rem;
+}
  
 @layer base {
   * {
