@@ -17,39 +17,22 @@ import {
 
 const components: { title: string; href: string; description: string }[] = [
   {
-    title: "Curso 1",
+    title: "Curso de Conocimientos",
     href: "/docs/primitives/alert-dialog",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "Expedición científica",
   },
   {
-    title: "Curso 2",
+    title: "Curso de Razonamiento",
     href: "/docs/primitives/hover-card",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "Ruta del Genio",
   },
   {
-    title: "Curso 3",
+    title: "Cruso para Carreras Especializadas",
     href: "/docs/primitives/progress",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-  {
-    title: "Curso 4",
-    href: "/docs/primitives/scroll-area",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-  {
-    title: "Curso 5",
-    href: "/docs/primitives/tabs",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-  {
-    title: "Curso 6",
-    href: "/docs/primitives/tooltip",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "Sendero del Guerrero",
   },
 ]
 

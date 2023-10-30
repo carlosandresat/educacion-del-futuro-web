@@ -14,8 +14,8 @@ export function MissionVision() {
           <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 text-left">
             EDF - Educación del Futuro
           </h2>
-          <div className=" w-full">
-      <AspectRatio ratio={20 / 9}>
+          <div className="">
+      <AspectRatio ratio={14 / 9}>
             <Image 
               src="/inicio-edf.png" 
               alt="inicio" 
