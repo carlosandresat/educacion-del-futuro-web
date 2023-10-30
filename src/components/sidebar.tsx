@@ -34,6 +34,7 @@ const Sidebar = () => {
           key={network.name}
           href={network.link}
           className="block py-3 hover:bg-card p-2 rounded-full"
+          target="_blank"
         >
           <Image
             src={`/icons/${network.name}.png`}
