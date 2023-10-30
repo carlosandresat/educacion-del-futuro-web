@@ -3,10 +3,10 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const socialNetworks = [
-  { name: "tik-tok", link: "#" },
-  { name: "instagram", link: "#" },
+  { name: "tik-tok", link: "https://www.tiktok.com/@educacion_del_futuro?_t=8goiE5HX1TK&_r=1" },
+  { name: "instagram", link: "https://www.instagram.com/edf_academia/" },
   { name: "telegram", link: "#" },
-  { name: "whatsapp", link: "#" },
+  { name: "whatsapp", link: "https://wa.link/e2sutu" },
   { name: "location", link: "#" },
 ];
 
