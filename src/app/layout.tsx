@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Educación del Futuro",
-  description: "Sitio web de la Escuela de Educación del Futuro",
+  description: "S¡Prepárate para el futuro de la educación! En Educación del Futuro, impulsamos la transformación educativa con innovación y tecnología. Descubre un mundo de posibilidades en nuestra academia líder en la revolución del aprendizaje.",
 };
 
 export default function RootLayout({
