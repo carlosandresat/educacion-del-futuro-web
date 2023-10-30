@@ -9,16 +9,16 @@ import {
 import Image from "next/image";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 
-export function NoticiaCard() {
+export function NoticiaCard({title, description, link, image}: {title: string, description: string, link: string, image: string}) {
   return (
-    <a target="_blank" href="https://www.youtube.com/">
+    <a target="_blank" href={link}>
     <Card className="transition-all hover:scale-105">
       
       <CardContent>
         <div className="w-full pt-4">
         <AspectRatio ratio={16 / 9}>
         <Image
-          src="/profesor.jpeg"
+          src={image}
           alt="Logo"
           fill={true}
           className="justify-start rounded-md object-cover"
@@ -27,8 +27,8 @@ export function NoticiaCard() {
         </div>
       </CardContent>
       <CardHeader>
-        <CardTitle>Título Recurso 1</CardTitle>
-        <CardDescription>Este es un ejemplo de descripción de noticia, debe ser reemplazado con noticias nuevas.</CardDescription>
+        <CardTitle>{title}</CardTitle>
+        <CardDescription>{description}</CardDescription>
       </CardHeader>
       <CardFooter>
         
