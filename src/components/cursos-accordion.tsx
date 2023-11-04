@@ -87,7 +87,7 @@ export function CursosAccordion() {
                     <video
                       onMouseEnter={(e) => e.currentTarget.play()}
                       onMouseLeave={(e) => e.currentTarget.pause()}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover rounded-md"
                       muted
                       playsInline
                       loop
@@ -143,13 +143,16 @@ export function CursosAccordion() {
                   </ul>
                 </div>
                 <div className="flex w-full md:w-1/3 lg:w-1/3 p-4 pl-6 justify-center">
-                  <AspectRatio ratio={1 / 1}>
-                    <Image
-                      src="/next.svg"
-                      alt="Logo"
-                      fill={true}
-                      className={`rounded-3xl object-fit`}
-                    />
+                  <AspectRatio ratio={3 / 4}>
+                    <video
+                      onMouseEnter={(e) => e.currentTarget.play()}
+                      onMouseLeave={(e) => e.currentTarget.pause()}
+                      className="w-full h-full object-cover rounded-md"
+                      muted
+                      playsInline
+                      loop
+                      src="https://www.espoch.edu.ec/wp-content/uploads/2023/03/video_pag_web2.mp4"
+                    ></video>
                   </AspectRatio>
                 </div>
               </div>
@@ -198,13 +201,16 @@ export function CursosAccordion() {
                   </ul>
                 </div>
                 <div className="flex w-full md:w-1/3 lg:w-1/3 p-4 pl-6 justify-center">
-                  <AspectRatio ratio={1 / 1}>
-                    <Image
-                      src="/next.svg"
-                      alt="Logo"
-                      fill={true}
-                      className={`rounded-3xl object-fit`}
-                    />
+                  <AspectRatio ratio={3 / 4}>
+                    <video
+                      onMouseEnter={(e) => e.currentTarget.play()}
+                      onMouseLeave={(e) => e.currentTarget.pause()}
+                      className="w-full h-full object-cover rounded-md"
+                      muted
+                      playsInline
+                      loop
+                      src="https://www.espoch.edu.ec/wp-content/uploads/2023/03/video_pag_web2.mp4"
+                    ></video>
                   </AspectRatio>
                 </div>
               </div>
