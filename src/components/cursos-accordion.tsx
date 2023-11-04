@@ -22,6 +22,8 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 
+import { TestimonioCard } from "@/components/testimonio-card";
+
 import Image from "next/image";
 
 export function CursosAccordion() {
@@ -39,108 +41,10 @@ export function CursosAccordion() {
     <>
       <div className="flex items-center flex-wrap my-10 max-w-screen-xl w-full">
         <div className="grid grid-cols-3 gap-4 w-full">
-          <div className="flex flex-col ">
-            <AspectRatio ratio={3 / 4}>
-              <video
-                onMouseEnter={(e) => e.currentTarget.play()}
-                onMouseLeave={(e) => e.currentTarget.pause()}
-                className="w-full h-full object-cover rounded-md"
-                muted
-                playsInline
-                loop
-                src="https://www.espoch.edu.ec/wp-content/uploads/2023/03/video_pag_web2.mp4"
-              ></video>
-            </AspectRatio>
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button variant="blue" className="w-fit mt-3 self-center">
-                  Ver Puntaje
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-[425px] md:max-w-screen-sm md:w-fit max-h-full py-6">
-                <Image
-                  src="/testimonio2.jpg"
-                  alt="Logo"
-                  width={899}
-                  height={1280}
-                  className="justify-start rounded-md object-cover"
-                />
-                <DialogFooter className="sm:justify-end">
-                  <DialogClose asChild>
-                    <Button className=" self-end">Close</Button>
-                  </DialogClose>
-                </DialogFooter>
-              </DialogContent>
-            </Dialog>
-          </div>
-          <div className="flex flex-col ">
-            <AspectRatio ratio={3 / 4}>
-              <video
-                onMouseEnter={(e) => e.currentTarget.play()}
-                onMouseLeave={(e) => e.currentTarget.pause()}
-                className="w-full h-full object-cover rounded-md"
-                muted
-                playsInline
-                loop
-                src="https://www.espoch.edu.ec/wp-content/uploads/2023/03/video_pag_web2.mp4"
-              ></video>
-            </AspectRatio>
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button variant="blue" className="w-fit mt-3 self-center">
-                  Ver Puntaje
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-[425px] md:max-w-screen-lg">
-                <Image
-                  src="/testimonio1.jpg"
-                  alt="Logo"
-                  width={1280}
-                  height={720}
-                  className="justify-start rounded-md object-cover"
-                />
-                <DialogFooter className="sm:justify-end">
-                  <DialogClose asChild>
-                    <Button className=" self-end">Close</Button>
-                  </DialogClose>
-                </DialogFooter>
-              </DialogContent>
-            </Dialog>
-          </div>
-          <div className="flex flex-col ">
-            <AspectRatio ratio={3 / 4}>
-              <video
-                onMouseEnter={(e) => e.currentTarget.play()}
-                onMouseLeave={(e) => e.currentTarget.pause()}
-                className="w-full h-full object-cover rounded-md"
-                muted
-                playsInline
-                loop
-                src="https://www.espoch.edu.ec/wp-content/uploads/2023/03/video_pag_web2.mp4"
-              ></video>
-            </AspectRatio>
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button variant="blue" className="w-fit mt-3 self-center">
-                  Ver Puntaje
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-[425px] md:max-w-screen-lg">
-                <Image
-                  src="/testimonio3.jpg"
-                  alt="Logo"
-                  width={1280}
-                  height={720}
-                  className="justify-start rounded-md object-cover"
-                />
-                <DialogFooter className="sm:justify-end">
-                  <DialogClose asChild>
-                    <Button className=" self-end">Close</Button>
-                  </DialogClose>
-                </DialogFooter>
-              </DialogContent>
-            </Dialog>
-          </div>
+          <TestimonioCard video="https://www.espoch.edu.ec/wp-content/uploads/2023/03/video_pag_web2.mp4" title="Título 1" puntaje="986" pic="testimonio2" pic_orientation="horizontal"></TestimonioCard>
+          <TestimonioCard video="https://www.espoch.edu.ec/wp-content/uploads/2023/03/video_pag_web2.mp4" title="Título 2" puntaje="986" pic="testimonio1" pic_orientation="vertical"></TestimonioCard>
+          <TestimonioCard video="https://www.espoch.edu.ec/wp-content/uploads/2023/03/video_pag_web2.mp4" title="Título 3" puntaje="986" pic="testimonio3" pic_orientation="horizontal"></TestimonioCard>
+          
         </div>
 
         <Separator className="my-10" />
