@@ -69,7 +69,7 @@ export function CursosAccordion() {
             <AccordionTrigger className="group text-xl">
               <div className="flex flex-col">
               <div>
-                Curso de Conocimientos: Expedición Científica
+              🌍🔬 Curso de Conocimientos: Expedición Científica
               </div>
               <p className=" text-lg self-start text-muted-foreground group-data-[state=open]:hidden">
               Lorem ipsum dolor sit amet...
@@ -127,7 +127,7 @@ export function CursosAccordion() {
             <AccordionTrigger className="group text-xl">
               <div className="flex flex-col">
               <div>
-              Curso de Razonamiento: Ruta del Genio
+              🤔📚 Curso de Razonamiento: Ruta del Genio
               </div>
               <p className=" text-lg self-start text-muted-foreground group-data-[state=open]:hidden">
               Lorem ipsum dolor sit amet...
@@ -187,7 +187,7 @@ export function CursosAccordion() {
             <AccordionTrigger className="group text-xl">
               <div className="flex flex-col">
               <div>
-              Curso para Carreras Focalizadas: Sendero del Guerrero
+              ⚔️🏹 Curso para Carreras Focalizadas: Sendero del Guerrero
               </div>
               <p className=" text-lg self-start text-muted-foreground group-data-[state=open]:hidden">
               Lorem ipsum dolor sit amet...
