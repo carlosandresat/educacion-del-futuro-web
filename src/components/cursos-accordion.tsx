@@ -47,7 +47,17 @@ export function CursosAccordion() {
           
         </div>
 
-        <Separator className="my-10" />
+        <Separator className="mt-10 mb-4" />
+
+        <div className="max-w-screen-xl w-full">
+      <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 py-6 mt-5 md:self-start text-left w-max">
+        Nuestros Cursos
+      </h2>
+
+      <div className="text-muted-foreground md:self-start text-xl py-2">
+        Explora tu próxima aventura
+      </div>
+      </div>
 
         <Accordion
           type="single"
