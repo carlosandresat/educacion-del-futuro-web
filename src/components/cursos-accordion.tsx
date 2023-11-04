@@ -56,8 +56,15 @@ export function CursosAccordion() {
           onValueChange={handleAccordionChange}
         >
           <AccordionItem value="item-1">
-            <AccordionTrigger className=" text-xl">
-              Curso de Conocimientos: Expedición Científica
+            <AccordionTrigger className="group text-xl">
+              <div className="flex flex-col">
+              <div>
+                Curso de Conocimientos: Expedición Científica
+              </div>
+              <p className=" text-lg self-start text-muted-foreground group-data-[state=open]:hidden">
+              Lorem ipsum dolor sit amet...
+              </p>
+              </div>
             </AccordionTrigger>
             <AccordionContent>
               <div className="flex items-center flex-wrap w-full">
@@ -107,8 +114,17 @@ export function CursosAccordion() {
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-2">
-            <AccordionTrigger className=" text-xl">
+            <AccordionTrigger className="group text-xl">
+              <div className="flex flex-col">
+              <div>
               Curso de Razonamiento: Ruta del Genio
+              </div>
+              <p className=" text-lg self-start text-muted-foreground group-data-[state=open]:hidden">
+              Lorem ipsum dolor sit amet...
+              </p>
+              </div>
+
+              
             </AccordionTrigger>
             <AccordionContent>
               <div className="flex items-center flex-wrap w-full">
@@ -155,8 +171,15 @@ export function CursosAccordion() {
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-3">
-            <AccordionTrigger className=" text-xl">
+            <AccordionTrigger className="group text-xl">
+              <div className="flex flex-col">
+              <div>
               Curso para Carreras Focalizadas: Sendero del Guerrero
+              </div>
+              <p className=" text-lg self-start text-muted-foreground group-data-[state=open]:hidden">
+              Lorem ipsum dolor sit amet...
+              </p>
+              </div>
             </AccordionTrigger>
             <AccordionContent>
               <div className="flex items-center flex-wrap w-full">
