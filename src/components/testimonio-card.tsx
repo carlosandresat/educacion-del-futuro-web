@@ -16,6 +16,7 @@ import {
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { Car } from "lucide-react";
 
 export function TestimonioCard({
   video,
@@ -49,10 +50,13 @@ export function TestimonioCard({
       <CardHeader>
         <CardTitle className="self-center">{title}</CardTitle>
       </CardHeader>
+      <CardContent className="text-center">
+      ¡Revisa su puntaje aquí!
+      </CardContent>
       <CardFooter className="justify-center">
         <Dialog>
           <DialogTrigger asChild>
-            <Button variant="blue" className="w-fit mt-3 self-center">
+            <Button variant="blue" className="w-fit self-center">
               {puntaje}
             </Button>
           </DialogTrigger>
