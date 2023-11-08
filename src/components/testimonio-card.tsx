@@ -56,7 +56,7 @@ export function TestimonioCard({
       <CardFooter className="justify-center">
         <Dialog>
           <DialogTrigger asChild>
-            <Button variant="blue" className="w-fit self-center">
+            <Button variant="blue" className="w-fit self-center text-lg">
               {puntaje}
             </Button>
           </DialogTrigger>

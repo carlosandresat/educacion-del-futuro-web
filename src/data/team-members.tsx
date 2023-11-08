@@ -392,6 +392,6 @@ export const teamMembers = [
       { name: "email-outline", url: "mailto:mairadaniela197@gmail.com" },
       { name: "linkedin", url: "linkedin.com/in/mayra-chilcañan-547a511a7" },
     ],
-    pic: "placeholder",
+    pic: "mchilcanan",
   },
 ];

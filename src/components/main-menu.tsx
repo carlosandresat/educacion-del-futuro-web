@@ -68,13 +68,13 @@ export function MainMenu({isTransparent}: {isTransparent: boolean}) {
                 </NavigationMenuLink>
               </li>
               <ListItem href="/inicio#mision_vision" title="Nuestro Equipo">
-              Conoce al equipo de Educación del Futuro.
+              Conoce al equipo EDF
               </ListItem>
               <ListItem href="/inicio#recursos" title="Recursos">
-                Revisa los recursos que tenemos para ti.
+                Revisa los recursos que tenemos para ti
               </ListItem>
               <ListItem href="/inicio#puntajes_referenciales" title="Puntajes Referenciales">
-              Consulta los puntajes referenciales de la carrera de tus sueños.
+              Consulta los puntajes referenciales de la carrera de tu preferencia
               </ListItem>
             </ul>
           </NavigationMenuContent>
