@@ -7,7 +7,7 @@ const socialNetworks = [
   { name: "instagram", link: "https://www.instagram.com/edf_academia/" },
   { name: "telegram", link: "#" },
   { name: "whatsapp", link: "https://wa.link/e2sutu" },
-  { name: "location", link: "#" },
+  { name: "location", link: "https://maps.app.goo.gl/MWu3qJRXeDL2qupB7" },
 ];
 
 const Sidebar = () => {
