@@ -20,13 +20,14 @@ export default function Cursos() {
 
   return (
     <>
+    
       <video
         className="elementor-background-video-hosted elementor-html5-video absolute top-0 left-0 w-full h-full object-cover opacity-90"
         autoPlay
         muted
         playsInline
         loop
-        src="/intro-video.mp4"
+        src="https://res.cloudinary.com/djqqonsys/video/upload/v1699916216/v4gbgvqlcsrz9bqx1sav.mp4"
       ></video>
       <div className={`flex absolute bottom-12 w-full justify-center flex-wrap md:space-x-4 duration-300 ${
       !isRegisterBarVisible ? "translate-y-28" : "translate-y-0"
