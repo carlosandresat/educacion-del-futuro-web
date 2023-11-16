@@ -98,6 +98,7 @@ export const teamMembers = [
           sido esenciales para guiar a los alumnos hacia sus objetivos
           académicos.
         </p>
+        
         <h3 className="mt-6 croll-m-20 text-xl font-semibold tracking-tight">
           Habilidades clave:
         </h3>

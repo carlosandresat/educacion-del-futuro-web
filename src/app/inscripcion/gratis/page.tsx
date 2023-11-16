@@ -63,35 +63,12 @@ const FormSchema = z.object({
   condicion_salud: z.string().max(100, {
     message: "La condición de salud debe tener menos de 100 caracteres.",
   }),
-  representante_nombres: z
-    .string()
-    .min(6, {
-      message: "Tu nombre debe tener al menos 6 caracteres.",
-    })
-    .max(100, {
-      message: "Tu nombre debe tener menos de 100 caracteres.",
-    }),
-  representante_celular: z.string().min(7, {
-    message: "El número de telefono debe tener al menos 7 dígitos.",
-  }),
-  representante_convencional: z.string().min(7, {
-    message: "El número de telefono debe tener al menos 7 dígitos.",
-  }),
-  representante_email: z.string().email({
-    message: "Invalid email address.",
-  }),
-  represntante_direccion: z.string().min(6, {
-    message: "La dirección debe tener al menos 6 caracteres.",
-  }),
   carrera: z.string(),
   no_examenes: z.string(),
-  expectativas: z.string().max(100, {
-    message: "Las expectativas deben tener menos de 100 caracteres.",
-  }),
   descubierto_por: z.string(),
 });
 
-export function Inscripciones() {
+export default function Gratis() {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
@@ -125,10 +102,7 @@ export function Inscripciones() {
               <FormItem>
                 <FormLabel>Curso</FormLabel>
                 <FormControl>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
+                  <Select  onValueChange={field.onChange} defaultValue={field.value}>
                     <SelectTrigger className="w-[280px]">
                       <SelectValue placeholder="Selecciona tu curso" />
                     </SelectTrigger>
@@ -157,17 +131,13 @@ export function Inscripciones() {
               <FormItem>
                 <FormLabel>Horario</FormLabel>
                 <FormControl>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
+                  <Select  onValueChange={field.onChange} defaultValue={field.value}>
                     <SelectTrigger className="w-[280px]">
                       <SelectValue placeholder="Selecciona tu horario" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="horario1">Horario 1</SelectItem>
-                      <SelectItem value="horario2">Horario 2</SelectItem>
-                      <SelectItem value="horario3">Horario 3</SelectItem>
+                      <SelectItem value="3:00-4:30">3:00-4:30 PM</SelectItem>
+                      <SelectItem value="4:30-6:30">4:30-6:30 PM</SelectItem>
                     </SelectContent>
                   </Select>
                 </FormControl>
@@ -235,10 +205,7 @@ export function Inscripciones() {
               <FormItem>
                 <FormLabel>Género</FormLabel>
                 <FormControl>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
+                  <Select  onValueChange={field.onChange} defaultValue={field.value}>
                     <SelectTrigger className="w-[280px]">
                       <SelectValue placeholder="Selecciona tu género" />
                     </SelectTrigger>
@@ -260,10 +227,7 @@ export function Inscripciones() {
               <FormItem>
                 <FormLabel>Curso Académico</FormLabel>
                 <FormControl>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
+                  <Select  onValueChange={field.onChange} defaultValue={field.value}>
                     <SelectTrigger className="w-[280px]">
                       <SelectValue placeholder="Selecciona tu año" />
                     </SelectTrigger>
@@ -368,100 +332,9 @@ export function Inscripciones() {
               </FormItem>
             )}
           />
+          
           <h4 className="pt-6 scroll-m-20 text-xl font-semibold tracking-tight">
-            Sección 3: Datos de Registro del Representante
-          </h4>
-          <FormField
-            control={form.control}
-            name="representante_nombres"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Nombres y Apellidos del Representante</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="Ejemplo: Juan Fernando Ponce Guzman"
-                    {...field}
-                  />
-                </FormControl>
-                <FormDescription>
-                  Nombres y apellidos del representante
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="representante_celular"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Celular del Representante</FormLabel>
-                <FormControl>
-                  <Input placeholder="Ejemplo: 0987654321" {...field} />
-                </FormControl>
-                <FormDescription>
-                  Número de celular del representante
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="representante_convencional"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Convencional del Representante</FormLabel>
-                <FormControl>
-                  <Input placeholder="Ejemplo: 022345678" {...field} />
-                </FormControl>
-                <FormDescription>
-                  Número de convencional del representante
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="representante_email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email del Representante</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="Ejemplo: juan.ponce@gmail.com"
-                    {...field}
-                  />
-                </FormControl>
-                <FormDescription>Email del representante</FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="represntante_direccion"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Dirección del Representante</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="Ejemplo: Av. Amazonas y Naciones Unidas"
-                    {...field}
-                  />
-                </FormControl>
-                <FormDescription>Dirección del representante</FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <h4 className="pt-6 scroll-m-20 text-xl font-semibold tracking-tight">
-            Sección 4: Información Adicional
+            Sección 3: Información Adicional
           </h4>
           <FormField
             control={form.control}
@@ -470,7 +343,7 @@ export function Inscripciones() {
               <FormItem>
                 <FormLabel>Carrera</FormLabel>
                 <FormControl>
-                  <Input
+                <Input
                     placeholder="Ejemplo: Medicina, Ingeniería Civil, Enfermería..."
                     {...field}
                   />
@@ -490,10 +363,7 @@ export function Inscripciones() {
               <FormItem>
                 <FormLabel>Número de exámenes</FormLabel>
                 <FormControl>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
+                <Select  onValueChange={field.onChange} defaultValue={field.value}>
                     <SelectTrigger className="w-[280px]">
                       <SelectValue placeholder="Selecciona una opción" />
                     </SelectTrigger>
@@ -502,6 +372,7 @@ export function Inscripciones() {
                       <SelectItem value="1">1</SelectItem>
                       <SelectItem value="2">2</SelectItem>
                       <SelectItem value="2+">Más de 2</SelectItem>
+
                     </SelectContent>
                   </Select>
                 </FormControl>
@@ -513,23 +384,6 @@ export function Inscripciones() {
             )}
           />
 
-          <FormField
-            control={form.control}
-            name="expectativas"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Expectativas</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="Ejemplo: Aprender a estudiar"
-                    {...field}
-                  />
-                </FormControl>
-                <FormDescription>Expectativas del estudiante</FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
 
           <FormField
             control={form.control}
@@ -538,10 +392,7 @@ export function Inscripciones() {
               <FormItem>
                 <FormLabel>Descubierto por</FormLabel>
                 <FormControl>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
+                  <Select  onValueChange={field.onChange} defaultValue={field.value}>
                     <SelectTrigger className="w-[280px]">
                       <SelectValue placeholder="Selecciona una opción" />
                     </SelectTrigger>
@@ -568,12 +419,9 @@ export function Inscripciones() {
               </FormItem>
             )}
           />
-          <h4 className="pt-6 scroll-m-20 text-xl font-semibold tracking-tight">
-            Sección 5: Boucher de Inscripción
-          </h4>
 
           <div className="flex justify-center">
-            <Button type="submit">Submit</Button>
+            <Button type="submit">Enviar</Button>
           </div>
         </form>
       </Form>
