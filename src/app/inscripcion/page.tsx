@@ -2,6 +2,7 @@ import { Inscripciones } from "@/components/inscripciones";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { TerminosCondiciones } from "@/components/terminos-condiciones";
 
 export default function Inscripcion() {
   return (
@@ -21,7 +22,7 @@ export default function Inscripcion() {
       <div className="text-muted-foreground md:self-start text-xl py-2">
         ¿Aún indeciso? Prueba nuestras clases gratis y descubre la experiencia EDF
       </div>
-      <Link href="/inscripcion/gratis" className=" self-start"><Button className="text-lg rounded-full my-6">Ver más...</Button></Link>
+      <Link href="/inscripcion/gratis" className=" self-start"><Button className="rounded-full p-6 my-4 text-lg">Ver más...</Button></Link>
       </div>
 
       <Separator className="mt-4" />
@@ -33,7 +34,7 @@ export default function Inscripcion() {
       <div className="text-muted-foreground md:self-start text-xl py-2">
         ¿Ya sientes la llamada a la aventura? Únete a nuestro curso completo y emprende un vuelo transformador en tu educación
       </div>
-      <Link href="/inscripcion/registro" className=" self-start"><Button className="text-lg rounded-full my-6">Ver más...</Button></Link>
+      <TerminosCondiciones text="Ver más..." style="rounded-full p-6 my-4 text-lg" variant="default"></TerminosCondiciones>
       </div>
 
       <Separator className="mt-4" />

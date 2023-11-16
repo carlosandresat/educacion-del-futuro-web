@@ -11,17 +11,7 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
-import {
-  Dialog,
-  DialogContent,
-  DialogClose,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-  DialogFooter,
-} from "@/components/ui/dialog";
-
+import { TerminosCondiciones } from "@/components/terminos-condiciones";
 import { TestimonioCard } from "@/components/testimonio-card";
 
 import Image from "next/image";
@@ -155,15 +145,8 @@ export function CursosAccordion() {
                 </div>
               </div>
               <div className="flex w-full justify-center flex-wrap md:space-x-4">
-                <Link href="/cursos">
-                  <Button
-                    variant="secondary"
-                    className="rounded-full p-6 w-60 text-lg"
-                  >
-                    Inscríbete Ahora
-                  </Button>
-                </Link>
-                <Link href="/cursos">
+                <TerminosCondiciones text="Inscríbete Ahora" style="rounded-full p-6 w-60 text-lg" variant="secondary" />
+                <Link href="/inscripcion/gratis">
                   <Button className="rounded-full p-6 w-60 text-lg">
                     Clases Gratis
                   </Button>
@@ -207,15 +190,8 @@ export function CursosAccordion() {
                 </div>
               </div>
               <div className="flex w-full justify-center flex-wrap md:space-x-4">
-                <Link href="/cursos">
-                  <Button
-                    variant="secondary"
-                    className="rounded-full p-6 w-60 text-lg"
-                  >
-                    Inscríbete Ahora
-                  </Button>
-                </Link>
-                <Link href="/cursos">
+              <TerminosCondiciones text="Inscríbete Ahora" style="rounded-full p-6 w-60 text-lg" variant="secondary" />
+                <Link href="/inscripcion/gratis">
                   <Button className="rounded-full p-6 w-60 text-lg">
                     Clases Gratis
                   </Button>
@@ -261,15 +237,8 @@ export function CursosAccordion() {
                 </div>
               </div>
               <div className="flex w-full justify-center flex-wrap md:space-x-4">
-                <Link href="/cursos">
-                  <Button
-                    variant="secondary"
-                    className="rounded-full p-6 w-60 text-lg"
-                  >
-                    Inscríbete Ahora
-                  </Button>
-                </Link>
-                <Link href="/cursos">
+              <TerminosCondiciones text="Inscríbete Ahora" style="rounded-full p-6 w-60 text-lg" variant="secondary" />
+                <Link href="/inscripcion/gratis">
                   <Button className="rounded-full p-6 w-60 text-lg">
                     Clases Gratis
                   </Button>
