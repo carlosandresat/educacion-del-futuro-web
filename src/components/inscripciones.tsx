@@ -6,6 +6,16 @@ import * as z from "zod";
 import { CaretSortIcon, CheckIcon } from "@radix-ui/react-icons";
 import { cn } from "@/lib/utils";
 
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -193,9 +203,7 @@ export function Inscripciones() {
                     {...field}
                   />
                 </FormControl>
-                <FormDescription>
-                  Los nombres y apellidos del estudiante
-                </FormDescription>
+
                 <FormMessage />
               </FormItem>
             )}
@@ -275,9 +283,6 @@ export function Inscripciones() {
                     </SelectContent>
                   </Select>
                 </FormControl>
-                <FormDescription>
-                  Escoge tu horario de preferencia
-                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -330,20 +335,39 @@ export function Inscripciones() {
                               <CheckIcon
                                 className={cn(
                                   "ml-auto h-4 w-4",
-                                  colegio.name === field.name
+                                  colegio.name === field.value
                                     ? "opacity-100"
                                     : "opacity-0"
                                 )}
                               />
                             </CommandItem>
                           ))}
+                          <CommandItem
+                            value="Otro"
+                            key="Otro"
+                            onSelect={() => {
+                              form.setValue("colegio", "Otro");
+                            }}
+                          >
+                            Otro
+                            <CheckIcon
+                              className={cn(
+                                "ml-auto h-4 w-4",
+                                "Otro" === field.value
+                                  ? "opacity-100"
+                                  : "opacity-0"
+                              )}
+                            />
+                          </CommandItem>
                         </CommandGroup>
                         <ScrollBar orientation="vertical" />
                       </ScrollArea>
                     </Command>
                   </PopoverContent>
                 </Popover>
-                <FormDescription>Escoge tu colegio</FormDescription>
+                <FormDescription>
+                  Si no encuentras tu colegio utiliza la opción &quot;Otro&quot;
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -362,7 +386,18 @@ export function Inscripciones() {
                   />
                 </FormControl>
                 <FormDescription>
-                  Condición de salud del Estudiante
+                  <>
+                    Por favor, indícanos si tienes alguna condición de salud
+                    física, emocional, o cualquier otro desafío personal que
+                    enfrentas y consideras que deberíamos conocer para poder
+                    apoyarte de la mejor manera. Nuestra única intención es
+                    comprenderte y brindarte la guía necesaria para que puedas
+                    aprovechar al máximo este viaje educativo.{" "}
+                  </>
+                  <>
+                    &quot;Recuerda, todos enfrentamos desafíos y estamos aquí
+                    para apoyarte en cada paso del camino 😊&quot;
+                  </>
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -383,9 +418,7 @@ export function Inscripciones() {
                     {...field}
                   />
                 </FormControl>
-                <FormDescription>
-                  Nombres y apellidos del representante
-                </FormDescription>
+
                 <FormMessage />
               </FormItem>
             )}
@@ -400,9 +433,7 @@ export function Inscripciones() {
                 <FormControl>
                   <Input placeholder="Ejemplo: 0987654321" {...field} />
                 </FormControl>
-                <FormDescription>
-                  Número de celular del representante
-                </FormDescription>
+
                 <FormMessage />
               </FormItem>
             )}
@@ -417,9 +448,7 @@ export function Inscripciones() {
                 <FormControl>
                   <Input placeholder="Ejemplo: 022345678" {...field} />
                 </FormControl>
-                <FormDescription>
-                  Número de convencional del representante
-                </FormDescription>
+
                 <FormMessage />
               </FormItem>
             )}
@@ -437,7 +466,6 @@ export function Inscripciones() {
                     {...field}
                   />
                 </FormControl>
-                <FormDescription>Email del representante</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -455,7 +483,6 @@ export function Inscripciones() {
                     {...field}
                   />
                 </FormControl>
-                <FormDescription>Dirección del representante</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -476,7 +503,7 @@ export function Inscripciones() {
                   />
                 </FormControl>
                 <FormDescription>
-                  Escoge tu carrera de preferencia
+                  Ingresa tu carrera de preferencia
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -488,7 +515,7 @@ export function Inscripciones() {
             name="no_examenes"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Número de exámenes</FormLabel>
+                <FormLabel>¿Cuántas veces has dado el examen?</FormLabel>
                 <FormControl>
                   <Select
                     onValueChange={field.onChange}
@@ -506,7 +533,8 @@ export function Inscripciones() {
                   </Select>
                 </FormControl>
                 <FormDescription>
-                  Número de exámenes que ha rendido
+                  Tu sinceridad nos ayudará a adaptar mejor nuestras estrategias
+                  para apoyarte.
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -518,14 +546,20 @@ export function Inscripciones() {
             name="expectativas"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Expectativas</FormLabel>
+                <FormLabel>
+                  ¿Cuáles son tus expectativas del curso EDF?
+                </FormLabel>
                 <FormControl>
                   <Input
                     placeholder="Ejemplo: Aprender a estudiar"
                     {...field}
                   />
                 </FormControl>
-                <FormDescription>Expectativas del estudiante</FormDescription>
+                <FormDescription>
+                  Por favor, descríbenos brevemente tus metas tanto académicas
+                  como personales y cómo te gustaría que EDF te ayude a
+                  alcanzarlas.{" "}
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -563,7 +597,9 @@ export function Inscripciones() {
                     </SelectContent>
                   </Select>
                 </FormControl>
-                <FormDescription>¿Cómo nos descubriste?</FormDescription>
+                <FormDescription>
+                  ¿Cómo descubriste EDF Academy?
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -572,8 +608,51 @@ export function Inscripciones() {
             Sección 5: Boucher de Inscripción
           </h4>
 
+          <h4 className="scroll-m-20 text-lg font-semibold tracking-tight">
+            Opción 1: Transferencia o Depósito Bancario
+          </h4>
+
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Banco</TableHead>
+                <TableHead>Nro de Cuenta</TableHead>
+                <TableHead>Tipo</TableHead>
+                <TableHead>Titular</TableHead>
+                <TableHead>C.I.</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              <TableRow>
+                <TableCell>Pichincha</TableCell>
+                <TableCell>2209575442</TableCell>
+                <TableCell>Ahorros</TableCell>
+                <TableCell>Ariel Huera Solorzano</TableCell>
+                <TableCell>0603962077</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Guayaquil</TableCell>
+                <TableCell>0016613792</TableCell>
+                <TableCell>Ahorros</TableCell>
+                <TableCell>Ariel Huera Solorzano</TableCell>
+                <TableCell>0603962077</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Pacífico</TableCell>
+                <TableCell>1049370375</TableCell>
+                <TableCell>Ahorros</TableCell>
+                <TableCell>Ariel Huera Solorzano</TableCell>
+                <TableCell>0603962077</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+
+          <h4 className="scroll-m-20 text-lg font-semibold tracking-tight">
+            Opción 2: DeUna Banco Pichincha
+          </h4>
+
           <div className="flex justify-center">
-            <Button type="submit">Submit</Button>
+            <Button type="submit">Enviar</Button>
           </div>
         </form>
       </Form>

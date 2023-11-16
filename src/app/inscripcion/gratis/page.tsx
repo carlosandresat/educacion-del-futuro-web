@@ -163,9 +163,7 @@ export default function Gratis() {
                     {...field}
                   />
                 </FormControl>
-                <FormDescription>
-                  Los nombres y apellidos del estudiante
-                </FormDescription>
+                
                 <FormMessage />
               </FormItem>
             )}
@@ -239,9 +237,6 @@ export default function Gratis() {
                     </SelectContent>
                   </Select>
                 </FormControl>
-                <FormDescription>
-                  Escoge tu horario de preferencia
-                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -307,7 +302,8 @@ export default function Gratis() {
                     </Command>
                   </PopoverContent>
                 </Popover>
-                <FormDescription>Escoge tu colegio</FormDescription>
+                <FormDescription>                  Si no encuentras tu colegio utiliza la opción &quot;Otro&quot;
+</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -326,7 +322,15 @@ export default function Gratis() {
                   />
                 </FormControl>
                 <FormDescription>
-                  Condición de salud del Estudiante
+                Por favor, indícanos si tienes alguna condición de salud
+                    física, emocional, o cualquier otro desafío personal que
+                    enfrentas y consideras que deberíamos conocer para poder
+                    apoyarte de la mejor manera. Nuestra única intención es
+                    comprenderte y brindarte la guía necesaria para que puedas
+                    aprovechar al máximo este viaje educativo.
+                  
+                    &quot;Recuerda, todos enfrentamos desafíos y estamos aquí
+                    para apoyarte en cada paso del camino 😊&quot;
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -349,7 +353,7 @@ export default function Gratis() {
                   />
                 </FormControl>
                 <FormDescription>
-                  Escoge tu carrera de preferencia
+                  Ingresa tu carrera de preferencia
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -377,8 +381,7 @@ export default function Gratis() {
                   </Select>
                 </FormControl>
                 <FormDescription>
-                  Número de exámenes que ha rendido
-                </FormDescription>
+                Tu sinceridad nos ayudará a adaptar mejor nuestras estrategias para apoyarte.                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -414,7 +417,8 @@ export default function Gratis() {
                     </SelectContent>
                   </Select>
                 </FormControl>
-                <FormDescription>¿Cómo nos descubriste?</FormDescription>
+                <FormDescription>                  ¿Cómo descubriste EDF Academy?
+</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
