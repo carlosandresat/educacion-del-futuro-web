@@ -56,7 +56,7 @@ export function TestimonioCard({
       <CardFooter className="justify-center">
         <Dialog>
           <DialogTrigger asChild>
-            <Button variant="blue" className="w-fit self-center text-lg">
+            <Button variant="blue" className="w-fit self-center text-lg p-5">
               {puntaje}
             </Button>
           </DialogTrigger>
@@ -70,8 +70,8 @@ export function TestimonioCard({
             />
             <DialogFooter className="sm:justify-end">
               <DialogClose asChild>
-                <Button className=" self-end">Close</Button>
-              </DialogClose>
+                <Button className=" self-end" variant="blue">Cerrar</Button>
+              </DialogClose> 
             </DialogFooter>
           </DialogContent>
         </Dialog>

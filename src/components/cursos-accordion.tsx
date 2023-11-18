@@ -30,11 +30,11 @@ export function CursosAccordion() {
   return (
     <>
       <div className="flex items-center flex-wrap my-10 max-w-screen-xl w-full">
-        <div className="grid grid-cols-3 gap-4 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
           <TestimonioCard
             video="https://www.espoch.edu.ec/wp-content/uploads/2023/03/video_pag_web2.mp4"
             title="Título 1"
-            puntaje="906"
+            puntaje="937"
             pic="testimonio2"
             pic_orientation="horizontal"
           ></TestimonioCard>
@@ -48,7 +48,7 @@ export function CursosAccordion() {
           <TestimonioCard
             video="https://www.espoch.edu.ec/wp-content/uploads/2023/03/video_pag_web2.mp4"
             title="Título 3"
-            puntaje="949"
+            puntaje="925"
             pic="testimonio3"
             pic_orientation="horizontal"
           ></TestimonioCard>
