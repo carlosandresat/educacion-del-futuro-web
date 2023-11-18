@@ -147,7 +147,7 @@ export function CursosAccordion() {
               <div className="flex w-full justify-center flex-wrap md:space-x-4">
                 <TerminosCondiciones text="Inscríbete Ahora" style="rounded-full p-6 w-60 text-lg" variant="secondary" />
                 <Link href="/inscripcion/gratis">
-                  <Button className="rounded-full p-6 w-60 text-lg">
+                  <Button className="rounded-full p-6 w-60 text-lg" variant="blue">
                     Clases Gratis
                   </Button>
                 </Link>
@@ -192,7 +192,7 @@ export function CursosAccordion() {
               <div className="flex w-full justify-center flex-wrap md:space-x-4">
               <TerminosCondiciones text="Inscríbete Ahora" style="rounded-full p-6 w-60 text-lg" variant="secondary" />
                 <Link href="/inscripcion/gratis">
-                  <Button className="rounded-full p-6 w-60 text-lg">
+                  <Button className="rounded-full p-6 w-60 text-lg" variant="blue">
                     Clases Gratis
                   </Button>
                 </Link>
@@ -239,7 +239,7 @@ export function CursosAccordion() {
               <div className="flex w-full justify-center flex-wrap md:space-x-4">
               <TerminosCondiciones text="Inscríbete Ahora" style="rounded-full p-6 w-60 text-lg" variant="secondary" />
                 <Link href="/inscripcion/gratis">
-                  <Button className="rounded-full p-6 w-60 text-lg">
+                  <Button className="rounded-full p-6 w-60 text-lg" variant="blue">
                     Clases Gratis
                   </Button>
                 </Link>

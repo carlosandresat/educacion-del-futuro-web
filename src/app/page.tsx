@@ -35,7 +35,7 @@ export default function Cursos() {
     }`}>
       <TerminosCondiciones text="Inscríbete Ahora" style="rounded-full p-6 bg-secondary/80 hover:bg-secondary w-60 text-lg" variant="secondary"></TerminosCondiciones>
       <Link href="/inscripcion/gratis" >
-        <Button className="rounded-full p-6 bg-primary/80 hover:bg-primary w-60 text-lg">Clases Gratis</Button>
+        <Button className="rounded-full p-6 bg-main/80 hover:bg-main w-60 text-lg">Clases Gratis</Button>
       </Link>
       </div>
     </>

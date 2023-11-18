@@ -17,7 +17,7 @@ import { Label } from "@/components/ui/label";
 export function Login() {
   return (
     <Dialog>
-      <DialogTrigger className="flex items-center justify-center top-6 md:top-1/3 w-12 h-12 fixed right-2 md:right-8 rounded-full bg-primary z-10">
+      <DialogTrigger className="flex items-center justify-center top-6 md:top-1/3 w-12 h-12 fixed right-2 md:right-8 rounded-full bg-main hover:bg-main/80 z-10">
         
           <PersonIcon className="invert"></PersonIcon>
         
@@ -42,7 +42,7 @@ export function Login() {
           </div>
         </div>
         <DialogFooter>
-          <Button type="submit">Ingresa</Button>
+          <Button type="submit" variant="blue">Ingresa</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

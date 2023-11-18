@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { CaretSortIcon, CheckIcon } from "@radix-ui/react-icons";
 import { cn } from "@/lib/utils";
+import Image from "next/image"
 
 import {
   Table,
@@ -650,6 +651,15 @@ export function Inscripciones() {
           <h4 className="scroll-m-20 text-lg font-semibold tracking-tight">
             Opción 2: DeUna Banco Pichincha
           </h4>
+              <div className="flex justify-center">
+          <Image 
+            src="/QRDeUna.jpg"
+            alt="De Una QR"
+            height={400}
+            width={500}
+            className="max-w-sm"
+            ></Image>
+</div>
 
           <div className="flex justify-center">
             <Button type="submit">Enviar</Button>
