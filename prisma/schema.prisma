@@ -22,11 +22,10 @@ model registro {
   representante_nombres String
   representante_celular String
   representante_convencional String
-  correo              String
-  direccion           String
+  representante_email String
+  representante_direccion String
   carrera             String
-  no_examenes         Int
-  espectativas        String
+  no_examenes         String
+  expectativas        String
   descubierto_por      String
-  deposito            String
 }

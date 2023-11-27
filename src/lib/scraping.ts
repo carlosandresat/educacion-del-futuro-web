@@ -1,6 +1,7 @@
 "use server";
 import puppeteer from "puppeteer";
 import { delay } from "./utils";
+import fs from "fs";
 
 export async function getPuntajesData(search: string) {
   const browser = await puppeteer.launch({
@@ -100,4 +101,62 @@ export async function getPuntajesData(search: string) {
   });
   await browser.close();
     return result;*/
+}
+
+export async function postTelegram(req, res) {
+  if(req.method === 'POST') {
+  const url =
+      "https://api.telegram.org/bot6863177397:AAE0m0czZW8DPYTfuHjmY_IYnKaaFoZyhLI/sendDocument";
+      const file = req.files.file;
+
+    const formData = new FormData();
+    formData.append("chat_id", "5927092855");
+    formData.append("document", file);
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        body: formData,
+        headers: {
+          // Include any additional headers you need
+          'Content-Type': 'multipart/form-data',
+          // Add more headers if necessary
+        },
+      });
+      const data = await response.json();
+      if (response.ok) {
+        console.log('File sent successfully:', data.result.document.file_id);
+      } else {
+        console.error('Failed to send file:', data);
+      }
+    } catch (error) {
+      console.error('Error sending file:', error.message);
+    }
+  } else {
+    res.status(405).json({message: 'We only support POST'});
+  }
+}
+
+
+export async function postTelegramText(path: string) {
+  const url =
+      "https://api.telegram.org/bot6863177397:AAE0m0czZW8DPYTfuHjmY_IYnKaaFoZyhLI/sendMessage";
+
+    const formData = new FormData();
+    formData.append("chat_id", "5927092855");
+    formData.append("text", "ALA");
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        body: formData,
+       
+      });
+      const data = await response.json();
+      if (response.ok) {
+        console.log('File sent successfully:', data.result);
+      } else {
+        console.error('Failed to send file:', data);
+      }
+    } catch (error) {
+      console.error('Error sending file:', error.message);
+    }
 }

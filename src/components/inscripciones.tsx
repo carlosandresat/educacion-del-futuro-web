@@ -1,11 +1,17 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import * as z from "zod";
 import { CaretSortIcon, CheckIcon } from "@radix-ui/react-icons";
 import { cn } from "@/lib/utils";
-import Image from "next/image"
+import Image from "next/image";
+import { useToast } from "@/components/ui/use-toast"
+
+import fs from "fs";
+import { postTelegram } from "@/lib/scraping";
+
+import { useState } from "react";
 
 import {
   Table,
@@ -48,7 +54,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { toast } from "@/components/ui/use-toast";
 import { colegios_riobamba } from "@/data/colegios_riobamba";
 
 const FormSchema = z.object({
@@ -91,7 +96,7 @@ const FormSchema = z.object({
   representante_email: z.string().email({
     message: "Invalid email address.",
   }),
-  represntante_direccion: z.string().min(6, {
+  representante_direccion: z.string().min(6, {
     message: "La dirección debe tener al menos 6 caracteres.",
   }),
   carrera: z.string(),
@@ -107,16 +112,29 @@ export function Inscripciones() {
     resolver: zodResolver(FormSchema),
   });
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
-    console.log(data);
+  const [file, setFile] = useState(null);
+  const { toast } = useToast()
+
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
+    const res = await fetch('/api/register', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    if(res.ok){
+      toast({
+        title: "Registro exitoso",
+        description: "Felicidades por tu registro."
+      })
+    } else {
+      toast({
+        title: "Registro fallido",
+        description: "Hubo un error en nuestros servidores, inténtalo de nuevo más tarde."
+      })
+    }
+    
   }
 
   return (
@@ -474,7 +492,7 @@ export function Inscripciones() {
 
           <FormField
             control={form.control}
-            name="represntante_direccion"
+            name="representante_direccion"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Dirección del Representante</FormLabel>
@@ -651,18 +669,37 @@ export function Inscripciones() {
           <h4 className="scroll-m-20 text-lg font-semibold tracking-tight">
             Opción 2: DeUna Banco Pichincha
           </h4>
-              <div className="flex justify-center">
-          <Image 
-            src="/QRDeUna.jpg"
-            alt="De Una QR"
-            height={400}
-            width={500}
-            className="max-w-sm"
+          <div className="flex justify-center">
+            <Image
+              src="/QRDeUna.jpg"
+              alt="De Una QR"
+              height={400}
+              width={500}
+              className="max-w-sm"
             ></Image>
-</div>
+          </div>
+
+          <a
+            href="https://wa.link/e2sutu"
+            className="inline-block mr-4"
+            target="_blank"
+          >
+            <Button variant="default" className="w-80 h-12 p-3 hover:scale-105" type="button">
+              Enviar comprobante
+              <Image
+                src={`/icons/whatsapp.png`}
+                alt="Whatsapp"
+                width={30}
+                height={30}
+                className="ml-3 h-auto w-auto object-cover transition-all  invert"
+              />
+            </Button>
+          </a>
 
           <div className="flex justify-center">
-            <Button type="submit">Enviar</Button>
+            <Button variant="blue" className="text-lg p-5" type="submit">
+              Terminar registro
+            </Button>
           </div>
         </form>
       </Form>

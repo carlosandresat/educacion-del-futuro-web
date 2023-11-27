@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { MainNavbar } from "@/components/main-navbar";
+import { Toaster } from "@/components/ui/toaster"
 import Sidebar from "@/components/sidebar";
 
 
@@ -33,6 +34,7 @@ export default function RootLayout({
       <body className={`${inter.className}`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <div>
+            <Toaster></Toaster>
             <MainNavbar></MainNavbar>
             <div className="mx-auto">{children}</div>
             <Sidebar></Sidebar>
