@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { set, useForm } from "react-hook-form"
 import * as z from "zod"
-import { getPuntajesData } from "@/lib/scraping"
 import { useState } from "react"
 import { PuntajesTable } from "@/components/puntajes-table"
 import { Button } from "@/components/ui/button"
@@ -44,9 +43,6 @@ export function PuntajesForm() {
   
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    setLoading(true)
-    const response = await getPuntajesData(data.oferta)
-    setTableData(response as any)
     setLoading(false)
   }
 
