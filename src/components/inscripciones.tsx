@@ -8,9 +8,6 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { useToast } from "@/components/ui/use-toast"
 
-import fs from "fs";
-import { postTelegram } from "@/lib/scraping";
-
 import { useState } from "react";
 
 import {
