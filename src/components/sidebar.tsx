@@ -26,7 +26,7 @@ const Sidebar = () => {
   }, []);
 
   return (
-    <div className={`fixed top-1/2 right-2 md:right-4 transform -translate-y-1/2 bg-secondary/80 p-4 rounded-full duration-300 ${
+    <div className={`fixed hidden sm:block top-1/2 right-2 md:right-4 transform -translate-y-1/2 bg-secondary/80 p-4 rounded-full duration-300 ${
       !isSideBarVisible ? "translate-x-32" : "translate-x-0"
     }`}>
       {socialNetworks.map((network) => (
