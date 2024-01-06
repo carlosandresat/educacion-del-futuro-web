@@ -195,4 +195,5 @@ export const colegios_riobamba = [
     { code: "06H01530", name: "UNIDAD EDUCATIVA CICALPA" },
     { code: "06H01703", name: "UNIDAD EDUCATIVA PCEI JOSE MARIA VELAZ" },
     { code: "06H01906", name: "COLEGIO DE BACHILLERATO MARÍA MAZZARELLO" },
+    { code: "Otro", name: "Otro"},
 ];

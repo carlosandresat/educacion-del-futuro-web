@@ -358,23 +358,6 @@ export function Inscripciones() {
                               />
                             </CommandItem>
                           ))}
-                          <CommandItem
-                            value="Otro"
-                            key="Otro"
-                            onSelect={() => {
-                              form.setValue("colegio", "Otro");
-                            }}
-                          >
-                            Otro
-                            <CheckIcon
-                              className={cn(
-                                "ml-auto h-4 w-4",
-                                "Otro" === field.value
-                                  ? "opacity-100"
-                                  : "opacity-0"
-                              )}
-                            />
-                          </CommandItem>
                         </CommandGroup>
                         <ScrollBar orientation="vertical" />
                       </ScrollArea>
