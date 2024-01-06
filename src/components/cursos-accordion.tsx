@@ -194,7 +194,7 @@ export function CursosAccordion() {
               <TerminosCondiciones text="Inscríbete Ahora" style="rounded-full p-6 w-60 text-lg" variant="secondary" />
                 <Link href="/inscripcion/gratis">
                   <Button className="rounded-full p-6 w-60 text-lg" variant="blue">
-                    Clases Gratis
+                    Clases Demostrativas
                   </Button>
                 </Link>
               </div>
@@ -240,7 +240,7 @@ export function CursosAccordion() {
               <TerminosCondiciones text="Inscríbete Ahora" style="rounded-full p-6 w-60 text-lg" variant="secondary" />
                 <Link href="/inscripcion/gratis">
                   <Button className="rounded-full p-6 w-60 text-lg" variant="blue">
-                    Clases Gratis
+                    Clases Demostrativas
                   </Button>
                 </Link>
               </div>

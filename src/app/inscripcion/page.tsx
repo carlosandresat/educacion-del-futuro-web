@@ -17,10 +17,10 @@ export default function Inscripcion() {
       <div className="max-w-screen-xl w-full">
 
       <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 py-6 mt-5 md:self-start text-left w-max ">
-        Clases Gratis
+        Clases Demostrativas
       </h2>
       <div className="text-muted-foreground md:self-start text-xl py-2">
-        ¿Aún indeciso? Prueba nuestras clases gratis y descubre la experiencia EDF
+        ¿Aún indeciso? Prueba nuestras clases demostrativas y descubre la experiencia EDF
       </div>
       <Link href="/inscripcion/gratis" className=" self-start"><Button className="rounded-full p-6 my-4 text-lg" variant="blue">Ver más...</Button></Link>
       </div>

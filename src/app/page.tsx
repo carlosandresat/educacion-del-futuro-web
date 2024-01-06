@@ -47,7 +47,7 @@ export default function Cursos() {
         ></TerminosCondiciones>
         <Link href="/inscripcion/gratis">
           <Button className="rounded-full p-6 bg-main/80 hover:bg-main w-60 text-lg">
-            Clases Gratis
+            Clases Demostrativas
           </Button>
         </Link>
       </div>

@@ -65,7 +65,7 @@ export function RegisterBar() {
         <Button variant="secondary" className="rounded-full p-6 w-60 border md:text-lg">Inscríbete Ahora</Button>
       </Link>
       <Link href="/cursos" >
-        <Button className="rounded-full p-6 w-60 md:text-lg" variant="blue">Clases Gratis</Button>
+        <Button className="rounded-full p-6 w-60 md:text-lg" variant="blue">Clases Demostrativas</Button>
       </Link>
       </div>
     </div>
