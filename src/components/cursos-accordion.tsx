@@ -32,25 +32,28 @@ export function CursosAccordion() {
       <div className="flex items-center flex-wrap my-10 max-w-screen-xl w-full">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
           <TestimonioCard
-            video="https://www.espoch.edu.ec/wp-content/uploads/2023/03/video_pag_web2.mp4"
-            title="Título 1"
+            video="https://storage.googleapis.com/edf-bucket/Joselyn.mp4"
+            title="Joselyn Criollo"
             puntaje="937"
             pic="testimonio2"
             pic_orientation="horizontal"
+            quote="“En EDF los profesores son como tu familia”"
           ></TestimonioCard>
           <TestimonioCard
-            video="https://www.espoch.edu.ec/wp-content/uploads/2023/03/video_pag_web2.mp4"
-            title="Título 2"
+            video="https://storage.googleapis.com/edf-bucket/Angel.mp4"
+            title="Ángel Choto"
             puntaje="959"
             pic="testimonio1"
             pic_orientation="vertical"
+            quote="“En EDF empieza tu aventura hacia el futuro”"
           ></TestimonioCard>
           <TestimonioCard
-            video="https://www.espoch.edu.ec/wp-content/uploads/2023/03/video_pag_web2.mp4"
-            title="Título 3"
+            video="https://storage.googleapis.com/edf-bucket/Katy.mp4"
+            title="Catherine Martínez"
             puntaje="925"
             pic="testimonio3"
             pic_orientation="horizontal"
+            quote="“Con EDF ahora ya tengo un plan”"
           ></TestimonioCard>
         </div>
 
@@ -86,7 +89,7 @@ export function CursosAccordion() {
             </AccordionTrigger>
             <AccordionContent>
               <div className="flex items-center flex-wrap w-full">
-                <div className="w-full md:w-2/3 mb-4 md:pr-6 text-base text-justify">
+                <div className="w-full md:w-2/3 mb-4 md:pr-16 text-base text-justify">
                   &quot;Expedición Científica&quot; es un curso meticulosamente
                   diseñado para sumergirte en el vasto océano del conocimiento
                   científico. Este curso es una colaboración exclusiva con la
@@ -130,16 +133,15 @@ export function CursosAccordion() {
                   para cualquier reto académico que decidas enfrentar en el
                   futuro.
                 </div>
-                <div className="flex w-full md:w-1/3 lg:w-1/3 p-4 md:pl-6 justify-center">
-                  <AspectRatio ratio={3 / 4}>
+                <div className="flex w-full md:w-1/3 lg:w-1/3 p-4 justify-center">
+                  <AspectRatio ratio={9 / 16}>
                     <video
                       onMouseEnter={(e) => e.currentTarget.play()}
                       onMouseLeave={(e) => e.currentTarget.pause()}
                       className="w-full h-full object-cover rounded-md"
-                      muted
                       playsInline
                       loop
-                      src="https://www.espoch.edu.ec/wp-content/uploads/2023/03/video_pag_web2.mp4"
+                      src="https://res.cloudinary.com/djqqonsys/video/upload/f_auto:video,q_auto/Expedicion-Cientifica"
                     ></video>
                   </AspectRatio>
                 </div>
@@ -148,7 +150,7 @@ export function CursosAccordion() {
                 <TerminosCondiciones text="Inscríbete Ahora" style="rounded-full p-6 w-60 text-lg" variant="secondary" />
                 <Link href="/inscripcion/gratis">
                   <Button className="rounded-full p-6 w-60 text-lg" variant="blue">
-                    Clases Gratis
+                    Clases Demostrativas
                   </Button>
                 </Link>
               </div>
@@ -157,7 +159,7 @@ export function CursosAccordion() {
           <AccordionItem value="item-2">
             <AccordionTrigger className="group text-xl">
               <div className="flex flex-col">
-                <div className="md:self-start">🤔📚 Curso de Razonamiento: Ruta del Genio</div>
+                <div className="md:self-start">💡📚 Curso de Razonamiento: Ruta del Genio</div>
                 <p className=" text-lg self-start text-muted-foreground group-data-[state=open]:hidden md:text-left">
                 El curso &quot;Ruta del Genio&quot; es una travesía intelectual diseñada exclusivamente para jóvenes que desean afinar su mente y...
                 </p>
@@ -165,7 +167,7 @@ export function CursosAccordion() {
             </AccordionTrigger>
             <AccordionContent>
               <div className="flex items-center flex-wrap w-full">
-                <div className="w-full md:w-2/3 mb-4 md:pr-6 text-base text-justify">
+                <div className="w-full md:w-2/3 mb-4 md:pr-16 text-base text-justify">
                 El curso &quot;Ruta del Genio&quot; es una travesía intelectual diseñada exclusivamente para jóvenes que desean afinar su mente y alcanzar nuevas cumbres de razonamiento. Nuestro enfoque pedagógico utiliza un libro innovador, organizado y optimizado con la asistencia de inteligencia artificial, lo que asegura una estructura de aprendizaje personalizada y de máxima eficacia. Este enfoque garantiza que cada concepto se presente de la manera más comprensible, permitiendo que tu no solo entiendas, sino también que apliques lo aprendido en situaciones reales y académicas.
                   <ul className="my-6 ml-6 list-disc [&>li]:mt-2">
                     <li><span className="font-bold">Razonamiento Verbal:</span> Refina tu habilidad para analizar y sintetizar información, mejorando la comunicación y la comprensión lectora.</li>
@@ -175,16 +177,15 @@ export function CursosAccordion() {
                   </ul>
                   Este curso es una inversión en tu futuro, preparándote no solo para el éxito académico, sino para enfrentar los desafíos intelectuales de la vida cotidiana con confianza y competencia.
                 </div>
-                <div className="flex w-full md:w-1/3 lg:w-1/3 p-4 pl-6 justify-center">
-                  <AspectRatio ratio={3 / 4}>
+                <div className="flex w-full md:w-1/3 lg:w-1/3 p-4 justify-center">
+                  <AspectRatio ratio={9 / 16}>
                     <video
                       onMouseEnter={(e) => e.currentTarget.play()}
                       onMouseLeave={(e) => e.currentTarget.pause()}
                       className="w-full h-full object-cover rounded-md"
-                      muted
                       playsInline
                       loop
-                      src="https://www.espoch.edu.ec/wp-content/uploads/2023/03/video_pag_web2.mp4"
+                      src="https://res.cloudinary.com/djqqonsys/video/upload/f_auto:video,q_auto/Ruta-del-Genio"
                     ></video>
                   </AspectRatio>
                 </div>
@@ -212,7 +213,7 @@ export function CursosAccordion() {
             </AccordionTrigger>
             <AccordionContent>
               <div className="flex items-center flex-wrap w-full">
-                <div className="w-full md:w-2/3 mb-4 md:pr-6 text-base text-justify">
+                <div className="w-full md:w-2/3 mb-4 md:pr-16 text-base text-justify">
                 El curso &quot;Ruta del Guerrero&quot; está especialmente diseñado para los jóvenes que aspiran a unirse a las Fuerzas Armadas de Ecuador. Este programa robusto y completo utiliza la tecnología de punta de Khan Academy, junto con herramientas de inteligencia artificial, para ofrecer una experiencia de aprendizaje que cumple con los rigurosos estándares académicos, y que además se alinea con las exigentes expectativas del servicio militar. El curso se estructura de la siguiente manera:
                   <ul className="my-6 ml-6 list-disc [&>li]:mt-2">
                     <li><span className="font-bold">Conocimientos básicos:</span> En este curso aprenderás los conceptos básicos de matemáticas, física, química y biología que se detallan en el curso &quot;Expedición cientifica&quot;</li>
@@ -222,16 +223,15 @@ export function CursosAccordion() {
                   </ul>
                   &quot;Ruta del Guerrero&quot; prepara a los estudiantes no solo para superar los desafíos de los rigurosos exámenes de ingreso a las fuerzas, sino para destacar una vez dentro.
                 </div>
-                <div className="flex w-full md:w-1/3 lg:w-1/3 p-4 pl-6 justify-center">
-                  <AspectRatio ratio={3 / 4}>
+                <div className="flex w-full md:w-1/3 lg:w-1/3 p-4 justify-center">
+                  <AspectRatio ratio={9 / 16}>
                     <video
                       onMouseEnter={(e) => e.currentTarget.play()}
                       onMouseLeave={(e) => e.currentTarget.pause()}
                       className="w-full h-full object-cover rounded-md"
-                      muted
                       playsInline
                       loop
-                      src="https://www.espoch.edu.ec/wp-content/uploads/2023/03/video_pag_web2.mp4"
+                      src="https://res.cloudinary.com/djqqonsys/video/upload/f_auto:video,q_auto/Sendero%20del%20Guerrero"
                     ></video>
                   </AspectRatio>
                 </div>

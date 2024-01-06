@@ -24,22 +24,23 @@ export function TestimonioCard({
   puntaje,
   pic,
   pic_orientation,
+  quote,
 }: {
   video: string;
   title: string;
   puntaje: string;
   pic: string;
     pic_orientation: string;
+  quote: string;
 }) {
   return (
     <Card className="transition-all">
       <div className="w-full p-4 xl:px-10">
-      <AspectRatio ratio={3 / 4}>
+      <AspectRatio ratio={9 / 16}>
               <video
                 onMouseEnter={(e) => e.currentTarget.play()}
                 onMouseLeave={(e) => e.currentTarget.pause()}
                 className="w-full h-full object-cover rounded-md"
-                muted
                 playsInline
                 loop
                 src={video}
@@ -51,7 +52,7 @@ export function TestimonioCard({
         <CardTitle className="self-center">{title}</CardTitle>
       </CardHeader>
       <CardContent className="text-center">
-      ¡Revisa su puntaje aquí!
+        {quote}
       </CardContent>
       <CardFooter className="justify-center">
         <Dialog>
