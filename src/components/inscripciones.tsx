@@ -317,7 +317,7 @@ export function Inscripciones() {
                         variant="outline"
                         role="combobox"
                         className={cn(
-                          "w-[500px] justify-between",
+                          "w-full md:w-[500px] xl:w-[800px] justify-between",
                           !field.value && "text-muted-foreground"
                         )}
                       >
@@ -330,7 +330,7 @@ export function Inscripciones() {
                       </Button>
                     </FormControl>
                   </PopoverTrigger>
-                  <PopoverContent className="w-[500px] p-0 ">
+                  <PopoverContent className="w-[350px] md:w-[500px] xl:w-[800px] p-0 ">
                     <Command>
                       <CommandInput
                         placeholder="Buscar colegio..."
