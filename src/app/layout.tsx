@@ -1,4 +1,5 @@
 import "./globals.css";
+import { Analytics } from '@vercel/analytics/react';
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -39,6 +40,7 @@ export default function RootLayout({
             <div className="mx-auto">{children}</div>
             <Sidebar></Sidebar>
           </div>
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>
