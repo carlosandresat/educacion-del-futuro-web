@@ -218,12 +218,12 @@ SEXTA: VALOR A PAGAR</h4>
         <DialogFooter>
             <div className="flex flex-col md:flex-row justify-center md:space-x-4">
             <DialogClose asChild>
-                <Button variant="outline" className="w-full md:w-auto">
+                <Button variant="outline" className="w-full md:w-auto rounded-full">
                 Cancelar
                 </Button>
             </DialogClose>
             <Link href="/inscripcion/registro">
-                <Button className="w-full md:w-auto">Aceptar</Button>
+                <Button className="w-full md:w-auto" variant="blue">Aceptar</Button>
             </Link>
             </div>
         </DialogFooter>
