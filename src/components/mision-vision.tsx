@@ -10,7 +10,7 @@ export function MissionVision() {
       </h2>
 
       <div
-        className="flex items-center flex-wrap pb-10 max-w-screen-xl w-full"
+        className="flex flex-col-reverse sm:flex-row items-center flex-wrap pb-10 max-w-screen-xl w-full"
         id="conocenos"
       >
         <div className="w-full md:w-1/2 lg:w-1/2 p-4 ">
