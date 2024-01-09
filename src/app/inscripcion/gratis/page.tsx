@@ -73,17 +73,28 @@ export default function Gratis() {
     resolver: zodResolver(FormSchema),
   });
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
+    const res = await fetch("/api/clases-demostrativas", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
-    console.log(data);
+    if (res.ok) {
+      toast({
+        title: "Registro exitoso",
+        description: "Felicidades por tu registro.",
+      });
+    } else {
+      toast({
+        title: "Registro fallido",
+        description:
+          "Hubo un error en nuestros servidores, inténtalo de nuevo más tarde.",
+      });
+    }
   }
+
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-between p-6 md:p-12">
