@@ -75,7 +75,7 @@ const FormSchema = z.object({
   colegio: z.string(),
   condicion_salud: z.string().max(100, {
     message: "La condición de salud debe tener menos de 100 caracteres.",
-  }),
+  }).optional(),
   representante_nombres: z
     .string()
     .min(6, {

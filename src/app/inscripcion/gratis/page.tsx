@@ -62,7 +62,7 @@ const FormSchema = z.object({
   colegio: z.string(),
   condicion_salud: z.string().max(100, {
     message: "La condición de salud debe tener menos de 100 caracteres.",
-  }),
+  }).optional(),
   carrera: z.string(),
   no_examenes: z.string(),
   descubierto_por: z.string(),
@@ -113,7 +113,7 @@ export default function Gratis() {
                       <SelectItem value="Curso de Razonamiento">
                         Curso de Razonamiento
                       </SelectItem>
-                      <SelectItem value="Curso para carreras especializadas">
+                      <SelectItem value="Curso para Carreras Especializadas">
                         Curso para Carreras Especializadas
                       </SelectItem>
                     </SelectContent>
@@ -136,8 +136,13 @@ export default function Gratis() {
                       <SelectValue placeholder="Selecciona tu horario" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="3:00-4:30">3:00-4:30 PM</SelectItem>
-                      <SelectItem value="4:30-6:30">4:30-6:30 PM</SelectItem>
+                      {form.watch("curso") === "Curso de Conocimientos" ||
+                      form.watch("curso") ===
+                        "Curso para Carreras Especializadas" ? (
+                        <SelectItem value="16:30-18:30">4:30-6:30 PM</SelectItem>
+                      ) : form.watch("curso") === "Curso de Razonamiento" ? (
+                        <SelectItem value="15:00-16:30">3:00-4:30 PM</SelectItem>
+                      ) : null}
                     </SelectContent>
                   </Select>
                 </FormControl>
