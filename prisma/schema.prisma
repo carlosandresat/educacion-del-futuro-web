@@ -28,4 +28,23 @@ model registro {
   no_examenes         String
   expectativas        String
   descubierto_por      String
+  createdAt DateTime @default(now())
+
+}
+
+model clases_demostrativas {
+  id                  Int     @id @default(autoincrement())
+  curso               String
+  horario             String
+  nombres             String
+  cedula              String
+  telefono            String
+  genero              String
+  academic_year       String
+  colegio             String
+  condicion_salud     String
+  carrera             String
+  no_examenes         String
+  descubierto_por      String
+  createdAt DateTime @default(now())
 }
