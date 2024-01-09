@@ -6,7 +6,7 @@ import * as z from "zod";
 import { CaretSortIcon, CheckIcon } from "@radix-ui/react-icons";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import { useToast } from "@/components/ui/use-toast"
+import { useToast } from "@/components/ui/use-toast";
 
 import { useState } from "react";
 
@@ -110,28 +110,28 @@ export function Inscripciones() {
   });
 
   const [file, setFile] = useState(null);
-  const { toast } = useToast()
+  const { toast } = useToast();
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    const res = await fetch('/api/register', {
-      method: 'POST',
+    const res = await fetch("/api/register", {
+      method: "POST",
       body: JSON.stringify(data),
       headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    if(res.ok){
+        "Content-Type": "application/json",
+      },
+    });
+    if (res.ok) {
       toast({
         title: "Registro exitoso",
-        description: "Felicidades por tu registro."
-      })
+        description: "Felicidades por tu registro.",
+      });
     } else {
       toast({
         title: "Registro fallido",
-        description: "Hubo un error en nuestros servidores, inténtalo de nuevo más tarde."
-      })
+        description:
+          "Hubo un error en nuestros servidores, inténtalo de nuevo más tarde.",
+      });
     }
-    
   }
 
   return (
@@ -165,7 +165,7 @@ export function Inscripciones() {
                       <SelectItem value="Curso de Razonamiento">
                         Curso de Razonamiento
                       </SelectItem>
-                      <SelectItem value="Curso para carreras especializadas">
+                      <SelectItem value="Curso para Carreras Especializadas">
                         Curso para Carreras Especializadas
                       </SelectItem>
                     </SelectContent>
@@ -191,9 +191,13 @@ export function Inscripciones() {
                       <SelectValue placeholder="Selecciona tu horario" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="horario1">Horario 1</SelectItem>
-                      <SelectItem value="horario2">Horario 2</SelectItem>
-                      <SelectItem value="horario3">Horario 3</SelectItem>
+                      {form.watch("curso") === "Curso de Conocimientos" ||
+                      form.watch("curso") ===
+                        "Curso para Carreras Especializadas" ? (
+                        <SelectItem value="16:30-18:30">4:30-6:30 PM</SelectItem>
+                      ) : form.watch("curso") === "Curso de Razonamiento" ? (
+                        <SelectItem value="15:00-16:30">3:00-4:30 PM</SelectItem>
+                      ) : null}
                     </SelectContent>
                   </Select>
                 </FormControl>
@@ -664,7 +668,11 @@ export function Inscripciones() {
             className="inline-block mr-4"
             target="_blank"
           >
-            <Button variant="default" className="w-80 h-12 p-3 hover:scale-105" type="button">
+            <Button
+              variant="default"
+              className="w-80 h-12 p-3 hover:scale-105"
+              type="button"
+            >
               Enviar comprobante
               <Image
                 src={`/icons/whatsapp.png`}
