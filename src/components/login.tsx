@@ -87,7 +87,7 @@ export function Login() {
                     />
                   </FormControl>
                   <FormDescription>
-                    Ingresa tu correo institucional.
+                    Ingresa tu correo.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -108,7 +108,7 @@ export function Login() {
                     />
                   </FormControl>
                   <FormDescription>
-                    Ingresa una contraseña para ingresar a Tuto-U.
+                    Ingresa tu contraseña EDF Academy.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
