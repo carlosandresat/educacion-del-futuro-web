@@ -4,7 +4,8 @@ export const publicRoutes = [
     "/cursos",
     "/inscripcion",
     "/inscripcion/gratis",
-    "/inscripcion/registro"
+    "/inscripcion/registro",
+    "/newuser"
 ];
 
 export const authRoutes = [
