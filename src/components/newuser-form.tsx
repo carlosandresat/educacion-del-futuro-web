@@ -82,6 +82,7 @@ export function NewUserForm() {
                 <Input
                   placeholder="nombre.apellido@yachaytech.edu.ec"
                   disabled={isPending}
+                  type="email"
                   {...field}
                 />
               </FormControl>
