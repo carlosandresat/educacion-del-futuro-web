@@ -52,6 +52,10 @@ export function MainNavbar() {
 
   const pathname = usePathname()
 
+  if(pathname === '/dashboard') {
+    return null
+  }
+
   return (
     <nav
       className={`${pathname === "/" ? "bg-transparent" : "bg-secondary"} p-4 sticky top-0 z-10 duration-300 ${
