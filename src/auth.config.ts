@@ -26,7 +26,7 @@ export default {
                         user.password
                     )
 
-                    if (passwordsMatch) return user;
+                    if (passwordsMatch) return user as any;
 
                 }
                 return null;
