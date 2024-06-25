@@ -3,100 +3,221 @@ generator client {
 }
 
 datasource db {
-  provider     = "postgresql"
-  url          = env("DATABASE_URL")
-  directUrl    = env("DIRECT_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model registro {
-  id                  Int     @id @default(autoincrement())
-  curso               String
-  horario             String
-  nombres             String
-  cedula              String
-  telefono            String
-  genero              String
-  academic_year       String
-  colegio             String
-  condicion_salud     String
-  representante_nombres String
-  representante_celular String
+  id                         Int      @id @default(autoincrement())
+  curso                      String
+  horario                    String
+  nombres                    String
+  cedula                     String
+  telefono                   String
+  genero                     String
+  academic_year              String
+  colegio                    String
+  condicion_salud            String
+  representante_nombres      String
+  representante_celular      String
   representante_convencional String
-  representante_email String
-  representante_direccion String
-  carrera             String
-  no_examenes         String
-  expectativas        String
-  descubierto_por      String
-  createdAt DateTime @default(now())
-
+  representante_email        String
+  representante_direccion    String
+  carrera                    String
+  no_examenes                String
+  expectativas               String
+  descubierto_por            String
+  createdAt                  DateTime @default(now())
 }
 
 model clases_demostrativas {
-  id                  Int     @id @default(autoincrement())
-  curso               String
-  horario             String
-  nombres             String
-  cedula              String
-  telefono            String
-  genero              String
-  academic_year       String
-  colegio             String
-  condicion_salud     String
-  carrera             String
-  no_examenes         String
-  descubierto_por      String
-  createdAt DateTime @default(now())
+  id              Int      @id @default(autoincrement())
+  curso           String
+  horario         String
+  nombres         String
+  cedula          String
+  telefono        String
+  genero          String
+  academic_year   String
+  colegio         String
+  condicion_salud String
+  carrera         String
+  no_examenes     String
+  descubierto_por String
+  createdAt       DateTime @default(now())
 }
 
-model Account {
-  id                 String  @id @default(cuid())
-  userId             String  @map("user_id")
-  type               String
-  provider           String
-  providerAccountId  String  @map("provider_account_id")
-  refresh_token      String? @db.Text
-  access_token       String? @db.Text
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String? @db.Text
-  session_state      String?
- 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
- 
-  @@unique([provider, providerAccountId])
-  @@map("accounts")
-}
- 
-model Session {
-  id           String   @id @default(cuid())
-  sessionToken String   @unique @map("session_token")
-  userId       String   @map("user_id")
-  expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
- 
-  @@map("sessions")
-}
- 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime? @map("email_verified")
-  image         String?
-  password      String?
-  accounts      Account[]
-  sessions      Session[]
- 
+  id       Int     @id @default(autoincrement())
+  name     String?
+  email    String? @unique
+  image    String?
+  password String?
+  roleId   Int     @map("role_id")
+  role     Role    @relation(fields: [roleId], references: [id])
+
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt @map("updated_at")
+  courses             CourseSchedule[]     @relation("CourseTeacher")
+  enrollments         Enrollment[]
+  homeworks           HomeworkGrade[]
+  lessons             LessonGrade[]
+  absences            AbsenceRegister[]
+  psychologyRegisters PsychologyRegister[] @relation("Psychologist")
+  psychologyRecords   PsychologyRegister[] @relation("Student")
+  penalties           Penaltie[]
+
   @@map("users")
 }
 
-model VerificationToken {
-  identifier String
-  token      String
-  expires    DateTime
- 
-  @@unique([identifier, token])
-  @@map("verificationtokens")
+model Role {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  users User[]
+
+  @@map("roles")
+}
+
+model Course {
+  id          Int              @id @default(autoincrement())
+  name        String
+  description String
+  createdAt   DateTime         @default(now()) @map("created_at")
+  updatedAt   DateTime         @updatedAt @map("updated_at")
+  schedules   CourseSchedule[]
+
+  @@map("courses")
+}
+
+model CourseSchedule {
+  id          Int          @id @default(autoincrement())
+  courseId    Int          @map("course_id")
+  course      Course       @relation(fields: [courseId], references: [id])
+  teacherId   Int          @map("teacher_id")
+  teacher     User         @relation("CourseTeacher", fields: [teacherId], references: [id])
+  schedule    String
+  createdAt   DateTime     @default(now()) @map("created_at")
+  updatedAt   DateTime     @updatedAt @map("updated_at")
+  enrollments Enrollment[]
+  homeworks   Homework[]
+  lessons     Lesson[]
+  classes     Class[]
+
+  @@map("course_schedules")
+}
+
+model Class {
+  id               Int            @id @default(autoincrement())
+  courseScheduleId Int            @map("course_schedule_id")
+  courseSchedule   CourseSchedule @relation(fields: [courseScheduleId], references: [id])
+  topic            String
+  date             DateTime
+  createdAt        DateTime       @default(now()) @map("created_at")
+  updatedAt        DateTime       @updatedAt @map("updated_at")
+
+  absences AbsenceRegister[]
+
+  @@map("classes")
+}
+
+model Enrollment {
+  id               Int            @id @default(autoincrement())
+  studentId        Int            @map("student_id")
+  student          User           @relation(fields: [studentId], references: [id])
+  courseScheduleId Int            @map("course_schedule_id")
+  courseSchedule   CourseSchedule @relation(fields: [courseScheduleId], references: [id])
+  enrollmentDate   DateTime       @map("enrollment_date")
+
+  @@map("enrollments")
+}
+
+model Homework {
+  id               Int             @id @default(autoincrement())
+  courseScheduleId Int             @map("course_schedule_id")
+  courseSchedule   CourseSchedule  @relation(fields: [courseScheduleId], references: [id])
+  title            String
+  description      String
+  dueDate          DateTime        @map("due_date")
+  createdAt        DateTime        @default(now()) @map("created_at")
+  updatedAt        DateTime        @updatedAt @map("updated_at")
+  grades           HomeworkGrade[]
+
+  @@map("homeworks")
+}
+
+model Lesson {
+  id               Int            @id @default(autoincrement())
+  courseScheduleId Int            @map("course_schedule_id")
+  courseSchedule   CourseSchedule @relation(fields: [courseScheduleId], references: [id])
+  title            String
+  content          String
+  lessonDate       DateTime       @map("lesson_date")
+  createdAt        DateTime       @default(now()) @map("created_at")
+  updatedAt        DateTime       @updatedAt @map("updated_at")
+  grades           LessonGrade[]
+
+  @@map("lessons")
+}
+
+model AbsenceRegister {
+  id        Int      @id @default(autoincrement())
+  studentId Int      @map("student_id")
+  student   User     @relation(fields: [studentId], references: [id])
+  classId   Int      @map("class_id")
+  class     Class    @relation(fields: [classId], references: [id])
+  reason    String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("absence_registers")
+}
+
+model HomeworkGrade {
+  id         Int      @id @default(autoincrement())
+  homeworkId Int      @map("homework_id")
+  homework   Homework @relation(fields: [homeworkId], references: [id])
+  studentId  Int      @map("student_id")
+  student    User     @relation(fields: [studentId], references: [id])
+  grade      Float
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  @@map("homework_grades")
+}
+
+model LessonGrade {
+  id        Int      @id @default(autoincrement())
+  lessonId  Int      @map("lesson_id")
+  lesson    Lesson   @relation(fields: [lessonId], references: [id])
+  studentId Int      @map("student_id")
+  student   User     @relation(fields: [studentId], references: [id])
+  grade     Float
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("lesson_grades")
+}
+
+model PsychologyRegister {
+  id           Int      @id @default(autoincrement())
+  psychologistId Int      @map("psychologist_id")
+  psychologist User     @relation("Psychologist", fields: [psychologistId], references: [id])
+  studentId    Int      @map("student_id")
+  student      User     @relation("Student", fields: [studentId], references: [id])
+  description  String
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@map("psychology_registers")
+}
+
+model Penaltie {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @map("user_id")
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("penalties")
 }

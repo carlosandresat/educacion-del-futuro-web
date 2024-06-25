@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { TerminosCondiciones } from "@/components/terminos-condiciones";
 import { PlayIcon, PauseIcon } from "@radix-ui/react-icons";
+import Sidebar from "@/components/sidebar";
 
 export default function Cursos() {
   const [isRegisterBarVisible, setIsRegisterBarVisible] = useState(false);
@@ -51,6 +52,7 @@ export default function Cursos() {
           </Button>
         </Link>
       </div>
+      <Sidebar></Sidebar>
     </>
   );
 }

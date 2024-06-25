@@ -38,7 +38,6 @@ export default function RootLayout({
             <Toaster></Toaster>
             <MainNavbar></MainNavbar>
             <div className="mx-auto">{children}</div>
-            <Sidebar></Sidebar>
           </div>
           <Analytics />
         </ThemeProvider>

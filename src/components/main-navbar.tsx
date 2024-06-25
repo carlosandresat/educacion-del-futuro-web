@@ -34,8 +34,6 @@ export function MainNavbar() {
     };
 
     window.addEventListener("scroll", onScroll);
-    console.log(scrollDir);
-
     return () => window.removeEventListener("scroll", onScroll);
   }, [scrollDir]);
 
@@ -52,7 +50,7 @@ export function MainNavbar() {
 
   const pathname = usePathname()
 
-  if(pathname === '/dashboard') {
+  if(pathname === '/dashboard' || pathname === '/profesor') {
     return null
   }
 
