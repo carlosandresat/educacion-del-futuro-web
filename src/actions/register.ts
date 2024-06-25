@@ -28,13 +28,13 @@ export const register = async (data: z.infer<typeof RegisterSchema>) => {
         return { error: "Email ya registrado" };
     }
 
-    await prisma.user.create({
+    /*await prisma.user.create({
         data: {
             name,
             email,
             password: hashedPassword,
         },
-    });
+    });*/
 
     return { sucess: "Pre-Registro completado" };
 };
