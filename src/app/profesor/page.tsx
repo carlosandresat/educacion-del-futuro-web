@@ -12,6 +12,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { NewClassDialog } from "@/components/new-class-dialog";
+import { NewHomeworkDialog } from "@/components/new-homework-dialog";
+import { NewLessonDialog } from "@/components/new-lesson-dialog";
 
 const Dashboard = async () => {
   const session = await auth();
@@ -30,11 +32,13 @@ const Dashboard = async () => {
           Cerrar Sesión
         </Button>
       </form>
-      <div className="flex">
+      <div className="flex justify-between gap-2 w-full">
         <NewClassDialog/>
+        <NewHomeworkDialog />
+        <NewLessonDialog />
       </div>
 
-      <Tabs defaultValue="homeworks" className="w-full">
+      <Tabs defaultValue="homeworks" className="w-full mt-4">
         <TabsList className="flex w-full border-b">
           <TabsTrigger value="homeworks">Tareas</TabsTrigger>
           <TabsTrigger value="lessons">Lecciones</TabsTrigger>
