@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { NewClassDialog } from "@/components/new-class-dialog";
 
 const Dashboard = async () => {
   const session = await auth();
@@ -29,6 +30,9 @@ const Dashboard = async () => {
           Cerrar Sesión
         </Button>
       </form>
+      <div className="flex">
+        <NewClassDialog/>
+      </div>
 
       <Tabs defaultValue="homeworks" className="w-full">
         <TabsList className="flex w-full border-b">
