@@ -9,6 +9,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { NewClassForm } from "@/components/new-class-form";
 
 
 export function NewClassDialog() {
@@ -21,7 +22,7 @@ export function NewClassDialog() {
         <DialogHeader>
           <DialogTitle>Nueva Clase</DialogTitle>
         </DialogHeader>
-        
+        <NewClassForm />
       </DialogContent>
     </Dialog>
   );

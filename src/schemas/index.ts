@@ -28,3 +28,44 @@ export const RegisterSchema = z.object({
         .min(8, "La contraseña debe contener mínimo 8 caracteres")
         .max(16, "La contraseña debe contener máximo 16 caracteres"),
 });
+
+export const NewClassSchema = z.object({
+    topic: z
+        .string({
+            required_error: "Por favor ingresa un tema",
+        }),
+    date: z.date({
+        required_error: "Tienes que escoger una fecha.",
+      }),
+    time: z.number({
+        required_error: "Tienes que escoger una hora.",
+    })
+});
+
+export const NewHomeworkSchema = z.object({
+    title: z
+        .string({
+            required_error: "Por favor ingresa un tema",
+        }),
+    description: z
+    .string({
+        required_error: "Por favor ingresa un tema",
+    }),
+    dueDate: z.date({
+        required_error: "Tienes que escoger una fecha.",
+      }),
+});
+
+export const NewLessonSchema = z.object({
+    title: z
+        .string({
+            required_error: "Por favor ingresa un tema",
+        }),
+    content: z
+        .string({
+        required_error: "Por favor ingresa un tema",
+    }),
+    date: z.date({
+        required_error: "Tienes que escoger una fecha.",
+      }),
+});
