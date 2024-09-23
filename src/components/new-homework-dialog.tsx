@@ -9,6 +9,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { NewHomeworkForm } from "@/components/new-homework-form";
 
 
 export function NewHomeworkDialog() {
@@ -21,7 +22,7 @@ export function NewHomeworkDialog() {
         <DialogHeader>
           <DialogTitle>Nueva Tarea</DialogTitle>
         </DialogHeader>
-        
+        <NewHomeworkForm />
       </DialogContent>
     </Dialog>
   );
