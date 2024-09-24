@@ -10,13 +10,14 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { NewLessonForm } from "@/components/new-lesson-form";
+import { PlusIcon } from "@radix-ui/react-icons";
 
 
 export function NewLessonDialog() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Nueva Lección</Button>
+      <Button variant="blue" className="w-12 h-12"><PlusIcon/></Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
