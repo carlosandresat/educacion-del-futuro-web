@@ -45,11 +45,11 @@ export const NewClassSchema = z.object({
 export const NewHomeworkSchema = z.object({
     title: z
         .string({
-            required_error: "Por favor ingresa un tema",
+            required_error: "Por favor ingresa un título",
         }),
     description: z
     .string({
-        required_error: "Por favor ingresa un tema",
+        required_error: "Por favor ingresa una descripción",
     }),
     dueDate: z.date({
         required_error: "Tienes que escoger una fecha.",
@@ -59,11 +59,11 @@ export const NewHomeworkSchema = z.object({
 export const NewLessonSchema = z.object({
     title: z
         .string({
-            required_error: "Por favor ingresa un tema",
+            required_error: "Por favor ingresa un título",
         }),
     content: z
         .string({
-        required_error: "Por favor ingresa un tema",
+        required_error: "Por favor ingresa un contenido",
     }),
     date: z.date({
         required_error: "Tienes que escoger una fecha.",
