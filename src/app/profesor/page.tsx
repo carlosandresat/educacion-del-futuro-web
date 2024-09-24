@@ -32,11 +32,6 @@ const Dashboard = async () => {
           Cerrar Sesión
         </Button>
       </form>
-      <div className="flex justify-between gap-2 w-full">
-        <NewClassDialog/>
-        <NewHomeworkDialog />
-        <NewLessonDialog />
-      </div>
 
       <Tabs defaultValue="homeworks" className="w-full mt-4">
         <TabsList className="flex w-full border-b">
@@ -45,6 +40,9 @@ const Dashboard = async () => {
           <TabsTrigger value="absences">Asistencia</TabsTrigger>
         </TabsList>
         <TabsContent value="homeworks">
+          <div className="flex justify-center my-4">
+            <NewHomeworkDialog />
+          </div>
           <div className="border rounded-lg w-full">
             <div className="relative w-full overflow-auto">
               <Table>
@@ -95,6 +93,9 @@ const Dashboard = async () => {
           </div>
         </TabsContent>
         <TabsContent value="lessons">
+          <div className="flex justify-center my-4">
+            <NewLessonDialog />
+          </div>
           <div className="border rounded-lg w-full">
             <div className="relative w-full overflow-auto">
               <Table>
@@ -157,6 +158,9 @@ const Dashboard = async () => {
           </div>
         </TabsContent>
         <TabsContent value="absences">
+          <div className="flex justify-center my-4">
+            <NewClassDialog />
+          </div>
           <div className="border rounded-lg w-full">
             <div className="relative w-full overflow-auto">
               <Table>
