@@ -14,9 +14,20 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { NewClassDialog } from "@/components/new-class-dialog";
 import { NewHomeworkDialog } from "@/components/new-homework-dialog";
 import { NewLessonDialog } from "@/components/new-lesson-dialog";
+import HomeworkTab from "@/components/homework-tab";
+import { BookOpen, User } from "lucide-react";
+import Link from "next/link";
 
 const Dashboard = async () => {
   const session = await auth();
+  const courses = [
+    { id: '1', name: 'Matemáticas', students: 30, color: 'bg-blue-500' },
+    { id: '2', name: 'Ciencias', students: 25, color: 'bg-green-500' },
+    { id: '3', name: 'Literatura', students: 28, color: 'bg-yellow-500' },
+    { id: '4', name: 'Historia', students: 22, color: 'bg-red-500' },
+    { id: '5', name: 'Inglés', students: 35, color: 'bg-purple-500' },
+    { id: '6', name: 'Arte', students: 20, color: 'bg-pink-500' },
+  ]
 
   return (
     <div className="flex flex-col items-center justify-center p-6 md:p-12">
@@ -33,208 +44,37 @@ const Dashboard = async () => {
         </Button>
       </form>
 
-      <Tabs defaultValue="homeworks" className="w-full mt-4">
-        <TabsList className="flex w-full border-b">
-          <TabsTrigger value="homeworks">Tareas</TabsTrigger>
-          <TabsTrigger value="lessons">Lecciones</TabsTrigger>
-          <TabsTrigger value="absences">Asistencia</TabsTrigger>
-        </TabsList>
-        <TabsContent value="homeworks">
-          <div className="flex justify-center my-4">
-            <NewHomeworkDialog />
-          </div>
-          <div className="border rounded-lg w-full">
-            <div className="relative w-full overflow-auto">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead className="w-[150px]">Student Name</TableHead>
-                    <TableHead>Homework 1</TableHead>
-                    <TableHead>Homework 2</TableHead>
-                    <TableHead>Homework 3</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  <TableRow>
-                    <TableCell className="font-medium">John Doe</TableCell>
-                    <TableCell>85</TableCell>
-                    <TableCell>92</TableCell>
-                    <TableCell>78</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">Jane Smith</TableCell>
-                    <TableCell>92</TableCell>
-                    <TableCell>88</TableCell>
-                    <TableCell>85</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">
-                      Michael Johnson
-                    </TableCell>
-                    <TableCell>78</TableCell>
-                    <TableCell>82</TableCell>
-                    <TableCell>90</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">Emily Davis</TableCell>
-                    <TableCell>90</TableCell>
-                    <TableCell>85</TableCell>
-                    <TableCell>92</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">David Wilson</TableCell>
-                    <TableCell>85</TableCell>
-                    <TableCell>90</TableCell>
-                    <TableCell>88</TableCell>
-                  </TableRow>
-                </TableBody>
-              </Table>
-            </div>
-          </div>
-        </TabsContent>
-        <TabsContent value="lessons">
-          <div className="flex justify-center my-4">
-            <NewLessonDialog />
-          </div>
-          <div className="border rounded-lg w-full">
-            <div className="relative w-full overflow-auto">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead className="w-[150px]">Student Name</TableHead>
-                    <TableHead>Lesson 1</TableHead>
-                    <TableHead>Lesson 2</TableHead>
-                    <TableHead>Lesson 3</TableHead>
-                    <TableHead>Lesson 4</TableHead>
-                    <TableHead>Lesson 5</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  <TableRow>
-                    <TableCell className="font-medium">John Doe</TableCell>
-                    <TableCell>90</TableCell>
-                    <TableCell>85</TableCell>
-                    <TableCell>92</TableCell>
-                    <TableCell>80</TableCell>
-                    <TableCell>88</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">Jane Smith</TableCell>
-                    <TableCell>95</TableCell>
-                    <TableCell>90</TableCell>
-                    <TableCell>88</TableCell>
-                    <TableCell>92</TableCell>
-                    <TableCell>85</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">
-                      Michael Johnson
-                    </TableCell>
-                    <TableCell>88</TableCell>
-                    <TableCell>85</TableCell>
-                    <TableCell>92</TableCell>
-                    <TableCell>80</TableCell>
-                    <TableCell>90</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">Emily Davis</TableCell>
-                    <TableCell>88</TableCell>
-                    <TableCell>92</TableCell>
-                    <TableCell>85</TableCell>
-                    <TableCell>90</TableCell>
-                    <TableCell>88</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">David Wilson</TableCell>
-                    <TableCell>92</TableCell>
-                    <TableCell>85</TableCell>
-                    <TableCell>90</TableCell>
-                    <TableCell>88</TableCell>
-                    <TableCell>92</TableCell>
-                  </TableRow>
-                </TableBody>
-              </Table>
-            </div>
-          </div>
-        </TabsContent>
-        <TabsContent value="absences">
-          <div className="flex justify-center my-4">
-            <NewClassDialog />
-          </div>
-          <div className="border rounded-lg w-full">
-            <div className="relative w-full overflow-auto">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead className="w-[150px]">Student Name</TableHead>
-                    <TableHead>Class 1</TableHead>
-                    <TableHead>Class 2</TableHead>
-                    <TableHead>Class 3</TableHead>
-                    <TableHead>Class 4</TableHead>
-                    <TableHead>Class 5</TableHead>
-                    <TableHead>Class 6</TableHead>
-                    <TableHead>Class 7</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  <TableRow>
-                    <TableCell className="font-medium">John Doe</TableCell>
-                    <TableCell>A</TableCell>
-                    <TableCell>D</TableCell>
-                    <TableCell>A</TableCell>
-                    <TableCell>D</TableCell>
-                    <TableCell>A</TableCell>
-                    <TableCell>D</TableCell>
-                    <TableCell>A</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">Jane Smith</TableCell>
-                    <TableCell>D</TableCell>
-                    <TableCell>A</TableCell>
-                    <TableCell>D</TableCell>
-                    <TableCell>A</TableCell>
-                    <TableCell>D</TableCell>
-                    <TableCell>A</TableCell>
-                    <TableCell>D</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">
-                      Michael Johnson
-                    </TableCell>
-                    <TableCell>A</TableCell>
-                    <TableCell>D</TableCell>
-                    <TableCell>A</TableCell>
-                    <TableCell>D</TableCell>
-                    <TableCell>A</TableCell>
-                    <TableCell>D</TableCell>
-                    <TableCell>A</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">Emily Davis</TableCell>
-                    <TableCell>D</TableCell>
-                    <TableCell>A</TableCell>
-                    <TableCell>D</TableCell>
-                    <TableCell>A</TableCell>
-                    <TableCell>D</TableCell>
-                    <TableCell>A</TableCell>
-                    <TableCell>D</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">David Wilson</TableCell>
-                    <TableCell>A</TableCell>
-                    <TableCell>D</TableCell>
-                    <TableCell>A</TableCell>
-                    <TableCell>D</TableCell>
-                    <TableCell>A</TableCell>
-                    <TableCell>D</TableCell>
-                    <TableCell>A</TableCell>
-                  </TableRow>
-                </TableBody>
-              </Table>
-            </div>
-          </div>
-        </TabsContent>
-      </Tabs>
+      <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+      Bienvenido, usuario
+    </h2>
+    <h4 className="scroll-m-20 text-xl font-semibold tracking-tight self-start mt-8">
+      Tus cursos:
+    </h4>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full mt-6">
+    {courses.map((course) => (
+      <Link href={`profesor/${course.id}`} key={course.id}>
+              <div
+                className={`${course.color} rounded-lg shadow-lg overflow-hidden cursor-pointer hover:scale-105 transition-all`}
+              >
+                <div className="p-6">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-xl font-semibold text-white">{course.name}</h3>
+                    <BookOpen className="w-6 h-6 text-white opacity-75" />
+                  </div>
+                  <p className="mt-2 text-white opacity-90">
+                    {course.students} estudiantes
+                  </p>
+                </div>
+                <div className="bg-white bg-opacity-20 py-3 px-6">
+                  <div className="flex items-center text-white">
+                    <User className="w-5 h-5 mr-2 opacity-75" />
+                    <span>Ver detalles</span>
+                  </div>
+                </div>
+              </div>
+              </Link>
+            ))}
+    </div>
     </div>
   );
 };
