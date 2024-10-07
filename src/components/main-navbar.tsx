@@ -50,7 +50,7 @@ export function MainNavbar() {
 
   const pathname = usePathname()
 
-  if(pathname === '/dashboard' || pathname === '/profesor') {
+  if(pathname === '/dashboard' || pathname.startsWith("/profesor")) {
     return null
   }
 
