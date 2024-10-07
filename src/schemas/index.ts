@@ -69,3 +69,14 @@ export const NewLessonSchema = z.object({
         required_error: "Tienes que escoger una fecha.",
       }),
 });
+
+export const HomeworksSchema = z.object({
+    students: z.array(
+      z.object({
+        name: z.string(),
+        homework1: z.coerce.number().min(0).max(100),
+        homework2: z.coerce.number().min(0).max(100),
+        homework3: z.coerce.number().min(0).max(100),
+      })
+    ),
+  });
