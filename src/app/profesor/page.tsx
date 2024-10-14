@@ -45,7 +45,7 @@ const Dashboard = async () => {
       </form>
 
       <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
-      Bienvenido, usuario
+      Bienvenido, {session?.user?.name}
     </h2>
     <h4 className="scroll-m-20 text-xl font-semibold tracking-tight self-start mt-8">
       Tus cursos:
