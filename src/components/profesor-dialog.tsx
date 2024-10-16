@@ -25,7 +25,7 @@ export function ProfesorDialog({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="bg-main rounded-full">Ver Perfil</Button>
+        <Button variant="blue">Ver Perfil</Button>
       </DialogTrigger>
       <DialogContent className="md:max-w-2xl">
         <DialogHeader>

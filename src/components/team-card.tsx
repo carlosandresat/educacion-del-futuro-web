@@ -45,12 +45,13 @@ export function TeamCard({
         </AspectRatio>
       </div>
 
+      <div className="h-52 flex flex-col justify-between">
       <CardHeader>
         <CardTitle className="self-center">{name}</CardTitle>
         <CardDescription className="text-center">{position}</CardDescription>
         <CardDescription className="text-center">{title}</CardDescription>
       </CardHeader>
-      <CardFooter className="justify-center">
+      <CardFooter className="justify-center h-max">
         <ProfesorDialog
           name={name}
           position={position}
@@ -58,6 +59,7 @@ export function TeamCard({
           networks={networks}
         ></ProfesorDialog>
       </CardFooter>
+      </div>
     </Card>
   );
 }
