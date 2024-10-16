@@ -83,3 +83,17 @@ export const HomeworkGradeSchema = z.object({
   export const HomeworksSchema = z.object({
     students: z.array(HomeworkGradeSchema),
   });
+
+export const LessonGradeSchema = z.object({
+    studentId: z.number(),
+    grades: z.array(
+      z.object({
+        lessonId: z.number(),
+        grade: z.coerce.number().min(0).max(100),
+      })
+    ),
+  });
+  
+export const LessonsSchema = z.object({
+    students: z.array(LessonGradeSchema),
+  });

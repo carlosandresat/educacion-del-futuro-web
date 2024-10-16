@@ -15,6 +15,7 @@ import { NewClassDialog } from "@/components/new-class-dialog";
 import { NewHomeworkDialog } from "@/components/new-homework-dialog";
 import { NewLessonDialog } from "@/components/new-lesson-dialog";
 import HomeworkTab from "@/components/homework-tab";
+import { LessonsTab } from "@/components/lessons-tab";
 import Link from "next/link";
 import { ArrowBigLeft } from "lucide-react";
 
@@ -49,69 +50,7 @@ const Dashboard = async () => {
           <HomeworkTab />
         </TabsContent>
         <TabsContent value="lessons">
-          <div className="flex justify-center my-4">
-            <NewLessonDialog />
-          </div>
-          <div className="border rounded-lg w-full">
-            <div className="relative w-full overflow-auto">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead className="w-[150px]">Student Name</TableHead>
-                    <TableHead>Lesson 1</TableHead>
-                    <TableHead>Lesson 2</TableHead>
-                    <TableHead>Lesson 3</TableHead>
-                    <TableHead>Lesson 4</TableHead>
-                    <TableHead>Lesson 5</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  <TableRow>
-                    <TableCell className="font-medium">John Doe</TableCell>
-                    <TableCell>90</TableCell>
-                    <TableCell>85</TableCell>
-                    <TableCell>92</TableCell>
-                    <TableCell>80</TableCell>
-                    <TableCell>88</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">Jane Smith</TableCell>
-                    <TableCell>95</TableCell>
-                    <TableCell>90</TableCell>
-                    <TableCell>88</TableCell>
-                    <TableCell>92</TableCell>
-                    <TableCell>85</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">
-                      Michael Johnson
-                    </TableCell>
-                    <TableCell>88</TableCell>
-                    <TableCell>85</TableCell>
-                    <TableCell>92</TableCell>
-                    <TableCell>80</TableCell>
-                    <TableCell>90</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">Emily Davis</TableCell>
-                    <TableCell>88</TableCell>
-                    <TableCell>92</TableCell>
-                    <TableCell>85</TableCell>
-                    <TableCell>90</TableCell>
-                    <TableCell>88</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">David Wilson</TableCell>
-                    <TableCell>92</TableCell>
-                    <TableCell>85</TableCell>
-                    <TableCell>90</TableCell>
-                    <TableCell>88</TableCell>
-                    <TableCell>92</TableCell>
-                  </TableRow>
-                </TableBody>
-              </Table>
-            </div>
-          </div>
+          <LessonsTab />
         </TabsContent>
         <TabsContent value="absences">
           <div className="flex justify-center my-4">
