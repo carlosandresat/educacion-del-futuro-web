@@ -70,13 +70,16 @@ export const NewLessonSchema = z.object({
       }),
 });
 
-export const HomeworksSchema = z.object({
-    students: z.array(
+export const HomeworkGradeSchema = z.object({
+    studentId: z.number(),
+    grades: z.array(
       z.object({
-        name: z.string(),
-        homework1: z.coerce.number().min(0).max(100),
-        homework2: z.coerce.number().min(0).max(100),
-        homework3: z.coerce.number().min(0).max(100),
+        homeworkId: z.number(),
+        grade: z.coerce.number().min(0).max(100),
       })
     ),
+  });
+  
+  export const HomeworksSchema = z.object({
+    students: z.array(HomeworkGradeSchema),
   });

@@ -30,7 +30,7 @@ import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select"; // Assume you have a Select component
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, useFieldArray } from "react-hook-form";
-import { useState, useTransition } from "react";
+import { useState, useTransition, useEffect } from "react";
 import { z } from "zod";
 import { toast } from "@/components/ui/use-toast";
 import {
@@ -46,124 +46,117 @@ import { HomeworksSchema } from "@/schemas";
 
 const HomeworkTab = () => {
   const initialHomeworks = [
-    { name: "John Doe", homework1: 85, homework2: 92, homework3: 78 },
-    { name: "Jane Smith", homework1: 92, homework2: 88, homework3: 85 },
-    { name: "Michael Johnson", homework1: 78, homework2: 82, homework3: 90 },
-    { name: "Emily Davis", homework1: 90, homework2: 85, homework3: 92 },
-    { name: "David Wilson", homework1: 85, homework2: 90, homework3: 88 },
+    { id: 1, title: "Homework 1" },
+    { id: 2, title: "Homework 2" },
+    { id: 3, title: "Homework 3" },
   ];
 
-  const homeworksForm = useForm({
+  const initialStudents = [
+    { id: 1, name: "John Doe" },
+    { id: 2, name: "Jane Smith" },
+    { id: 3, name: "Michael Johnson" },
+    { id: 4, name: "Emily Davis" },
+    { id: 5, name: "David Wilson" },
+  ];
+
+  const [students, setStudents] = useState(initialStudents);
+  const [homeworks, setHomeworks] = useState(initialHomeworks);
+
+
+
+  const defaultValues: z.infer<typeof HomeworksSchema> = {
+    students: students.map((student) => ({
+      studentId: student.id,
+      grades: homeworks.map((hw) => ({
+        homeworkId: hw.id,
+        grade: Math.floor(Math.random() * 101), // Random grade for sample
+      })),
+    })),
+  };
+
+  const homeworksForm = useForm<z.infer<typeof HomeworksSchema>>({
     resolver: zodResolver(HomeworksSchema),
-    defaultValues: {
-      students: initialHomeworks,
-    },
+    defaultValues,
   });
 
-  const { control: controlHomeworks, handleSubmit: handleSubmitHomeworks } =
-    homeworksForm;
+  const { control, handleSubmit, reset } = homeworksForm;
 
-  const { fields: fieldsHomeworks } = useFieldArray({
-    control: controlHomeworks,
+  const { fields } = useFieldArray({
+    control,
     name: "students",
   });
 
-  const onSubmitHomeworks = (data: z.infer<typeof HomeworksSchema>) => {
-    // Handle form submission, e.g., send data to the server
-    toast({
-      title: "Homeworks Updated",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
+  const onSubmit = async (data: z.infer<typeof HomeworksSchema>) => {
+    
+
+    try {
+      // Placeholder for server-side logic
+      // Replace this with actual server action integration
+      console.log("Submitting Data:", data);
+
+      // Simulate server processing delay
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      // Show success toast
+      toast({
+        title: "Grades Updated",
+        description: "Homework grades have been successfully updated.",
+      });
+
+      // Optionally reset the form or handle post-submission logic
+      reset();
+    } catch (error) {
+      console.error(error);
+      toast({
+        title: "Error",
+        description: "Failed to update grades.",
+      });
+    }
   };
 
   return (
     <>
       <div className="flex justify-between items-center my-4">
         <NewHomeworkDialog />
-        <Button
-          onClick={() => handleSubmitHomeworks(onSubmitHomeworks)()}
-          variant="blue"
-        >
+        <Button onClick={handleSubmit(onSubmit)} variant="blue">
           Guardar Cambios
         </Button>
       </div>
       <Form {...homeworksForm}>
-        <form
-          onSubmit={handleSubmitHomeworks(onSubmitHomeworks)}
-          className="border rounded-lg w-full p-4"
-        >
+        <form onSubmit={handleSubmit(onSubmit)} className="border rounded-lg w-full p-4">
           <div className="relative w-full overflow-auto">
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="w-[150px]">Student Name</TableHead>
-                  <TableHead>Homework 1</TableHead>
-                  <TableHead>Homework 2</TableHead>
-                  <TableHead>Homework 3</TableHead>
+                <TableHead className="w-[150px]">Student Name</TableHead>
+                  {homeworks.map((hw) => (
+                    <TableHead key={hw.id}>{hw.title}</TableHead>
+                  ))}
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {fieldsHomeworks.map((field, index) => (
+              {fields.map((field, index) => (
                   <TableRow key={field.id}>
                     <TableCell className="font-medium">
-                      <FormField
-                        control={controlHomeworks}
-                        name={`students.${index}.name`}
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormControl>
-                              <Input {...field} disabled />
-                            </FormControl>
-                          </FormItem>
-                        )}
-                      />
+                      {/* Display student name */}
+                      <Input value={students[index]?.name} disabled />
                     </TableCell>
-                    <TableCell>
-                      <FormField
-                        control={controlHomeworks}
-                        name={`students.${index}.homework1`}
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormControl>
-                              <Input type="number" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </TableCell>
-                    <TableCell>
-                      <FormField
-                        control={controlHomeworks}
-                        name={`students.${index}.homework2`}
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormControl>
-                              <Input type="number" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </TableCell>
-                    <TableCell>
-                      <FormField
-                        control={controlHomeworks}
-                        name={`students.${index}.homework3`}
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormControl>
-                              <Input type="number" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </TableCell>
+                    {homeworks.map((hw, hwIndex) => (
+                      <TableCell key={hw.id}>
+                        <FormField
+                          control={control}
+                          name={`students.${index}.grades.${hwIndex}.grade`}
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormControl>
+                                <Input type="number" {...field} min={0} max={100} />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </TableCell>
+                    ))}
                   </TableRow>
                 ))}
               </TableBody>
