@@ -97,3 +97,19 @@ export const LessonGradeSchema = z.object({
 export const LessonsSchema = z.object({
     students: z.array(LessonGradeSchema),
   });
+
+export const AssistanceTypeSchema = z.enum(["P", "A", "F"])
+
+export const AssistanceRegisterSchema = z.object({
+    studentId: z.number(),
+    register: z.array(
+      z.object({
+        classId: z.number(),
+        assistance: AssistanceTypeSchema,
+      })
+    ),
+});
+
+export const AssistanceSchema = z.object({
+    students: z.array(AssistanceRegisterSchema)
+})

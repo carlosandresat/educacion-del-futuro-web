@@ -18,6 +18,7 @@ import HomeworkTab from "@/components/homework-tab";
 import { LessonsTab } from "@/components/lessons-tab";
 import Link from "next/link";
 import { ArrowBigLeft } from "lucide-react";
+import { AssistanceTab } from "@/components/assistance-tab";
 
 const Dashboard = async () => {
   const session = await auth();
@@ -53,81 +54,7 @@ const Dashboard = async () => {
           <LessonsTab />
         </TabsContent>
         <TabsContent value="absences">
-          <div className="flex justify-center my-4">
-            <NewClassDialog />
-          </div>
-          <div className="border rounded-lg w-full">
-            <div className="relative w-full overflow-auto">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead className="w-[150px]">Student Name</TableHead>
-                    <TableHead>Class 1</TableHead>
-                    <TableHead>Class 2</TableHead>
-                    <TableHead>Class 3</TableHead>
-                    <TableHead>Class 4</TableHead>
-                    <TableHead>Class 5</TableHead>
-                    <TableHead>Class 6</TableHead>
-                    <TableHead>Class 7</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  <TableRow>
-                    <TableCell className="font-medium">John Doe</TableCell>
-                    <TableCell>A</TableCell>
-                    <TableCell>D</TableCell>
-                    <TableCell>A</TableCell>
-                    <TableCell>D</TableCell>
-                    <TableCell>A</TableCell>
-                    <TableCell>D</TableCell>
-                    <TableCell>A</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">Jane Smith</TableCell>
-                    <TableCell>D</TableCell>
-                    <TableCell>A</TableCell>
-                    <TableCell>D</TableCell>
-                    <TableCell>A</TableCell>
-                    <TableCell>D</TableCell>
-                    <TableCell>A</TableCell>
-                    <TableCell>D</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">
-                      Michael Johnson
-                    </TableCell>
-                    <TableCell>A</TableCell>
-                    <TableCell>D</TableCell>
-                    <TableCell>A</TableCell>
-                    <TableCell>D</TableCell>
-                    <TableCell>A</TableCell>
-                    <TableCell>D</TableCell>
-                    <TableCell>A</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">Emily Davis</TableCell>
-                    <TableCell>D</TableCell>
-                    <TableCell>A</TableCell>
-                    <TableCell>D</TableCell>
-                    <TableCell>A</TableCell>
-                    <TableCell>D</TableCell>
-                    <TableCell>A</TableCell>
-                    <TableCell>D</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">David Wilson</TableCell>
-                    <TableCell>A</TableCell>
-                    <TableCell>D</TableCell>
-                    <TableCell>A</TableCell>
-                    <TableCell>D</TableCell>
-                    <TableCell>A</TableCell>
-                    <TableCell>D</TableCell>
-                    <TableCell>A</TableCell>
-                  </TableRow>
-                </TableBody>
-              </Table>
-            </div>
-          </div>
+          <AssistanceTab />
         </TabsContent>
       </Tabs>
     </div>
