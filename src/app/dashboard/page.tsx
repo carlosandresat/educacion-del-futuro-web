@@ -22,7 +22,7 @@ const Dashboard = async () => {
         action={async () => {
           "use server";
 
-          await signOut();
+          await signOut({redirectTo: "/"});
         }}
         className="mb-12 self-end"
       >
