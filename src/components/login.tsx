@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { login } from "@/actions/login";
+import { login, loginRedirect } from "@/actions/login";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -36,6 +36,7 @@ import { LoginSchema } from "@/schemas";
 
 export function Login() {
   const [isPending, startTransition] = useTransition();
+
 
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
@@ -52,6 +53,7 @@ export function Login() {
         });
       } else {
         setIsOpen(false)
+        await loginRedirect()
       }
     })
   }
