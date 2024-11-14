@@ -32,9 +32,13 @@ import { CalendarIcon } from "@radix-ui/react-icons"
 import { format } from "date-fns"
 
 import { NewHomeworkSchema } from "@/schemas";
+import { usePathname } from 'next/navigation';
+import { createHomework } from "@/actions/teacher";
+
 
 export function NewHomeworkForm() {
   const [isPending, startTransition] = useTransition();
+  const pathname = usePathname()
 
   const form = useForm<z.infer<typeof NewHomeworkSchema>>({
     resolver: zodResolver(NewHomeworkSchema),
@@ -42,19 +46,25 @@ export function NewHomeworkForm() {
 
   function onSubmit(data: z.infer<typeof NewHomeworkSchema>) {
     startTransition(async () => {
-      const formattedData = {
-        title: data.title,
-        description: data.description,
-        datetime: data.dueDate
-      }
-      toast({
-        title: "You submitted the following values:",
-        description: (
-          <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-            <code className="text-white">{JSON.stringify(formattedData, null, 2)}</code>
-          </pre>
-        ),
-      })
+      const courseOfferingId = Number(pathname.split("/").at(-1))
+        const formattedData = {
+          courseOfferingId,
+          title: data.title,
+          description: data.description,
+          dueDate: data.dueDate
+        }
+        try {
+          await createHomework(formattedData);
+          toast({
+            title: "Se ha creado una nueva tarea",
+          })
+        } catch (error) {
+          toast({
+            title: "¡Ha habido un error!",
+          })
+        }
+        
+      
     })
   }
 

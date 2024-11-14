@@ -1,4 +1,8 @@
-import prisma from "@/lib/db"; // Adjust the import path based on your project structure
+"use server"
+
+import prisma from "@/lib/db";
+import { CreateHomeworkSchema } from "@/schemas";
+import { z } from "zod"
 
 /**
  * Retrieves all CourseOfferings assigned to a specific tutor (professor).
@@ -31,4 +35,39 @@ export async function getCoursesByTutorId(tutorId: number): Promise<{ id: number
     console.error(`Error fetching courses for tutor ID ${tutorId}:`, error)
     throw new Error("Failed to fetch courses for the specified tutor.")
   }
+}
+
+export async function createHomework(input: z.infer<typeof CreateHomeworkSchema>) {
+    const parsedInput = CreateHomeworkSchema.safeParse(input)
+    if (!parsedInput.success) {
+        // Extract and concatenate all validation error messages
+        const errorMessages = parsedInput.error.errors.map((err) => err.message).join(", ")
+        throw new Error(`Invalid input data: ${errorMessages}`)
+    }
+    const { courseOfferingId, title, description, dueDate } = parsedInput.data
+    try {
+        // Check if the CourseOffering exists
+        const courseOffering = await prisma.courseOffering.findUnique({
+            where: { id: courseOfferingId },
+        })
+
+        if (!courseOffering) {
+            throw new Error(`CourseOffering with ID ${courseOfferingId} does not exist.`)
+        }
+
+        // Create the new Homework entry
+        const newHomework = await prisma.homework.create({
+            data: {
+                courseOfferingId,
+                title,
+                description,
+                dueDate,
+            },
+        })
+
+        return newHomework
+    } catch (error) {
+        console.error("Error creating homework:", error)
+        throw new Error("Failed to create homework. Please try again later.")
+    }
 }

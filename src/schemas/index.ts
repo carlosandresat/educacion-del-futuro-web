@@ -113,3 +113,16 @@ export const AssistanceRegisterSchema = z.object({
 export const AssistanceSchema = z.object({
     students: z.array(AssistanceRegisterSchema)
 })
+
+export const CreateHomeworkSchema = z.object({
+    courseOfferingId: z.number().int().positive({
+        message: "Invalid Course Offering ID.",
+    }),
+    title: z.string().min(1, { message: "Title is required." }),
+    description: z.string().min(1, { message: "Description is required." }),
+    dueDate: z.date({
+        required_error: "Due date is required.",
+    }).refine((date) => date > new Date(), {
+        message: "Due date must be in the future.",
+    }),
+})
