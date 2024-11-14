@@ -16,19 +16,13 @@ import { NewHomeworkDialog } from "@/components/new-homework-dialog";
 import { NewLessonDialog } from "@/components/new-lesson-dialog";
 import HomeworkTab from "@/components/homework-tab";
 import { BookOpen, User } from "lucide-react";
+import { getCoursesByTutorId } from "@/actions/teacher";
 import Link from "next/link";
 
 const Dashboard = async () => {
   const session = await auth();
-  const courses = [
-    { id: '1', name: 'Matemáticas', students: 30, color: 'bg-blue-500' },
-    { id: '2', name: 'Ciencias', students: 25, color: 'bg-green-500' },
-    { id: '3', name: 'Literatura', students: 28, color: 'bg-yellow-500' },
-    { id: '4', name: 'Historia', students: 22, color: 'bg-red-500' },
-    { id: '5', name: 'Inglés', students: 35, color: 'bg-purple-500' },
-    { id: '6', name: 'Arte', students: 20, color: 'bg-pink-500' },
-  ]
-
+  const courses = await getCoursesByTutorId(Number(session?.user.id))
+ 
   return (
     <div className="flex flex-col items-center justify-center p-6 md:p-12">
       <form
@@ -54,16 +48,14 @@ const Dashboard = async () => {
     {courses.map((course) => (
       <Link href={`profesor/${course.id}`} key={course.id}>
               <div
-                className={`${course.color} rounded-lg shadow-lg overflow-hidden cursor-pointer hover:scale-105 transition-all`}
+                className={`bg-main rounded-lg shadow-lg overflow-hidden cursor-pointer hover:scale-105 transition-all`}
               >
                 <div className="p-6">
                   <div className="flex items-center justify-between">
                     <h3 className="text-xl font-semibold text-white">{course.name}</h3>
                     <BookOpen className="w-6 h-6 text-white opacity-75" />
                   </div>
-                  <p className="mt-2 text-white opacity-90">
-                    {course.students} estudiantes
-                  </p>
+                  
                 </div>
                 <div className="bg-white bg-opacity-20 py-3 px-6">
                   <div className="flex items-center text-white">
