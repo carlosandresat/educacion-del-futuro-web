@@ -59,7 +59,7 @@ model User {
 
   createdAt           DateTime             @default(now())
   updatedAt           DateTime             @updatedAt @map("updated_at")
-  courses             CourseSchedule[]     @relation("CourseTeacher")
+  courses             CourseOffering[]     @relation("CourseTeacher")
   enrollments         Enrollment[]
   homeworks           HomeworkGrade[]
   lessons             LessonGrade[]
@@ -85,12 +85,12 @@ model Course {
   description String
   createdAt   DateTime         @default(now()) @map("created_at")
   updatedAt   DateTime         @updatedAt @map("updated_at")
-  schedules   CourseSchedule[]
+  offering    CourseOffering[]
 
   @@map("courses")
 }
 
-model CourseSchedule {
+model CourseOffering {
   id          Int          @id @default(autoincrement())
   courseId    Int          @map("course_id")
   course      Course       @relation(fields: [courseId], references: [id])
@@ -104,13 +104,13 @@ model CourseSchedule {
   lessons     Lesson[]
   classes     Class[]
 
-  @@map("course_schedules")
+  @@map("course_offerings")
 }
 
 model Class {
   id               Int            @id @default(autoincrement())
-  courseScheduleId Int            @map("course_schedule_id")
-  courseSchedule   CourseSchedule @relation(fields: [courseScheduleId], references: [id])
+  courseOfferingId Int            @map("course_offering_id")
+  courseOffering   CourseOffering @relation(fields: [courseOfferingId], references: [id])
   topic            String
   date             DateTime
   createdAt        DateTime       @default(now()) @map("created_at")
@@ -125,8 +125,8 @@ model Enrollment {
   id               Int            @id @default(autoincrement())
   studentId        Int            @map("student_id")
   student          User           @relation(fields: [studentId], references: [id])
-  courseScheduleId Int            @map("course_schedule_id")
-  courseSchedule   CourseSchedule @relation(fields: [courseScheduleId], references: [id])
+  courseOfferingId Int            @map("course_offering_id")
+  courseOffering   CourseOffering @relation(fields: [courseOfferingId], references: [id])
   enrollmentDate   DateTime       @map("enrollment_date")
 
   @@map("enrollments")
@@ -134,8 +134,8 @@ model Enrollment {
 
 model Homework {
   id               Int             @id @default(autoincrement())
-  courseScheduleId Int             @map("course_schedule_id")
-  courseSchedule   CourseSchedule  @relation(fields: [courseScheduleId], references: [id])
+  courseOfferingId Int             @map("course_offering_id")
+  courseOffering   CourseOffering  @relation(fields: [courseOfferingId], references: [id])
   title            String
   description      String
   dueDate          DateTime        @map("due_date")
@@ -148,8 +148,8 @@ model Homework {
 
 model Lesson {
   id               Int            @id @default(autoincrement())
-  courseScheduleId Int            @map("course_schedule_id")
-  courseSchedule   CourseSchedule @relation(fields: [courseScheduleId], references: [id])
+  courseOfferingId Int            @map("course_offering_id")
+  courseOffering   CourseOffering @relation(fields: [courseOfferingId], references: [id])
   title            String
   content          String
   lessonDate       DateTime       @map("lesson_date")
