@@ -55,7 +55,7 @@ const Page = async ({
           <TabsTrigger value="absences">Asistencia</TabsTrigger>
         </TabsList>
         <TabsContent value="homeworks">
-          <HomeworkTab initialData={initialHomeworksData}/>
+          <HomeworkTab initialData={initialHomeworksData} courseOfferingId={Number(classId)}/>
         </TabsContent>
         <TabsContent value="lessons">
           <LessonsTab />

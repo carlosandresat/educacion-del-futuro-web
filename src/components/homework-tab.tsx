@@ -43,8 +43,9 @@ import { cn } from "@/lib/utils";
 import { CalendarIcon } from "@radix-ui/react-icons";
 import { format } from "date-fns";
 import { HomeworksSchema } from "@/schemas";
+import { updateHomeworkGrades } from "@/actions/teacher";
 
-const HomeworkTab = ({ initialData } : {initialData: {
+const HomeworkTab = ({ initialData, courseOfferingId } : {initialData: {
   students: {
       id: number;
       name: string | null;
@@ -62,11 +63,10 @@ const HomeworkTab = ({ initialData } : {initialData: {
           }[];
       }[];
   };
-}}) => {
+}, courseOfferingId:number}) => {
 
   const { students, homeworks, defaultValues } = initialData;
-
-
+  const [isPending, startTransition] = useTransition();
 
   const homeworksForm = useForm({
     resolver: zodResolver(HomeworksSchema),
@@ -81,15 +81,13 @@ const HomeworkTab = ({ initialData } : {initialData: {
   });
 
   const onSubmit = async (data: z.infer<typeof HomeworksSchema>) => {
-    
+    startTransition(async () => {
+
 
     try {
       // Placeholder for server-side logic
       // Replace this with actual server action integration
-      console.log("Submitting Data:", data);
-
-      // Simulate server processing delay
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await updateHomeworkGrades(data, courseOfferingId)
 
       // Show success toast
       toast({
@@ -104,13 +102,14 @@ const HomeworkTab = ({ initialData } : {initialData: {
         description: "Failed to update grades.",
       });
     }
+  })
   };
 
   return (
     <>
       <div className="flex justify-between items-center my-4">
         <NewHomeworkDialog />
-        <Button onClick={handleSubmit(onSubmit)} variant="blue">
+        <Button onClick={handleSubmit(onSubmit)} variant="blue" disabled={isPending}>
           Guardar Cambios
         </Button>
       </div>

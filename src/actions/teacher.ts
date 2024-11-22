@@ -1,7 +1,7 @@
 "use server"
 
 import prisma from "@/lib/db";
-import { CreateHomeworkSchema } from "@/schemas";
+import { CreateHomeworkSchema, HomeworksSchema } from "@/schemas";
 import { revalidatePath } from "next/cache";
 import { z } from "zod"
 
@@ -136,4 +136,57 @@ export async function getInitialHomeworksData(courseOfferingId:number) {
     homeworks,
     defaultValues,
   };
+}
+
+export async function updateHomeworkGrades(
+  data:  z.infer<typeof HomeworksSchema>,
+  courseOfferingId: number
+) {
+  // Validate the input data using the HomeworksSchema
+  const parsedData = HomeworksSchema.safeParse(data);
+
+  if (!parsedData.success) {
+    // Extract and concatenate all validation error messages
+    const errorMessages = parsedData.error.errors.map((err) => err.message).join(", ");
+    throw new Error(`Invalid input data: ${errorMessages}`);
+  }
+
+  try {
+    // Iterate over each student in the data
+    for (const student of parsedData.data.students) {
+      const { studentId, grades } = student;
+
+      // Iterate over each grade entry for the student
+      for (const gradeEntry of grades) {
+        const { homeworkId, grade } = gradeEntry;
+
+        if (grade !== null && grade !== undefined) {
+          // Proceed with upsert
+          await prisma.homeworkGrade.upsert({
+            where: {
+              homework_student_unique: {
+                homeworkId,
+                studentId,
+              },
+            },
+            update: {
+              grade,
+              updatedAt: new Date(),
+            },
+            create: {
+              homeworkId,
+              studentId,
+              grade,
+            },
+          });
+        }
+      }
+    }
+
+    // Optionally, revalidate the path or return success message
+    revalidatePath(`/profesor/${courseOfferingId}`);
+  } catch (error) {
+    console.error("Error updating homework grades:", error);
+    throw new Error("Failed to update homework grades. Please try again later.");
+  }
 }
