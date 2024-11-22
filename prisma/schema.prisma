@@ -183,6 +183,7 @@ model HomeworkGrade {
   createdAt  DateTime @default(now()) @map("created_at")
   updatedAt  DateTime @updatedAt @map("updated_at")
 
+  @@unique([homeworkId, studentId], name: "homework_student_unique")
   @@map("homework_grades")
 }
 

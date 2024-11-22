@@ -121,8 +121,8 @@ const HomeworkTab = ({ initialData } : {initialData: {
   <TableHeader>
     <TableRow>
       <TableHead className="w-[150px]">Student Name</TableHead>
-      {homeworks.map((hw) => (
-        <TableHead key={hw.id}>{hw.title}</TableHead>
+      {homeworks.map((hw, index) => (
+        <TableHead key={hw.id} className="text-center">#{index+1}</TableHead>
       ))}
     </TableRow>
   </TableHeader>
