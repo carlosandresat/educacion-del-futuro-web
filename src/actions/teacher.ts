@@ -2,6 +2,7 @@
 
 import prisma from "@/lib/db";
 import { CreateHomeworkSchema } from "@/schemas";
+import { revalidatePath } from "next/cache";
 import { z } from "zod"
 
 /**
@@ -64,10 +65,76 @@ export async function createHomework(input: z.infer<typeof CreateHomeworkSchema>
                 dueDate,
             },
         })
-
-        return newHomework
     } catch (error) {
         console.error("Error creating homework:", error)
         throw new Error("Failed to create homework. Please try again later.")
     }
+    revalidatePath(`/profesor/${courseOfferingId}`)
+}
+
+export async function getInitialHomeworksData(courseOfferingId:number) {
+  // Fetch students enrolled in the course offering
+  const enrollments = await prisma.enrollment.findMany({
+    where: { courseOfferingId },
+    include: {
+      student: {
+        select: {
+          id: true,
+          name: true,
+        },
+      },
+    },
+  });
+
+  const students = enrollments.map((enrollment) => enrollment.student);
+
+  // Fetch homework assignments for the course offering
+  const homeworks = await prisma.homework.findMany({
+    where: { courseOfferingId },
+    select: {
+      id: true,
+      title: true,
+    },
+  });
+
+  // Fetch existing homework grades
+  const homeworkGrades = await prisma.homeworkGrade.findMany({
+    where: {
+      homework: {
+        courseOfferingId,
+      },
+    },
+    select: {
+      studentId: true,
+      homeworkId: true,
+      grade: true,
+    },
+  });
+
+  // Organize grades per student
+  const studentsWithGrades = students.map((student) => {
+    const grades = homeworks.map((homework) => {
+      const gradeRecord = homeworkGrades.find(
+        (hg) => hg.studentId === student.id && hg.homeworkId === homework.id
+      );
+      return {
+        homeworkId: homework.id,
+        grade: gradeRecord ? gradeRecord.grade : null, // or default to 0
+      };
+    });
+    return {
+      studentId: student.id,
+      grades,
+    };
+  });
+
+  const defaultValues = {
+    students: studentsWithGrades,
+  };
+
+  return {
+    students,
+    homeworks,
+    defaultValues,
+  };
 }

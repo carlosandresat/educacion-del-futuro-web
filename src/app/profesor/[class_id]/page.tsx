@@ -19,9 +19,16 @@ import { LessonsTab } from "@/components/lessons-tab";
 import Link from "next/link";
 import { ArrowBigLeft } from "lucide-react";
 import { AssistanceTab } from "@/components/assistance-tab";
+import { getInitialHomeworksData } from "@/actions/teacher";
 
-const Dashboard = async () => {
+const Page = async ({
+  params,
+}: {
+  params: Promise<{ class_id: string }>
+}) => {
   const session = await auth();
+  const classId = (await params).class_id
+  const initialHomeworksData = await getInitialHomeworksData(Number(classId))
 
   return (
     <div className="flex flex-col items-center justify-center p-6 md:p-12">
@@ -48,7 +55,7 @@ const Dashboard = async () => {
           <TabsTrigger value="absences">Asistencia</TabsTrigger>
         </TabsList>
         <TabsContent value="homeworks">
-          <HomeworkTab />
+          <HomeworkTab initialData={initialHomeworksData}/>
         </TabsContent>
         <TabsContent value="lessons">
           <LessonsTab />
@@ -61,4 +68,4 @@ const Dashboard = async () => {
   );
 };
 
-export default Dashboard;
+export default Page;

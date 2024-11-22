@@ -44,37 +44,31 @@ import { CalendarIcon } from "@radix-ui/react-icons";
 import { format } from "date-fns";
 import { HomeworksSchema } from "@/schemas";
 
-const HomeworkTab = () => {
-  const initialHomeworks = [
-    { id: 1, title: "Homework 1" },
-    { id: 2, title: "Homework 2" },
-    { id: 3, title: "Homework 3" },
-  ];
-
-  const initialStudents = [
-    { id: 1, name: "John Doe" },
-    { id: 2, name: "Jane Smith" },
-    { id: 3, name: "Michael Johnson" },
-    { id: 4, name: "Emily Davis" },
-    { id: 5, name: "David Wilson" },
-  ];
-
-  const [students, setStudents] = useState(initialStudents);
-  const [homeworks, setHomeworks] = useState(initialHomeworks);
-
-
-
-  const defaultValues: z.infer<typeof HomeworksSchema> = {
-    students: students.map((student) => ({
-      studentId: student.id,
-      grades: homeworks.map((hw) => ({
-        homeworkId: hw.id,
-        grade: Math.floor(Math.random() * 101), // Random grade for sample
-      })),
-    })),
+const HomeworkTab = ({ initialData } : {initialData: {
+  students: {
+      id: number;
+      name: string | null;
+  }[];
+  homeworks: {
+      id: number;
+      title: string;
+  }[];
+  defaultValues: {
+      students: {
+          studentId: number;
+          grades: {
+              homeworkId: number;
+              grade: number | null;
+          }[];
+      }[];
   };
+}}) => {
 
-  const homeworksForm = useForm<z.infer<typeof HomeworksSchema>>({
+  const { students, homeworks, defaultValues } = initialData;
+
+
+
+  const homeworksForm = useForm({
     resolver: zodResolver(HomeworksSchema),
     defaultValues,
   });
@@ -103,8 +97,6 @@ const HomeworkTab = () => {
         description: "Homework grades have been successfully updated.",
       });
 
-      // Optionally reset the form or handle post-submission logic
-      reset();
     } catch (error) {
       console.error(error);
       toast({
@@ -125,42 +117,47 @@ const HomeworkTab = () => {
       <Form {...homeworksForm}>
         <form onSubmit={handleSubmit(onSubmit)} className="border rounded-lg w-full p-4">
           <div className="relative w-full overflow-auto">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                <TableHead className="w-[150px]">Student Name</TableHead>
-                  {homeworks.map((hw) => (
-                    <TableHead key={hw.id}>{hw.title}</TableHead>
-                  ))}
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-              {fields.map((field, index) => (
-                  <TableRow key={field.id}>
-                    <TableCell className="font-medium">
-                      {/* Display student name */}
-                      <Input value={students[index]?.name} disabled />
-                    </TableCell>
-                    {homeworks.map((hw, hwIndex) => (
-                      <TableCell key={hw.id}>
-                        <FormField
-                          control={control}
-                          name={`students.${index}.grades.${hwIndex}.grade`}
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormControl>
-                                <Input type="number" {...field} min={0} max={100} />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+          <Table>
+  <TableHeader>
+    <TableRow>
+      <TableHead className="w-[150px]">Student Name</TableHead>
+      {homeworks.map((hw) => (
+        <TableHead key={hw.id}>{hw.title}</TableHead>
+      ))}
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    {fields.map((field, index) => (
+      <TableRow key={field.id}>
+        <TableCell className="font-medium">
+          <Input value={students[index]?.name ?? ''} disabled />
+        </TableCell>
+        {homeworks.map((hw, hwIndex) => (
+          <TableCell key={hw.id}>
+            <FormField
+              control={control}
+              name={`students.${index}.grades.${hwIndex}.grade`}
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                  <Input
+  type="number"
+  {...field}
+  value={field.value ?? ''}
+  min={0}
+  max={100}
+/>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </TableCell>
+        ))}
+      </TableRow>
+    ))}
+  </TableBody>
+</Table>
           </div>
         </form>
       </Form>

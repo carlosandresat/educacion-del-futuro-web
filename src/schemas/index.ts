@@ -75,7 +75,7 @@ export const HomeworkGradeSchema = z.object({
     grades: z.array(
       z.object({
         homeworkId: z.number(),
-        grade: z.coerce.number().min(0).max(100),
+        grade: z.coerce.number().min(0).max(100).nullable().optional(), // Allow null but handle it
       })
     ),
   });
