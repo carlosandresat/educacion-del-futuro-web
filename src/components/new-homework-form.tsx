@@ -34,11 +34,13 @@ import { format } from "date-fns"
 import { NewHomeworkSchema } from "@/schemas";
 import { usePathname } from 'next/navigation';
 import { createHomework } from "@/actions/teacher";
+import { useRouter } from 'next/navigation'
 
 
 export function NewHomeworkForm() {
   const [isPending, startTransition] = useTransition();
   const pathname = usePathname()
+  const router = useRouter()
 
   const form = useForm<z.infer<typeof NewHomeworkSchema>>({
     resolver: zodResolver(NewHomeworkSchema),
@@ -58,6 +60,7 @@ export function NewHomeworkForm() {
           toast({
             title: "Se ha creado una nueva tarea",
           })
+          window.location.reload()
         } catch (error) {
           toast({
             title: "¡Ha habido un error!",

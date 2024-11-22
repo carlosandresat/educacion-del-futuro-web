@@ -69,7 +69,6 @@ export async function createHomework(input: z.infer<typeof CreateHomeworkSchema>
         console.error("Error creating homework:", error)
         throw new Error("Failed to create homework. Please try again later.")
     }
-    revalidatePath(`/profesor/${courseOfferingId}`)
 }
 
 export async function getInitialHomeworksData(courseOfferingId:number) {
