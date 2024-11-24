@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { TerminosCondiciones } from "@/components/terminos-condiciones";
 import { PlayIcon, PauseIcon } from "@radix-ui/react-icons";
 import Sidebar from "@/components/sidebar";
+import { AutoOpeningRouletteDialog } from "@/components/auto-opening-roulette-dialog";
 
 export default function Cursos() {
   const [isRegisterBarVisible, setIsRegisterBarVisible] = useState(false);
@@ -53,6 +54,7 @@ export default function Cursos() {
         </Link>
       </div>
       <Sidebar></Sidebar>
+      <AutoOpeningRouletteDialog />
     </>
   );
 }
