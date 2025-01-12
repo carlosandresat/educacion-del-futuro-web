@@ -126,3 +126,16 @@ export const CreateHomeworkSchema = z.object({
         message: "Due date must be in the future.",
     }),
 })
+
+export const CreateLessonSchema = z.object({
+    courseOfferingId: z.number().int().positive({
+        message: "Invalid Course Offering ID.",
+    }),
+    title: z.string().min(1, { message: "Title is required." }),
+    content: z.string().min(1, { message: "Description is required." }),
+    lessonDate: z.date({
+        required_error: "Due date is required.",
+    }).refine((date) => date > new Date(), {
+        message: "Due date must be in the future.",
+    }),
+})

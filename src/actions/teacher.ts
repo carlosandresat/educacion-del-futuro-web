@@ -1,7 +1,7 @@
 "use server"
 
 import prisma from "@/lib/db";
-import { CreateHomeworkSchema, HomeworksSchema } from "@/schemas";
+import { CreateHomeworkSchema, CreateLessonSchema, HomeworksSchema } from "@/schemas";
 import { revalidatePath } from "next/cache";
 import { z } from "zod"
 
@@ -57,7 +57,7 @@ export async function createHomework(input: z.infer<typeof CreateHomeworkSchema>
         }
 
         // Create the new Homework entry
-        const newHomework = await prisma.homework.create({
+        await prisma.homework.create({
             data: {
                 courseOfferingId,
                 title,
@@ -188,5 +188,38 @@ export async function updateHomeworkGrades(
   } catch (error) {
     console.error("Error updating homework grades:", error);
     throw new Error("Failed to update homework grades. Please try again later.");
+  }
+}
+
+export async function createLesson(input: z.infer<typeof CreateLessonSchema>) {
+  const parsedInput = CreateLessonSchema.safeParse(input)
+  if (!parsedInput.success) {
+      // Extract and concatenate all validation error messages
+      const errorMessages = parsedInput.error.errors.map((err) => err.message).join(", ")
+      throw new Error(`Invalid input data: ${errorMessages}`)
+  }
+  const { courseOfferingId, title, content, lessonDate } = parsedInput.data
+  try {
+      // Check if the CourseOffering exists
+      const courseOffering = await prisma.courseOffering.findUnique({
+          where: { id: courseOfferingId },
+      })
+
+      if (!courseOffering) {
+          throw new Error(`CourseOffering with ID ${courseOfferingId} does not exist.`)
+      }
+
+      // Create the new Homework entry
+      await prisma.lesson.create({
+          data: {
+              courseOfferingId,
+              title,
+              content,
+              lessonDate,
+          },
+      })
+  } catch (error) {
+      console.error("Error creating homework:", error)
+      throw new Error("Failed to create homework. Please try again later.")
   }
 }
