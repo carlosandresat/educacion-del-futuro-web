@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog'
-import { Roulette } from './roulette'
+import RouletteWheel from '@/components/roulette-wheel'
 import { Button } from '@/components/ui/button'
 
 export function AutoOpeningRouletteDialog() {
@@ -26,7 +26,7 @@ export function AutoOpeningRouletteDialog() {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <div className="flex justify-center my-4">
-          <Roulette />
+          <RouletteWheel />
         </div>
         <div className="flex justify-end">
           <Button onClick={() => setIsOpen(false)}>Cerrar</Button>
