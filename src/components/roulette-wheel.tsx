@@ -32,7 +32,7 @@ const RouletteWheel: React.FC = () => {
   const wheelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const useRoulette = async () => {
+    const playRoulette = async () => {
       const rouletteCookie = await getPrizeCookie()
       if (rouletteCookie){
         const currentPrize = prizes.find((prize)=> prize.name===rouletteCookie.value)
@@ -42,7 +42,7 @@ const RouletteWheel: React.FC = () => {
         createPrizeCookie(prize.name)
       }
     }
-    useRoulette()
+    playRoulette()
   }, [])
 
   // Suma total de los pesos para la selección aleatoria
