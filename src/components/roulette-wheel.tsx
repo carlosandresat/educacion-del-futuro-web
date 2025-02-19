@@ -150,7 +150,7 @@ const RouletteWheel: React.FC = () => {
             const textPos = polarToCartesian(center, center, radius * 0.65, midAngle - 90);
             return (
               <g key={i}>
-                <path d={path} fill={fillColor} stroke="#ffffff" strokeWidth="2" />
+                <path d={path} fill={fillColor} stroke="#000000" strokeWidth="2" />
                 {prize.type === "text" ? (
                   <text
                     x={textPos.x}
