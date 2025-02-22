@@ -3,7 +3,7 @@
 import { cookies } from "next/headers";
 
 export async function createPrizeCookie(prize: string) {
-  cookies().set("prize", prize);
+  cookies().set("prize", prize, { maxAge: 60 * 24 * 60 * 60 });
 }
 
 export async function getPrizeCookie() {
