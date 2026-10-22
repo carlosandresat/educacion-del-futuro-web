@@ -1,22 +1,25 @@
 "use server"
 
 import prisma from "@/lib/db";
+import { AuthorizationError, assertCourseOfferingAccess, assertRole } from "@/lib/auth-guards";
 import { CreateHomeworkSchema, CreateLessonSchema, HomeworksSchema } from "@/schemas";
 import { revalidatePath } from "next/cache";
 import { z } from "zod"
 
 /**
- * Retrieves all CourseOfferings assigned to a specific tutor (professor).
+ * Retrieves the CourseOfferings of the logged-in tutor (professor). Admins get every CourseOffering.
  *
- * @param tutorId - The ID of the tutor (professor).
  * @returns A promise that resolves to an array of CourseOffering objects containing `id` and `name`.
- * @throws An error if the database query fails.
+ * @throws An error if the user is not a teacher/admin or the database query fails.
  */
-export async function getCoursesByTutorId(tutorId: number): Promise<{ id: number; name: string }[]> {
+export async function getMyCourses(): Promise<{ id: number; name: string }[]> {
+  // The tutor is taken from the session, never from the client
+  const user = await assertRole(["TEACHER", "ADMIN"])
+
   try {
-    // Query CourseOffering where teacherId matches the provided tutorId
+    // Query CourseOffering where teacherId matches the logged-in tutor
     const courseOfferings = await prisma.courseOffering.findMany({
-      where: { teacherId: tutorId },
+      where: user.role === "ADMIN" ? {} : { teacherId: user.id },
       select: {
         id: true, // Select the ID of the CourseOffering
         course: {
@@ -33,7 +36,7 @@ export async function getCoursesByTutorId(tutorId: number): Promise<{ id: number
       name: offering.course.name,
     }))
   } catch (error) {
-    console.error(`Error fetching courses for tutor ID ${tutorId}:`, error)
+    console.error(`Error fetching courses for tutor ID ${user.id}:`, error)
     throw new Error("Failed to fetch courses for the specified tutor.")
   }
 }
@@ -46,16 +49,11 @@ export async function createHomework(input: z.infer<typeof CreateHomeworkSchema>
         throw new Error(`Invalid input data: ${errorMessages}`)
     }
     const { courseOfferingId, title, description, dueDate } = parsedInput.data
+
+    // Check that the CourseOffering exists and belongs to the logged-in tutor
+    await assertCourseOfferingAccess(courseOfferingId)
+
     try {
-        // Check if the CourseOffering exists
-        const courseOffering = await prisma.courseOffering.findUnique({
-            where: { id: courseOfferingId },
-        })
-
-        if (!courseOffering) {
-            throw new Error(`CourseOffering with ID ${courseOfferingId} does not exist.`)
-        }
-
         // Create the new Homework entry
         await prisma.homework.create({
             data: {
@@ -72,6 +70,8 @@ export async function createHomework(input: z.infer<typeof CreateHomeworkSchema>
 }
 
 export async function getInitialHomeworksData(courseOfferingId:number) {
+  await assertCourseOfferingAccess(courseOfferingId);
+
   // Fetch students enrolled in the course offering
   const enrollments = await prisma.enrollment.findMany({
     where: { courseOfferingId },
@@ -151,6 +151,26 @@ export async function updateHomeworkGrades(
     throw new Error(`Invalid input data: ${errorMessages}`);
   }
 
+  await assertCourseOfferingAccess(courseOfferingId);
+
+  // Every grade must reference a homework of this course and a student enrolled in it,
+  // otherwise a tutor could write grades of other courses through their own courseOfferingId
+  const [courseHomeworks, courseEnrollments] = await Promise.all([
+    prisma.homework.findMany({ where: { courseOfferingId }, select: { id: true } }),
+    prisma.enrollment.findMany({ where: { courseOfferingId }, select: { studentId: true } }),
+  ]);
+  const homeworkIds = new Set(courseHomeworks.map((homework) => homework.id));
+  const studentIds = new Set(courseEnrollments.map((enrollment) => enrollment.studentId));
+
+  const belongsToCourse = parsedData.data.students.every(
+    ({ studentId, grades }) =>
+      studentIds.has(studentId) && grades.every(({ homeworkId }) => homeworkIds.has(homeworkId))
+  );
+
+  if (!belongsToCourse) {
+    throw new AuthorizationError("Las notas no corresponden a este curso.");
+  }
+
   try {
     // Iterate over each student in the data
     for (const student of parsedData.data.students) {
@@ -199,17 +219,12 @@ export async function createLesson(input: z.infer<typeof CreateLessonSchema>) {
       throw new Error(`Invalid input data: ${errorMessages}`)
   }
   const { courseOfferingId, title, content, lessonDate } = parsedInput.data
+
+  // Check that the CourseOffering exists and belongs to the logged-in tutor
+  await assertCourseOfferingAccess(courseOfferingId)
+
   try {
-      // Check if the CourseOffering exists
-      const courseOffering = await prisma.courseOffering.findUnique({
-          where: { id: courseOfferingId },
-      })
-
-      if (!courseOffering) {
-          throw new Error(`CourseOffering with ID ${courseOfferingId} does not exist.`)
-      }
-
-      // Create the new Homework entry
+      // Create the new Lesson entry
       await prisma.lesson.create({
           data: {
               courseOfferingId,

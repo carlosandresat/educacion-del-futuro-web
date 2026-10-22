@@ -16,12 +16,12 @@ import { NewHomeworkDialog } from "@/components/new-homework-dialog";
 import { NewLessonDialog } from "@/components/new-lesson-dialog";
 import HomeworkTab from "@/components/homework-tab";
 import { BookOpen, User } from "lucide-react";
-import { getCoursesByTutorId } from "@/actions/teacher";
+import { getMyCourses } from "@/actions/teacher";
 import Link from "next/link";
 
 const Dashboard = async () => {
   const session = await auth();
-  const courses = await getCoursesByTutorId(Number(session?.user.id))
+  const courses = await getMyCourses()
  
   return (
     <div className="flex flex-col items-center justify-center p-6 md:p-12">
