@@ -8,6 +8,12 @@ export const publicRoutes = [
     "/newuser"
 ];
 
+// Endpoints used by the public enrollment forms (anonymous visitors)
+export const publicApiRoutes = [
+    "/api/register",
+    "/api/clases-demostrativas",
+];
+
 export const authRoutes = [
     "/auth/login",
     "/auth/register",
