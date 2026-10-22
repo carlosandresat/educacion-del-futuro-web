@@ -1,4 +1,6 @@
-import { auth, signOut } from "@/auth";
+import { signOut } from "@/auth";
+import { canAccessCourseOffering, requireRole } from "@/lib/auth-guards";
+import { notFound } from "next/navigation";
 import {
   Table,
   TableBody,
@@ -26,8 +28,12 @@ const Page = async ({
 }: {
   params: Promise<{ class_id: string }>
 }) => {
-  const session = await auth();
+  const user = await requireRole(["TEACHER", "ADMIN"]);
   const classId = (await params).class_id
+
+  // Same response for missing and foreign courses so IDs of other tutors are not disclosed
+  if (!(await canAccessCourseOffering(user, Number(classId)))) notFound();
+
   const initialHomeworksData = await getInitialHomeworksData(Number(classId))
 
   return (

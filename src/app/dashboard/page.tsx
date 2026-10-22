@@ -1,4 +1,5 @@
-import { auth, signOut } from "@/auth";
+import { signOut } from "@/auth";
+import { requireRole } from "@/lib/auth-guards";
 import {
   Table,
   TableBody,
@@ -14,7 +15,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 
 const Dashboard = async () => {
-  const session = await auth();
+  await requireRole(["ADMIN"]);
 
   return (
     <div className="flex flex-col items-center justify-center p-6 md:p-12">

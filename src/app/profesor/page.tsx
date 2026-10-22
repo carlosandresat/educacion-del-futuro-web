@@ -1,4 +1,5 @@
-import { auth, signOut } from "@/auth";
+import { signOut } from "@/auth";
+import { requireRole } from "@/lib/auth-guards";
 import {
   Table,
   TableBody,
@@ -20,7 +21,7 @@ import { getMyCourses } from "@/actions/teacher";
 import Link from "next/link";
 
 const Dashboard = async () => {
-  const session = await auth();
+  const user = await requireRole(["TEACHER", "ADMIN"]);
   const courses = await getMyCourses()
  
   return (
@@ -39,7 +40,7 @@ const Dashboard = async () => {
       </form>
 
       <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
-      Bienvenido, {session?.user?.name}
+      Bienvenido, {user.name}
     </h2>
     <h4 className="scroll-m-20 text-xl font-semibold tracking-tight self-start mt-8">
       Tus cursos:
