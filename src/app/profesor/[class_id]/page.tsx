@@ -1,7 +1,6 @@
-import { logout } from "@/actions/login";
+import { SignOutButton } from "@/components/sign-out-button";
 import { canAccessCourseOffering, requireRole } from "@/lib/auth-guards";
 import { notFound } from "next/navigation";
-import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import HomeworkTab from "@/components/homework-tab";
 import { LessonsTab } from "@/components/lessons-tab";
@@ -27,14 +26,7 @@ const Page = async ({
     <div className="flex flex-col items-center justify-center p-6 md:p-12">
         <div className="flex items-center mb-12 justify-between w-full">
             <Link href={"/profesor"}><ArrowBigLeft /></Link>
-      <form
-        action={logout}
-        className="self-end"
-      >
-        <Button type="submit" variant="blue">
-          Cerrar Sesión
-        </Button>
-      </form>
+      <SignOutButton className="self-end" />
       </div>
 
       <Tabs defaultValue="homeworks" className="w-full mt-4">

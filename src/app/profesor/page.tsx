@@ -1,6 +1,5 @@
-import { logout } from "@/actions/login";
+import { SignOutButton } from "@/components/sign-out-button";
 import { requireRole } from "@/lib/auth-guards";
-import { Button } from "@/components/ui/button";
 import { BookOpen, User } from "lucide-react";
 import { getMyCourses } from "@/actions/teacher";
 import Link from "next/link";
@@ -11,14 +10,7 @@ const Dashboard = async () => {
  
   return (
     <div className="flex flex-col items-center justify-center p-6 md:p-12">
-      <form
-        action={logout}
-        className="mb-12 self-end"
-      >
-        <Button type="submit" variant="blue">
-          Cerrar Sesión
-        </Button>
-      </form>
+      <SignOutButton className="mb-12 self-end" />
 
       <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
       Bienvenido, {user.name}
