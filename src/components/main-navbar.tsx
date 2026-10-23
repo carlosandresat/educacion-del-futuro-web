@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Login } from "@/components/login";
 import { MainMenu } from "@/components/main-menu";
 import { usePathname } from "next/navigation"
+import { appRoutePrefixes } from "@/routes"
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 export function MainNavbar() {
@@ -48,7 +49,7 @@ export function MainNavbar() {
 
   const pathname = usePathname()
 
-  if(pathname === '/dashboard' || pathname.startsWith("/profesor")) {
+  if(appRoutePrefixes.some((prefix) => pathname.startsWith(prefix))) {
     return null
   }
 

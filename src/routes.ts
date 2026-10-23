@@ -21,3 +21,6 @@ export const authRoutes = [
 export const apiAuthPrefix = "/api/auth";
 
 export const DEFAULT_LOGIN_REDIRECT = "/dashboard"
+
+// Logged-in app areas: they render their own header instead of the public navbar
+export const appRoutePrefixes = ["/dashboard", "/profesor", "/student", "/psicologia"];
