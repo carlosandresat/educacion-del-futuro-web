@@ -26,6 +26,8 @@ Prisma 7: la configuración del CLI está en `prisma.config.ts` (carga `.env` co
 
 CI (`.github/workflows/ci.yml`) corre lint, typecheck, tests y build en cada push a `main` y en cada PR. Las variables están documentadas en `.env.example`. El `.env` local apunta a la rama `dev` del proyecto de Neon "EDF Academy Web" (`aws-us-east-1`); producción es la rama `production` y solo recibe `prisma migrate deploy`. El registro público está desactivado: los usuarios se crean con `npm run user:create -- <email> "<nombre>" <ROL>` (o con el seed en dev). Better Auth limita los inicios de sesión en producción (unos pocos intentos cada 10 s por IP).
 
+**Videos del sitio público (alojados fuera del repo):** el video de `src/app/page.tsx` y los de explicación de cada curso en `cursos-accordion.tsx` (Expedición Científica, Ruta del Genio, Sendero del Guerrero) están en Cloudinary (`res.cloudinary.com/djqqonsys`). Los de testimonio (`cursos-accordion.tsx`) y el de introducción (`mision-vision.tsx`) están en el bucket `edf-bucket` de Google Cloud Storage; si la billing account de GCP se cierra, esos videos dejan de cargar y los datos pueden borrarse. Mantener la facturación activa o migrarlos antes de la versión final.
+
 ## Arquitectura
 
 **Dos mitades con flujos de datos distintos:**
