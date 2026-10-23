@@ -104,11 +104,14 @@ const Carousel = React.forwardRef<
         return
       }
 
-      onSelect(api)
+      // Initial sync is deferred: setting state synchronously inside an effect is flagged by the React Compiler rules
+      const frame = requestAnimationFrame(() => onSelect(api))
       api.on("reInit", onSelect)
       api.on("select", onSelect)
 
       return () => {
+        cancelAnimationFrame(frame)
+        api?.off("reInit", onSelect)
         api?.off("select", onSelect)
       }
     }, [api, onSelect])
