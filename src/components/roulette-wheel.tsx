@@ -1,114 +1,71 @@
 "use client";
 import React, { useState, useRef, useEffect } from 'react';
-import { getPrizeCookie, createPrizeCookie } from '@/actions/roulette';
+import { spinRoulette } from '@/actions/roulette';
+import { ROULETTE_PRIZES, type RoulettePrize } from '@/data/roulette-prizes';
 
-type Prize = {
-  id: number;
-  name: string;
-  weight: number;
-  type: "image" | "text";
-  image?: string;
+const SPIN_DURATION_MS = 5000;
+
+// Calcula la rotación final para que el segmento ganador quede en la parte superior (puntero)
+const calculateRotation = (currentRotation: number, winningIndex: number): number => {
+  const extraSpins = 5; // Vueltas extra para efecto visual
+  const segmentAngle = 360 / ROULETTE_PRIZES.length;
+  // Queremos que el centro del segmento ganador quede en 0° (parte superior)
+  const desiredRotation = (360 - winningIndex * segmentAngle) % 360;
+  const currentMod = currentRotation % 360;
+  let delta = desiredRotation - currentMod;
+  if (delta < 0) delta += 360;
+  return currentRotation + extraSpins * 360 + delta;
+};
+
+// Funciones auxiliares para dibujar cada segmento de la ruleta con SVG
+const polarToCartesian = (centerX: number, centerY: number, radius: number, angleInDegrees: number) => {
+  const angleInRadians = (angleInDegrees * Math.PI) / 180.0;
+  return {
+    x: centerX + radius * Math.cos(angleInRadians),
+    y: centerY + radius * Math.sin(angleInRadians),
+  };
+};
+
+const describeArc = (x: number, y: number, radius: number, startAngle: number, endAngle: number) => {
+  // Ajustamos los ángulos para que 0° esté en la parte superior
+  const start = polarToCartesian(x, y, radius, startAngle - 90);
+  const end = polarToCartesian(x, y, radius, endAngle - 90);
+  const largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
+  return [
+    "M", x, y,
+    "L", start.x, start.y,
+    "A", radius, radius, 0, largeArcFlag, 1, end.x, end.y,
+    "Z"
+  ].join(" ");
 };
 
 const RouletteWheel: React.FC = () => {
-  // Definición de los 12 premios con sus pesos y tipos
-  const prizes: Prize[] = [
-    { id: 0, name: "Airpods", weight: 1, type: "image", image: "/gift-airpods.png" },
-    { id: 1, name: "Casco VR", weight: 2, type: "image", image: "/gift-vr.png" },
-    { id: 2, name: "Amazon Prime", weight: 5, type: "image", image: "/gift-prime.png" },
-    { id: 3, name: "Foto Profesional", weight: 5, type: "image", image: "/gift-photo.jpg" },
-    { id: 4, name: "Netflix", weight: 10, type: "image", image: "/gift-netflix.webp" },
-    { id: 5, name: "Disney+", weight: 10, type: "image", image: "/gift-disney.svg" },
-    { id: 6, name: "Recarga $3", weight: 10, type: "text" },
-    { id: 7, name: "Spotify", weight: 10, type: "image",  image: "/gift-spotify.png"},
-    { id: 8, name: "Coca Cola", weight: 10, type: "image", image: "/gift-cocacola.png" },
-    { id: 9, name: "Clase Gratis", weight: 10, type: "text" },
-    { id: 10, name: "Agua", weight: 10, type: "image", image: "/gift-dasani.webp" },
-  ];
-
   const [rotation, setRotation] = useState<number>(0);
   const [spinning, setSpinning] = useState<boolean>(false);
-  const [winner, setWinner] = useState<Prize | null>(null);
+  const [winner, setWinner] = useState<RoulettePrize | null>(null);
   const wheelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const playRoulette = async () => {
-      const rouletteCookie = await getPrizeCookie()
-      if (rouletteCookie){
-        const currentPrize = prizes.find((prize)=> prize.name===rouletteCookie.value)
-        spinWheel(currentPrize)
-      } else {
-        const prize = spinWheel()
-        createPrizeCookie(prize.name)
-      }
-    }
-    playRoulette()
-  }, [])
+    // The server draws the prize (or returns the one already won) and the wheel animates to it
+    let cancelled = false;
+    let timer: ReturnType<typeof setTimeout> | undefined;
 
-  // Suma total de los pesos para la selección aleatoria
-  const totalWeight = prizes.reduce((sum, prize) => sum + prize.weight, 0);
+    spinRoulette().then((prizeId) => {
+      if (cancelled) return;
+      const prize = ROULETTE_PRIZES.find((p) => p.id === prizeId) ?? ROULETTE_PRIZES[0];
+      setRotation((current) => calculateRotation(current, prize.id));
+      setSpinning(true);
+      timer = setTimeout(() => {
+        setSpinning(false);
+        setWinner(prize);
+      }, SPIN_DURATION_MS);
+    });
 
-  // Función que devuelve un premio aleatorio basado en los pesos asignados
-  const getRandomPrize = (): Prize => {
-    let random = Math.random() * totalWeight;
-    for (const prize of prizes) {
-      if (random < prize.weight) {
-        return prize;
-      }
-      random -= prize.weight;
-    }
-    // Fallback en caso de error: retorna el último premio
-    return prizes[prizes.length - 1];
-  };
-
-  // Calcula la rotación final para que el segmento ganador quede en la parte superior (puntero)
-  const calculateRotation = (currentRotation: number, winningIndex: number): number => {
-    const extraSpins = 5; // Vueltas extra para efecto visual
-    const segmentAngle = 360 / prizes.length; // Cada segmento ocupa 30°
-    // Queremos que el centro del segmento ganador quede en 0° (parte superior)
-    const desiredRotation = (360 - winningIndex * segmentAngle) % 360;
-    const currentMod = currentRotation % 360;
-    let delta = desiredRotation - currentMod;
-    if (delta < 0) delta += 360;
-    return currentRotation + extraSpins * 360 + delta;
-  };
-
-  // Inicia el giro de la ruleta
-  const spinWheel = (defaultPrize?:Prize) => {
-    const winningPrize = defaultPrize ? defaultPrize : getRandomPrize();
-    const newRotation = calculateRotation(rotation, winningPrize.id);
-    setRotation(newRotation);
-    setSpinning(true);
-    // Tiempo de animación: 5 segundos
-    setTimeout(() => {
-      setSpinning(false);
-      setWinner(winningPrize);
-    }, 5000);
-    return winningPrize;
-  };
-
-  // Funciones auxiliares para dibujar cada segmento de la ruleta con SVG
-  const polarToCartesian = (centerX: number, centerY: number, radius: number, angleInDegrees: number) => {
-    const angleInRadians = (angleInDegrees * Math.PI) / 180.0;
-    return {
-      x: centerX + radius * Math.cos(angleInRadians),
-      y: centerY + radius * Math.sin(angleInRadians),
+    return () => {
+      cancelled = true;
+      clearTimeout(timer);
     };
-  };
-
-  const describeArc = (x: number, y: number, radius: number, startAngle: number, endAngle: number) => {
-    // Ajustamos los ángulos para que 0° esté en la parte superior
-    const start = polarToCartesian(x, y, radius, startAngle - 90);
-    const end = polarToCartesian(x, y, radius, endAngle - 90);
-    const largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
-    const d = [
-      "M", x, y,
-      "L", start.x, start.y,
-      "A", radius, radius, 0, largeArcFlag, 1, end.x, end.y,
-      "Z"
-    ].join(" ");
-    return d;
-  };
+  }, []);
 
   const wheelSize = 300;
   const center = wheelSize / 2;
@@ -140,12 +97,12 @@ const RouletteWheel: React.FC = () => {
         }}
       >
         <svg width={wheelSize} height={wheelSize} viewBox={`0 0 ${wheelSize} ${wheelSize}`}>
-          {prizes.map((prize, i) => {
-            const segmentAngle = 360 / prizes.length;
+          {ROULETTE_PRIZES.map((prize, i) => {
+            const segmentAngle = 360 / ROULETTE_PRIZES.length;
             const startAngle = i * segmentAngle - segmentAngle / 2;
             const endAngle = i * segmentAngle + segmentAngle / 2;
             const path = describeArc(center, center, radius, startAngle, endAngle);
-            const fillColor = `hsl(${i * (360 / prizes.length)}, 80%, 50%)`;
+            const fillColor = `hsl(${i * (360 / ROULETTE_PRIZES.length)}, 80%, 50%)`;
             const midAngle = (startAngle + endAngle) / 2;
             const textPos = polarToCartesian(center, center, radius * 0.65, midAngle - 90);
             return (
