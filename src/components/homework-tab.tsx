@@ -68,21 +68,23 @@ const HomeworkTab = ({ initialData, courseOfferingId } : {initialData: {
 
 
     try {
-      // Placeholder for server-side logic
-      // Replace this with actual server action integration
-      await updateHomeworkGrades(data, courseOfferingId)
+      const result = await updateHomeworkGrades(data, courseOfferingId)
 
-      // Show success toast
+      if ("error" in result) {
+        toast({ title: "No se guardaron las notas", description: result.error });
+        return;
+      }
+
       toast({
-        title: "Grades Updated",
-        description: "Homework grades have been successfully updated.",
+        title: "Notas guardadas",
+        description: "Las notas de las tareas se actualizaron correctamente.",
       });
 
     } catch (error) {
       console.error(error);
       toast({
         title: "Error",
-        description: "Failed to update grades.",
+        description: "No se pudieron guardar las notas.",
       });
     }
   })

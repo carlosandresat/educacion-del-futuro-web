@@ -148,20 +148,25 @@ export async function getInitialHomeworksData(courseOfferingId:number) {
   };
 }
 
+// Returns the error instead of throwing it: Next.js hides thrown messages from the client in production
 export async function updateHomeworkGrades(
   data:  z.infer<typeof HomeworksSchema>,
   courseOfferingId: number
-) {
+): Promise<{ error: string } | { ok: true }> {
   // Validate the input data using the HomeworksSchema
   const parsedData = HomeworksSchema.safeParse(data);
 
   if (!parsedData.success) {
     // Extract and concatenate all validation error messages
-    const errorMessages = parsedData.error.issues.map((err) => err.message).join(", ");
-    throw new Error(`Invalid input data: ${errorMessages}`);
+    return { error: parsedData.error.issues.map((err) => err.message).join(" ") };
   }
 
-  await assertCourseOfferingAccess(courseOfferingId);
+  try {
+    await assertCourseOfferingAccess(courseOfferingId);
+  } catch (error) {
+    if (error instanceof AuthorizationError) return { error: error.message };
+    throw error;
+  }
 
   // Every grade must reference a homework of this course and a student enrolled in it,
   // otherwise a tutor could write grades of other courses through their own courseOfferingId
@@ -178,24 +183,16 @@ export async function updateHomeworkGrades(
   );
 
   if (!belongsToCourse) {
-    throw new AuthorizationError("Las notas no corresponden a este curso.");
+    return { error: "Las notas no corresponden a este curso." };
   }
 
-  try {
-    // Iterate over each student in the data
-    for (const student of parsedData.data.students) {
-      const { studentId, grades } = student;
-
-      // Iterate over each grade entry for the student
-      for (const gradeEntry of grades) {
-        const { homeworkId, grade } = gradeEntry;
-
-        if (grade === null) {
-          // An emptied input removes the grade instead of storing 0
-          await prisma.homeworkGrade.deleteMany({ where: { homeworkId, studentId } });
-        } else {
-          // Proceed with upsert
-          await prisma.homeworkGrade.upsert({
+  // One write per cell, all in a single transaction: a failure leaves the previous grades untouched
+  const writes = parsedData.data.students.flatMap(({ studentId, grades }) =>
+    grades.map(({ homeworkId, grade }) =>
+      grade === null
+        ? // An emptied input removes the grade instead of storing 0
+          prisma.homeworkGrade.deleteMany({ where: { homeworkId, studentId } })
+        : prisma.homeworkGrade.upsert({
             where: {
               homework_student_unique: {
                 homeworkId,
@@ -204,24 +201,25 @@ export async function updateHomeworkGrades(
             },
             update: {
               grade,
-              updatedAt: new Date(),
             },
             create: {
               homeworkId,
               studentId,
               grade,
             },
-          });
-        }
-      }
-    }
+          })
+    )
+  );
 
-    // Optionally, revalidate the path or return success message
-    revalidatePath(`/profesor/${courseOfferingId}`);
+  try {
+    await prisma.$transaction(writes);
   } catch (error) {
     console.error("Error updating homework grades:", error);
-    throw new Error("Failed to update homework grades. Please try again later.");
+    return { error: "No se pudieron guardar las notas. Inténtalo de nuevo más tarde." };
   }
+
+  revalidatePath(`/profesor/${courseOfferingId}`);
+  return { ok: true };
 }
 
 export async function createLesson(input: z.infer<typeof CreateLessonSchema>) {
