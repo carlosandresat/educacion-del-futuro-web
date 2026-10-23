@@ -104,29 +104,32 @@ export const AssistanceSchema = z.object({
     students: z.array(AssistanceRegisterSchema)
 })
 
+// The date picker sends local midnight and the server may run in another timezone (UTC on Vercel),
+// so "not in the past" is checked against the last 24 h: today is always accepted.
+const notBeforeToday = (date: Date) => date.getTime() >= Date.now() - 24 * 60 * 60 * 1000;
+
 export const CreateHomeworkSchema = z.object({
     courseOfferingId: z.number().int().positive({
-        message: "Invalid Course Offering ID.",
+        message: "Curso inválido.",
     }),
-    title: z.string().min(1, { message: "Title is required." }),
-    description: z.string().min(1, { message: "Description is required." }),
+    title: z.string().trim().min(1, { message: "Por favor ingresa un título." }),
+    description: z.string().trim().min(1, { message: "Por favor ingresa una descripción." }),
     dueDate: z.date({
-        error: "Due date is required.",
-    }).refine((date) => date > new Date(), {
-        message: "Due date must be in the future.",
+        error: "Tienes que escoger una fecha de entrega.",
+    }).refine(notBeforeToday, {
+        message: "La fecha de entrega no puede estar en el pasado.",
     }),
 })
 
+// Lessons are usually recorded on the day they happen or afterwards, so any date is valid
 export const CreateLessonSchema = z.object({
     courseOfferingId: z.number().int().positive({
-        message: "Invalid Course Offering ID.",
+        message: "Curso inválido.",
     }),
-    title: z.string().min(1, { message: "Title is required." }),
-    content: z.string().min(1, { message: "Description is required." }),
+    title: z.string().trim().min(1, { message: "Por favor ingresa un título." }),
+    content: z.string().trim().min(1, { message: "Por favor ingresa un contenido." }),
     lessonDate: z.date({
-        error: "Due date is required.",
-    }).refine((date) => date > new Date(), {
-        message: "Due date must be in the future.",
+        error: "Tienes que escoger una fecha.",
     }),
 })
 // Public enrollment forms: shared by the client forms and the API routes,

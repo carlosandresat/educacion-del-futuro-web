@@ -27,7 +27,7 @@ import {
 import { Calendar } from "@/components/ui/calendar"
 import { cn } from "@/lib/utils"
 import { CalendarIcon } from "@radix-ui/react-icons"
-import { format } from "date-fns"
+import { format, startOfToday } from "date-fns"
 
 import { NewHomeworkSchema } from "@/schemas";
 import { usePathname } from 'next/navigation';
@@ -35,7 +35,7 @@ import { createHomework } from "@/actions/teacher";
 import { useRouter } from 'next/navigation'
 
 
-export function NewHomeworkForm() {
+export function NewHomeworkForm({ onCreated }: { onCreated?: () => void }) {
   const [isPending, startTransition] = useTransition();
   const pathname = usePathname()
   const router = useRouter()
@@ -54,12 +54,18 @@ export function NewHomeworkForm() {
           dueDate: data.dueDate
         }
         try {
-          await createHomework(formattedData);
+          const result = await createHomework(formattedData);
+          if ("error" in result) {
+            toast({ title: "No se pudo crear la tarea", description: result.error })
+            return
+          }
           toast({
             title: "Se ha creado una nueva tarea",
           })
-          window.location.reload()
-        } catch (error) {
+          form.reset()
+          onCreated?.()
+          router.refresh()
+        } catch {
           toast({
             title: "¡Ha habido un error!",
           })
@@ -138,9 +144,7 @@ export function NewHomeworkForm() {
                       mode="single"
                       selected={field.value}
                       onSelect={field.onChange}
-                      disabled={(date) =>
-                        date < new Date("1900-01-01")
-                      }
+                      disabled={(date) => date < startOfToday()}
                       autoFocus
                     />
                   </PopoverContent>

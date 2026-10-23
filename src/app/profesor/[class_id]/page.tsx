@@ -36,7 +36,8 @@ const Page = async ({
           <TabsTrigger value="absences">Asistencia</TabsTrigger>
         </TabsList>
         <TabsContent value="homeworks">
-          <HomeworkTab initialData={initialHomeworksData} courseOfferingId={Number(classId)}/>
+          {/* Remount when a homework is added so the grade form picks up the new column */}
+          <HomeworkTab key={initialHomeworksData.homeworks.length} initialData={initialHomeworksData} courseOfferingId={Number(classId)}/>
         </TabsContent>
         <TabsContent value="lessons">
           <LessonsTab />

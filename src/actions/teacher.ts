@@ -41,17 +41,24 @@ export async function getMyCourses(): Promise<{ id: number; name: string }[]> {
   }
 }
 
-export async function createHomework(input: z.infer<typeof CreateHomeworkSchema>) {
+// Returns the error instead of throwing it: Next.js hides thrown messages from the client in production
+export async function createHomework(
+    input: z.infer<typeof CreateHomeworkSchema>
+): Promise<{ error: string } | { ok: true }> {
     const parsedInput = CreateHomeworkSchema.safeParse(input)
     if (!parsedInput.success) {
         // Extract and concatenate all validation error messages
-        const errorMessages = parsedInput.error.issues.map((err) => err.message).join(", ")
-        throw new Error(`Invalid input data: ${errorMessages}`)
+        return { error: parsedInput.error.issues.map((err) => err.message).join(" ") }
     }
     const { courseOfferingId, title, description, dueDate } = parsedInput.data
 
     // Check that the CourseOffering exists and belongs to the logged-in tutor
-    await assertCourseOfferingAccess(courseOfferingId)
+    try {
+        await assertCourseOfferingAccess(courseOfferingId)
+    } catch (error) {
+        if (error instanceof AuthorizationError) return { error: error.message }
+        throw error
+    }
 
     try {
         // Create the new Homework entry
@@ -65,8 +72,11 @@ export async function createHomework(input: z.infer<typeof CreateHomeworkSchema>
         })
     } catch (error) {
         console.error("Error creating homework:", error)
-        throw new Error("Failed to create homework. Please try again later.")
+        return { error: "No se pudo crear la tarea. Inténtalo de nuevo más tarde." }
     }
+
+    revalidatePath(`/profesor/${courseOfferingId}`)
+    return { ok: true }
 }
 
 export async function getInitialHomeworksData(courseOfferingId:number) {
