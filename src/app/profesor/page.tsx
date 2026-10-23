@@ -1,21 +1,6 @@
 import { signOut } from "@/auth";
 import { requireRole } from "@/lib/auth-guards";
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableFooter,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { NewClassDialog } from "@/components/new-class-dialog";
-import { NewHomeworkDialog } from "@/components/new-homework-dialog";
-import { NewLessonDialog } from "@/components/new-lesson-dialog";
-import HomeworkTab from "@/components/homework-tab";
 import { BookOpen, User } from "lucide-react";
 import { getMyCourses } from "@/actions/teacher";
 import Link from "next/link";

@@ -1,8 +1,5 @@
 "use client";
-import Image from "next/image";
 import { useEffect, useState } from "react";
-import { Login } from "@/components/login";
-import { MainMenu } from "@/components/main-menu";
 import { usePathname } from "next/navigation"
 import Link from "next/link";
 import { Button } from "@/components/ui/button";

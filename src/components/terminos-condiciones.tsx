@@ -10,7 +10,6 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import Image from "next/image";
 import Link from "next/link";
 
 export function TerminosCondiciones({ text, style, variant }: { text: string, style: string, variant:"link" | "default" | "destructive" | "outline" | "secondary" | "ghost" | "blue" | null | undefined }) {

@@ -1,21 +1,8 @@
 import { signOut } from "@/auth";
 import { canAccessCourseOffering, requireRole } from "@/lib/auth-guards";
 import { notFound } from "next/navigation";
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableFooter,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { NewClassDialog } from "@/components/new-class-dialog";
-import { NewHomeworkDialog } from "@/components/new-homework-dialog";
-import { NewLessonDialog } from "@/components/new-lesson-dialog";
 import HomeworkTab from "@/components/homework-tab";
 import { LessonsTab } from "@/components/lessons-tab";
 import Link from "next/link";

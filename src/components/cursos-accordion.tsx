@@ -14,7 +14,6 @@ import Link from "next/link";
 import { TerminosCondiciones } from "@/components/terminos-condiciones";
 import { TestimonioCard } from "@/components/testimonio-card";
 
-import Image from "next/image";
 
 export function CursosAccordion() {
   const [isOpen, setIsOpen] = useState(false);

@@ -1,7 +1,6 @@
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -16,7 +15,6 @@ import {
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { Car } from "lucide-react";
 
 export function TestimonioCard({
   video,

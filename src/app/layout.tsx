@@ -5,7 +5,6 @@ import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { MainNavbar } from "@/components/main-navbar";
 import { Toaster } from "@/components/ui/toaster"
-import Sidebar from "@/components/sidebar";
 
 
 const inter = Inter({ subsets: ["latin"] });

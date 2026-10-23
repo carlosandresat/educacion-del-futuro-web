@@ -1,44 +1,29 @@
 "use client";
 
-import { auth, signOut } from "@/auth";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { NewClassDialog } from "@/components/new-class-dialog";
 
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, useFieldArray } from "react-hook-form";
-import { useState, useTransition, useEffect } from "react";
+import { useState,  } from "react";
 import { z } from "zod";
 import { toast } from "@/components/ui/use-toast";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { Calendar } from "@/components/ui/calendar";
-import { cn } from "@/lib/utils";
-import { CalendarIcon } from "@radix-ui/react-icons";
-import { format } from "date-fns";
 import { AssistanceSchema } from "@/schemas";
 import {
     Select,

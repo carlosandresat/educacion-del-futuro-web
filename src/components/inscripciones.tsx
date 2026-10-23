@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { RegistroSchema } from "@/schemas";
 import { CaretSortIcon, CheckIcon } from "@radix-ui/react-icons";
@@ -14,7 +14,6 @@ import { useState } from "react";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
