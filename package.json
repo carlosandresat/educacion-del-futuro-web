@@ -72,6 +72,10 @@
   },
   "devDependencies": {
     "@types/formidable": "^3.4.5",
-    "@types/ws": "^8.5.10"
+    "@types/ws": "^8.5.10",
+    "tsx": "^4.23.15"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
   }
 }
