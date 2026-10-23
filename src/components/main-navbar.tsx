@@ -39,14 +39,11 @@ export function MainNavbar() {
   }, [scrollDir]);
 
   useEffect(() => {
-    if(window.location.pathname === "/") {
+    // Slide in after 1 s on the home page, right away elsewhere
     const delayTimer = setTimeout(() => {
       setScrollDir("scrolling up");
-    }, 1000);
+    }, window.location.pathname === "/" ? 1000 : 0);
     return () => clearTimeout(delayTimer);
-  } else {
-    setScrollDir("scrolling up");
-  }
   }, []);
 
   const pathname = usePathname()

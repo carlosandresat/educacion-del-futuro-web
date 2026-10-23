@@ -12,14 +12,11 @@ export default function Cursos() {
   const [isMuted, setIsMuted] = useState(true);
 
   useEffect(() => {
-    if (window.location.pathname === "/") {
-      const delayTimer = setTimeout(() => {
-        setIsRegisterBarVisible(true);
-      }, 1000);
-      return () => clearTimeout(delayTimer);
-    } else {
+    // Slide in after 1 s on the home page, right away elsewhere
+    const delayTimer = setTimeout(() => {
       setIsRegisterBarVisible(true);
-    }
+    }, window.location.pathname === "/" ? 1000 : 0);
+    return () => clearTimeout(delayTimer);
   }, []);
 
   return (

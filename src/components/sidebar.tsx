@@ -15,14 +15,11 @@ const Sidebar = () => {
   const [isSideBarVisible, setIsSideBarVisible] = useState(false);
 
   useEffect(() => {
-    if(window.location.pathname === "/") {
+    // Slide in after 1 s on the home page, right away elsewhere
     const delayTimer = setTimeout(() => {
       setIsSideBarVisible(true);
-    }, 1000);
+    }, window.location.pathname === "/" ? 1000 : 0);
     return () => clearTimeout(delayTimer);
-  } else {
-    setIsSideBarVisible(true);
-  }
   }, []);
 
   return (

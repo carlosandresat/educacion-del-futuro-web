@@ -40,14 +40,11 @@ export function RegisterBar() {
   }, [scrollDir]);
 
   useEffect(() => {
-    if(pathname === "/") {
+    // Slide in after 1 s on the home page, right away elsewhere
     const delayTimer = setTimeout(() => {
       setScrollDir("scrolling up");
-    }, 1000);
+    }, pathname === "/" ? 1000 : 0);
     return () => clearTimeout(delayTimer);
-  } else {
-    setScrollDir("scrolling up");
-  }
   }, [pathname]);
 
 
