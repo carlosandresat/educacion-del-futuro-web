@@ -4,11 +4,11 @@ import * as z from "zod";
 z.config(z.locales.es());
 
 export const LoginSchema = z.object({
-    email: z.string().email({
-        message: "Debes ingresar tu email institucional",
+    email: z.email({
+        error: "Debes ingresar tu email institucional",
     }),
     password: z.string().min(1, {
-        message: "Debes ingresar tu contraseña",
+        error: "Debes ingresar tu contraseña",
     }),
 })
 
@@ -110,57 +110,57 @@ const notBeforeToday = (date: Date) => date.getTime() >= Date.now() - 24 * 60 * 
 
 export const CreateHomeworkSchema = z.object({
     courseOfferingId: z.number().int().positive({
-        message: "Curso inválido.",
+        error: "Curso inválido.",
     }),
-    title: z.string().trim().min(1, { message: "Por favor ingresa un título." }),
-    description: z.string().trim().min(1, { message: "Por favor ingresa una descripción." }),
+    title: z.string().trim().min(1, { error: "Por favor ingresa un título." }),
+    description: z.string().trim().min(1, { error: "Por favor ingresa una descripción." }),
     dueDate: z.date({
         error: "Tienes que escoger una fecha de entrega.",
     }).refine(notBeforeToday, {
-        message: "La fecha de entrega no puede estar en el pasado.",
+        error: "La fecha de entrega no puede estar en el pasado.",
     }),
 })
 
 // Lessons are usually recorded on the day they happen or afterwards, so any date is valid
 export const CreateLessonSchema = z.object({
     courseOfferingId: z.number().int().positive({
-        message: "Curso inválido.",
+        error: "Curso inválido.",
     }),
-    title: z.string().trim().min(1, { message: "Por favor ingresa un título." }),
-    content: z.string().trim().min(1, { message: "Por favor ingresa un contenido." }),
+    title: z.string().trim().min(1, { error: "Por favor ingresa un título." }),
+    content: z.string().trim().min(1, { error: "Por favor ingresa un contenido." }),
     lessonDate: z.date({
         error: "Tienes que escoger una fecha.",
     }),
 })
 // Public enrollment forms: shared by the client forms and the API routes,
 // so the server never trusts client-side validation alone.
-const shortText = z.string().trim().min(1, { message: "Este campo es obligatorio." }).max(100, {
-    message: "Este campo debe tener menos de 100 caracteres.",
+const shortText = z.string().trim().min(1, { error: "Este campo es obligatorio." }).max(100, {
+    error: "Este campo debe tener menos de 100 caracteres.",
 });
 
 const phone = z.string().trim().min(7, {
-    message: "El número de telefono debe tener al menos 7 dígitos.",
+    error: "El número de telefono debe tener al menos 7 dígitos.",
 }).max(20, {
-    message: "El número de telefono debe tener menos de 20 dígitos.",
+    error: "El número de telefono debe tener menos de 20 dígitos.",
 });
 
 export const ClaseDemostrativaSchema = z.object({
     curso: shortText,
     horario: shortText,
     nombres: z.string().trim().min(6, {
-        message: "Tu nombre debe tener al menos 6 caracteres.",
+        error: "Tu nombre debe tener al menos 6 caracteres.",
     }).max(100, {
-        message: "Tu nombre debe tener menos de 100 caracteres.",
+        error: "Tu nombre debe tener menos de 100 caracteres.",
     }),
     cedula: z.string().trim().length(10, {
-        message: "El número de cédula debe tener 10 dígitos.",
+        error: "El número de cédula debe tener 10 dígitos.",
     }),
     telefono: phone,
     genero: shortText,
     academic_year: shortText,
     colegio: shortText,
     condicion_salud: z.string().trim().max(100, {
-        message: "La condición de salud debe tener menos de 100 caracteres.",
+        error: "La condición de salud debe tener menos de 100 caracteres.",
     }).default(""),
     carrera: shortText,
     no_examenes: shortText,
@@ -169,21 +169,21 @@ export const ClaseDemostrativaSchema = z.object({
 
 export const RegistroSchema = ClaseDemostrativaSchema.extend({
     representante_nombres: z.string().trim().min(6, {
-        message: "Tu nombre debe tener al menos 6 caracteres.",
+        error: "Tu nombre debe tener al menos 6 caracteres.",
     }).max(100, {
-        message: "Tu nombre debe tener menos de 100 caracteres.",
+        error: "Tu nombre debe tener menos de 100 caracteres.",
     }),
     representante_celular: phone,
     representante_convencional: phone,
-    representante_email: z.string().trim().email({
-        message: "Correo inválido.",
-    }).max(100),
+    representante_email: z.string().trim().max(100).pipe(z.email({
+        error: "Correo inválido.",
+    })),
     representante_direccion: z.string().trim().min(6, {
-        message: "La dirección debe tener al menos 6 caracteres.",
+        error: "La dirección debe tener al menos 6 caracteres.",
     }).max(200, {
-        message: "La dirección debe tener menos de 200 caracteres.",
+        error: "La dirección debe tener menos de 200 caracteres.",
     }),
     expectativas: z.string().trim().max(100, {
-        message: "Las expectativas deben tener menos de 100 caracteres.",
+        error: "Las expectativas deben tener menos de 100 caracteres.",
     }).default(""),
 });

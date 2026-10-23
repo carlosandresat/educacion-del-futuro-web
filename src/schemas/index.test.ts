@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { CreateHomeworkSchema, CreateLessonSchema, HomeworksSchema } from "@/schemas";
+import { CreateHomeworkSchema, CreateLessonSchema, HomeworksSchema, RegistroSchema } from "@/schemas";
 
 const DAY = 24 * 60 * 60 * 1000;
 
@@ -45,5 +45,18 @@ describe("homework and lesson dates", () => {
       lessonDate: new Date(Date.now() - 7 * DAY),
     });
     expect(result.success).toBe(true);
+  });
+});
+
+describe("guardian email", () => {
+  const email = RegistroSchema.shape.representante_email;
+
+  it("trims before validating the format", () => {
+    expect(email.parse("  rep@edf.test ")).toBe("rep@edf.test");
+  });
+
+  it("rejects invalid addresses with the Spanish message", () => {
+    const result = email.safeParse("no-es-correo");
+    expect(!result.success && result.error.issues[0].message).toBe("Correo inválido.");
   });
 });

@@ -19,7 +19,7 @@ import { Skeleton } from "./ui/skeleton"
 
 const FormSchema = z.object({
   oferta: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
+    error: "Escoge una oferta.",
   }),
 })
 
