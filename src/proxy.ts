@@ -8,9 +8,9 @@ import {
     publicRoutes,
 } from "@/routes"
 
-// Optimistic check only: it looks for the session cookie without validating it.
+// Next 16 proxy (Node runtime). Optimistic check only: it looks for the session cookie without validating it.
 // Pages and server actions validate the session and role through src/lib/auth-guards.ts.
-export default function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
     const { nextUrl } = req;
     const isLoggedIn = !!getSessionCookie(req);
 
