@@ -20,7 +20,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es">
+    // next-themes sets the theme class and color-scheme on <html> before hydration
+    <html lang="es" suppressHydrationWarning>
       <head>
       <meta name="google-site-verification" content="EETFrtxu405l0oWRdpW-umP52oO0OEWGehjL_IkV77k" />
       <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png"></link>
