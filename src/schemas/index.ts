@@ -1,5 +1,8 @@
 import * as z from "zod";
 
+// Default validation messages in Spanish (e.g. missing fields) for every schema in the app
+z.config(z.locales.es());
+
 export const LoginSchema = z.object({
     email: z.string().email({
         message: "Debes ingresar tu email institucional",
@@ -12,18 +15,18 @@ export const LoginSchema = z.object({
 export const RegisterSchema = z.object({
     name: z
         .string({
-            required_error: "Por favor ingresa tus nombres",
+            error: "Por favor ingresa tus nombres",
         })
         .min(3, "Tu nombre debe incluir más de 3 caracteres")
         .max(24, "Tu nombre debe contener menos de 24 caracteres"),
     email: z
         .string({
-            required_error: "Por favor ingresa tu correo.",
+            error: "Por favor ingresa tu correo.",
         })
         .email("Correo inválido, revisa la sintaxis."),
     password: z
         .string({
-            required_error: "Por favor ingresa una contrseña",
+            error: "Por favor ingresa una contraseña",
         })
         .min(8, "La contraseña debe contener mínimo 8 caracteres")
         .max(16, "La contraseña debe contener máximo 16 caracteres"),
@@ -32,50 +35,57 @@ export const RegisterSchema = z.object({
 export const NewClassSchema = z.object({
     topic: z
         .string({
-            required_error: "Por favor ingresa un tema",
+            error: "Por favor ingresa un tema",
         }),
     date: z.date({
-        required_error: "Tienes que escoger una fecha.",
+        error: "Tienes que escoger una fecha.",
       }),
     time: z.number({
-        required_error: "Tienes que escoger una hora.",
+        error: "Tienes que escoger una hora.",
     })
 });
 
 export const NewHomeworkSchema = z.object({
     title: z
         .string({
-            required_error: "Por favor ingresa un título",
+            error: "Por favor ingresa un título",
         }),
     description: z
     .string({
-        required_error: "Por favor ingresa una descripción",
+        error: "Por favor ingresa una descripción",
     }),
     dueDate: z.date({
-        required_error: "Tienes que escoger una fecha.",
+        error: "Tienes que escoger una fecha.",
       }),
 });
 
 export const NewLessonSchema = z.object({
     title: z
         .string({
-            required_error: "Por favor ingresa un título",
+            error: "Por favor ingresa un título",
         }),
     content: z
         .string({
-        required_error: "Por favor ingresa un contenido",
+        error: "Por favor ingresa un contenido",
     }),
     date: z.date({
-        required_error: "Tienes que escoger una fecha.",
+        error: "Tienes que escoger una fecha.",
       }),
 });
+
+// A grade typed in an <input type="number">: "" or null means "no grade" (never 0).
+const gradeField = z
+    .union([z.number(), z.string(), z.null()])
+    .optional()
+    .transform((value) => (value === "" || value === null || value === undefined ? null : Number(value)))
+    .pipe(z.number().min(0, { error: "La nota debe estar entre 0 y 100." }).max(100, { error: "La nota debe estar entre 0 y 100." }).nullable());
 
 export const HomeworkGradeSchema = z.object({
     studentId: z.number(),
     grades: z.array(
       z.object({
         homeworkId: z.number(),
-        grade: z.coerce.number().min(0).max(100).nullable().optional(), // Allow null but handle it
+        grade: gradeField,
       })
     ),
   });
@@ -89,7 +99,7 @@ export const LessonGradeSchema = z.object({
     grades: z.array(
       z.object({
         lessonId: z.number(),
-        grade: z.coerce.number().min(0).max(100),
+        grade: gradeField,
       })
     ),
   });
@@ -121,7 +131,7 @@ export const CreateHomeworkSchema = z.object({
     title: z.string().min(1, { message: "Title is required." }),
     description: z.string().min(1, { message: "Description is required." }),
     dueDate: z.date({
-        required_error: "Due date is required.",
+        error: "Due date is required.",
     }).refine((date) => date > new Date(), {
         message: "Due date must be in the future.",
     }),
@@ -134,7 +144,7 @@ export const CreateLessonSchema = z.object({
     title: z.string().min(1, { message: "Title is required." }),
     content: z.string().min(1, { message: "Description is required." }),
     lessonDate: z.date({
-        required_error: "Due date is required.",
+        error: "Due date is required.",
     }).refine((date) => date > new Date(), {
         message: "Due date must be in the future.",
     }),

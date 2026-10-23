@@ -33,7 +33,7 @@ export function createPublicFormHandler<T extends z.ZodTypeAny>(
     const parsed = schema.safeParse(body);
     if (!parsed.success) {
       return NextResponse.json(
-        { ok: false, error: "Datos inválidos.", fieldErrors: parsed.error.flatten().fieldErrors },
+        { ok: false, error: "Datos inválidos.", fieldErrors: z.flattenError(parsed.error).fieldErrors },
         { status: 400 }
       );
     }

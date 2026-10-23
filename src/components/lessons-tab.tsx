@@ -61,7 +61,7 @@ export const LessonsTab = () => {
     })),
   };
 
-  const lessonsForm = useForm<z.infer<typeof LessonsSchema>>({
+  const lessonsForm = useForm<z.input<typeof LessonsSchema>, unknown, z.output<typeof LessonsSchema>>({
     resolver: zodResolver(LessonsSchema),
     defaultValues,
   });
@@ -136,7 +136,7 @@ export const LessonsTab = () => {
                           render={({ field }) => (
                             <FormItem>
                               <FormControl>
-                                <Input type="number" {...field} min={0} max={100} />
+                                <Input type="number" {...field} value={field.value ?? ""} min={0} max={100} />
                               </FormControl>
                               <FormMessage />
                             </FormItem>

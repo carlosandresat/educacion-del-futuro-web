@@ -56,7 +56,7 @@ import { colegios_riobamba } from "@/data/colegios_riobamba";
 
 
 export function Inscripciones() {
-  const form = useForm<z.infer<typeof RegistroSchema>>({
+  const form = useForm<z.input<typeof RegistroSchema>, unknown, z.output<typeof RegistroSchema>>({
     resolver: zodResolver(RegistroSchema),
   });
 

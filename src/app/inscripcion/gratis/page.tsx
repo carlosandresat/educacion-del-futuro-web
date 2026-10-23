@@ -44,7 +44,7 @@ import { colegios_riobamba } from "@/data/colegios_riobamba";
 
 
 export default function Gratis() {
-  const form = useForm<z.infer<typeof ClaseDemostrativaSchema>>({
+  const form = useForm<z.input<typeof ClaseDemostrativaSchema>, unknown, z.output<typeof ClaseDemostrativaSchema>>({
     resolver: zodResolver(ClaseDemostrativaSchema),
   });
 

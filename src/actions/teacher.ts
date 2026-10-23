@@ -45,7 +45,7 @@ export async function createHomework(input: z.infer<typeof CreateHomeworkSchema>
     const parsedInput = CreateHomeworkSchema.safeParse(input)
     if (!parsedInput.success) {
         // Extract and concatenate all validation error messages
-        const errorMessages = parsedInput.error.errors.map((err) => err.message).join(", ")
+        const errorMessages = parsedInput.error.issues.map((err) => err.message).join(", ")
         throw new Error(`Invalid input data: ${errorMessages}`)
     }
     const { courseOfferingId, title, description, dueDate } = parsedInput.data
@@ -147,7 +147,7 @@ export async function updateHomeworkGrades(
 
   if (!parsedData.success) {
     // Extract and concatenate all validation error messages
-    const errorMessages = parsedData.error.errors.map((err) => err.message).join(", ");
+    const errorMessages = parsedData.error.issues.map((err) => err.message).join(", ");
     throw new Error(`Invalid input data: ${errorMessages}`);
   }
 
@@ -215,7 +215,7 @@ export async function createLesson(input: z.infer<typeof CreateLessonSchema>) {
   const parsedInput = CreateLessonSchema.safeParse(input)
   if (!parsedInput.success) {
       // Extract and concatenate all validation error messages
-      const errorMessages = parsedInput.error.errors.map((err) => err.message).join(", ")
+      const errorMessages = parsedInput.error.issues.map((err) => err.message).join(", ")
       throw new Error(`Invalid input data: ${errorMessages}`)
   }
   const { courseOfferingId, title, content, lessonDate } = parsedInput.data
