@@ -16,9 +16,11 @@ npm run build        # build de producción
 npm run lint         # next lint
 npx tsc --noEmit     # type-check (src/components/ui/dialog.tsx tiene 2 errores previos conocidos)
 npx prisma generate  # también corre en postinstall
+npx prisma migrate dev --name <cambio>  # nueva migración contra la rama dev
+npx prisma db seed   # roles y cursos; con SEED_TEST_USERS=true, además un usuario de prueba por rol
 ```
 
-No hay tests. Variables en `.env`: `DATABASE_URL`, `DIRECT_URL`, `AUTH_SECRET`. El `.env` local apunta a la base real: no escribir datos de prueba sin confirmar.
+No hay tests. Las variables están documentadas en `.env.example`. El `.env` local apunta a la rama `dev` del proyecto de Neon "EDF Academy Web" (`aws-us-east-1`); producción es la rama `production` y solo recibe `prisma migrate deploy`. Con `next start` en local, Auth.js necesita `AUTH_TRUST_HOST=true` (en Vercel no hace falta).
 
 ## Arquitectura
 
