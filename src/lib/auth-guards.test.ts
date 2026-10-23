@@ -45,9 +45,19 @@ describe("assertRole", () => {
 });
 
 describe("requireRole", () => {
-  it("redirects home when the role is not allowed", async () => {
+  it("sends anonymous visitors to the public home page", async () => {
+    getSession.mockResolvedValue(null);
+    await expect(requireRole(["ADMIN"])).rejects.toThrow(new Error("NEXT_REDIRECT:/"));
+  });
+
+  it("sends signed-in users without the role to their own landing page", async () => {
     getSession.mockResolvedValue(session("5", "STUDENT"));
-    await expect(requireRole(["ADMIN"])).rejects.toThrow("NEXT_REDIRECT:/");
+    await expect(requireRole(["ADMIN"])).rejects.toThrow("NEXT_REDIRECT:/student");
+  });
+
+  it("returns the user when the role is allowed", async () => {
+    getSession.mockResolvedValue(session("1", "ADMIN"));
+    await expect(requireRole(["ADMIN"])).resolves.toMatchObject({ id: 1, role: "ADMIN" });
   });
 });
 

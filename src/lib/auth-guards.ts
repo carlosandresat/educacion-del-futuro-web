@@ -1,6 +1,6 @@
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/db";
-import type { UserRole } from "@/lib/roles";
+import { ROLE_HOME, type UserRole } from "@/lib/roles";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -46,12 +46,14 @@ export async function assertRole(roles: UserRole[]): Promise<SessionUser> {
 }
 
 /**
- * For pages: redirects to the home page if the current user is not logged in or lacks one of the roles.
+ * For pages: sends anonymous visitors to the public home page and signed-in users without one of the
+ * roles to their own landing page (ROLE_HOME).
  */
 export async function requireRole(roles: UserRole[]): Promise<SessionUser> {
   const user = await getSessionUser();
 
-  if (!user || !roles.includes(user.role)) redirect("/");
+  if (!user) redirect("/");
+  if (!roles.includes(user.role)) redirect(ROLE_HOME[user.role] ?? "/");
 
   return user;
 }
