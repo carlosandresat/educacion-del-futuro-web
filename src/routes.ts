@@ -5,7 +5,6 @@ export const publicRoutes = [
     "/inscripcion",
     "/inscripcion/gratis",
     "/inscripcion/registro",
-    "/newuser"
 ];
 
 // Endpoints used by the public enrollment forms (anonymous visitors)

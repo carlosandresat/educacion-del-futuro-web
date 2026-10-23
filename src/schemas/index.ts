@@ -12,26 +12,6 @@ export const LoginSchema = z.object({
     }),
 })
 
-export const RegisterSchema = z.object({
-    name: z
-        .string({
-            error: "Por favor ingresa tus nombres",
-        })
-        .min(3, "Tu nombre debe incluir más de 3 caracteres")
-        .max(24, "Tu nombre debe contener menos de 24 caracteres"),
-    email: z
-        .string({
-            error: "Por favor ingresa tu correo.",
-        })
-        .email("Correo inválido, revisa la sintaxis."),
-    password: z
-        .string({
-            error: "Por favor ingresa una contraseña",
-        })
-        .min(8, "La contraseña debe contener mínimo 8 caracteres")
-        .max(16, "La contraseña debe contener máximo 16 caracteres"),
-});
-
 export const NewClassSchema = z.object({
     topic: z
         .string({
