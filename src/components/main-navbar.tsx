@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Login } from "@/components/login";
 import { MainMenu } from "@/components/main-menu";
@@ -62,7 +63,7 @@ export function MainNavbar() {
     >
       <div className="container flex flex-col justify-center items-center">
         {/* className="hidden md:flex space-x-4"o */}
-        <a href="/" className=" max-w-[240px] w-full">
+        <Link href="/" className=" max-w-[240px] w-full">
         <AspectRatio ratio={10 / 4}>
 
           <Image
@@ -72,7 +73,7 @@ export function MainNavbar() {
             className="justify-start rounded-md object-cover"
           />
           </AspectRatio>
-        </a>
+        </Link>
         <div className="flex flex-row justify-center w-full">
           <div className="">
             <MainMenu isTransparent = {pathname === "/"}></MainMenu>
