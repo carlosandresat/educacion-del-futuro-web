@@ -1,19 +1,11 @@
 import "dotenv/config";
 import { PrismaPg } from "@prisma/adapter-pg";
-import { PrismaClient } from "../src/generated/prisma/client";
-import bcrypt from "bcryptjs";
+import { hashPassword } from "better-auth/crypto";
+import { PrismaClient, type Role } from "../src/generated/prisma/client";
 
 const prisma = new PrismaClient({
   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL }),
 });
-
-// Role ids are fixed: src/auth.ts maps roleId -> role name
-const ROLES = [
-  { id: 1, name: "admin" },
-  { id: 2, name: "teacher" },
-  { id: 3, name: "student" },
-  { id: 4, name: "psychologist" },
-];
 
 const COURSES = [
   "Numérico",
@@ -33,18 +25,6 @@ const COURSES = [
 ];
 
 async function seedBaseData() {
-  for (const role of ROLES) {
-    await prisma.role.upsert({
-      where: { id: role.id },
-      update: { name: role.name },
-      create: role,
-    });
-  }
-  // Keep the sequence ahead of the fixed ids
-  await prisma.$executeRawUnsafe(
-    `SELECT setval(pg_get_serial_sequence('roles', 'id'), (SELECT MAX(id) FROM roles))`
-  );
-
   for (const name of COURSES) {
     const existing = await prisma.course.findFirst({ where: { name } });
     if (!existing) {
@@ -53,12 +33,24 @@ async function seedBaseData() {
   }
 }
 
-async function upsertUser(email: string, name: string, roleId: number, hashedPassword: string) {
-  return prisma.user.upsert({
+// Same shape Better Auth uses for email/password users: the hash lives in a "credential" account
+async function upsertUser(email: string, name: string, role: Role, hashedPassword: string) {
+  const user = await prisma.user.upsert({
     where: { email },
-    update: { name, roleId, password: hashedPassword },
-    create: { email, name, roleId, password: hashedPassword },
+    update: { name, role },
+    create: { email, name, role, emailVerified: true },
   });
+  const account = await prisma.account.findFirst({
+    where: { userId: user.id, providerId: "credential" },
+  });
+  if (account) {
+    await prisma.account.update({ where: { id: account.id }, data: { password: hashedPassword } });
+  } else {
+    await prisma.account.create({
+      data: { userId: user.id, providerId: "credential", accountId: String(user.id), password: hashedPassword },
+    });
+  }
+  return user;
 }
 
 async function findOrCreateOffering(courseName: string, teacherId: number, schedule: string) {
@@ -74,15 +66,15 @@ async function seedTestData() {
   if (!password) {
     throw new Error("SEED_TEST_PASSWORD is required when SEED_TEST_USERS=true");
   }
-  const hashedPassword = await bcrypt.hash(password, 10);
+  const hashedPassword = await hashPassword(password);
 
   const [, teacher, otherTeacher, student, otherStudent] = await Promise.all([
-    upsertUser("admin@edf.test", "Admin Prueba", 1, hashedPassword),
-    upsertUser("profesor@edf.test", "Profesor Prueba", 2, hashedPassword),
-    upsertUser("profesor2@edf.test", "Profesora Prueba", 2, hashedPassword),
-    upsertUser("estudiante@edf.test", "Estudiante Prueba", 3, hashedPassword),
-    upsertUser("estudiante2@edf.test", "Estudiante Dos", 3, hashedPassword),
-    upsertUser("psicologia@edf.test", "Psicóloga Prueba", 4, hashedPassword),
+    upsertUser("admin@edf.test", "Admin Prueba", "ADMIN", hashedPassword),
+    upsertUser("profesor@edf.test", "Profesor Prueba", "TEACHER", hashedPassword),
+    upsertUser("profesor2@edf.test", "Profesora Prueba", "TEACHER", hashedPassword),
+    upsertUser("estudiante@edf.test", "Estudiante Prueba", "STUDENT", hashedPassword),
+    upsertUser("estudiante2@edf.test", "Estudiante Dos", "STUDENT", hashedPassword),
+    upsertUser("psicologia@edf.test", "Psicóloga Prueba", "PSYCHOLOGIST", hashedPassword),
   ]);
 
   // Two offerings for one teacher and one for another, to exercise ownership checks
@@ -121,7 +113,7 @@ async function seedTestData() {
 async function main() {
   await seedBaseData();
 
-  // Test users are opt-in so production only gets roles and courses
+  // Test users are opt-in so production only gets the course catalog
   if (process.env.SEED_TEST_USERS === "true") {
     await seedTestData();
   }

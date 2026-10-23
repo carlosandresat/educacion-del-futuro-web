@@ -1,4 +1,4 @@
-import { signOut } from "@/auth";
+import { logout } from "@/actions/login";
 import { requireRole } from "@/lib/auth-guards";
 import { Button } from "@/components/ui/button";
 import { BookOpen, User } from "lucide-react";
@@ -12,11 +12,7 @@ const Dashboard = async () => {
   return (
     <div className="flex flex-col items-center justify-center p-6 md:p-12">
       <form
-        action={async () => {
-          "use server";
-
-          await signOut({redirectTo: "/"});
-        }}
+        action={logout}
         className="mb-12 self-end"
       >
         <Button type="submit" variant="blue">

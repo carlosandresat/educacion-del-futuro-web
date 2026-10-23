@@ -21,7 +21,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { login, loginRedirect } from "@/actions/login";
+import { login } from "@/actions/login";
+import { useRouter } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -34,6 +35,7 @@ import { LoginSchema } from "@/schemas";
 
 export function Login() {
   const [isPending, startTransition] = useTransition();
+  const router = useRouter();
 
 
   const form = useForm<z.infer<typeof LoginSchema>>({
@@ -43,7 +45,7 @@ export function Login() {
   function onSubmit(data: z.infer<typeof LoginSchema>) {
     startTransition(async ()=>{
       const response = await login(data);
-      if(response && response.error) {
+      if("error" in response) {
         toast({
           title: "¡Error!",
           description:
@@ -51,7 +53,8 @@ export function Login() {
         });
       } else {
         setIsOpen(false)
-        await loginRedirect()
+        router.push(response.redirectTo)
+        router.refresh()
       }
     })
   }

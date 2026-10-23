@@ -1,5 +1,5 @@
-import authConfig from "@/auth.config"
-import NextAuth from "next-auth"
+import { getSessionCookie } from "better-auth/cookies"
+import { NextResponse, type NextRequest } from "next/server"
 import {
     DEFAULT_LOGIN_REDIRECT,
     apiAuthPrefix,
@@ -8,11 +8,11 @@ import {
     publicRoutes,
 } from "@/routes"
 
-const { auth } = NextAuth(authConfig)
-
-export default auth((req) => {
+// Optimistic check only: it looks for the session cookie without validating it.
+// Pages and server actions validate the session and role through src/lib/auth-guards.ts.
+export default function middleware(req: NextRequest) {
     const { nextUrl } = req;
-    const isLoggedIn = !!req.auth;
+    const isLoggedIn = !!getSessionCookie(req);
 
     const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix)
     const isPublicRoute = publicRoutes.includes(nextUrl.pathname) || publicApiRoutes.includes(nextUrl.pathname);
@@ -24,17 +24,17 @@ export default auth((req) => {
 
     if(isAuthRoute){
         if(isLoggedIn){
-            return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl))
+            return NextResponse.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl))
         }
         return;
     }
 
     if (!isLoggedIn && !isPublicRoute){
-        return Response.redirect(new URL("/", nextUrl))
+        return NextResponse.redirect(new URL("/", nextUrl))
     }
 
     return
-})
+}
 
 export const config = {
     matcher: ['/((?!.*\\..*|_next).*)', '/', '/(api|trpc)(.*)'],

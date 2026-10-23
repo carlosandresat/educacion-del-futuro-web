@@ -1,4 +1,4 @@
-import { signOut } from "@/auth";
+import { logout } from "@/actions/login";
 import { canAccessCourseOffering, requireRole } from "@/lib/auth-guards";
 import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -28,11 +28,7 @@ const Page = async ({
         <div className="flex items-center mb-12 justify-between w-full">
             <Link href={"/profesor"}><ArrowBigLeft /></Link>
       <form
-        action={async () => {
-          "use server";
-
-          await signOut({redirectTo: "/"});
-        }}
+        action={logout}
         className="self-end"
       >
         <Button type="submit" variant="blue">

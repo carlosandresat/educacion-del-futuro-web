@@ -48,17 +48,27 @@ model clases_demostrativas {
   createdAt       DateTime @default(now())
 }
 
+enum Role {
+  ADMIN
+  TEACHER
+  STUDENT
+  PSYCHOLOGIST
+}
+
+// Auth tables follow Better Auth's core schema (user/session/account/verification) with Int ids
+// (advanced.database.generateId = "serial" in src/lib/auth.ts). Passwords live in Account.
 model User {
-  id       Int     @id @default(autoincrement())
-  name     String?
-  email    String? @unique
-  image    String?
-  password String?
-  roleId   Int     @map("role_id")
-  role     Role    @relation(fields: [roleId], references: [id])
+  id            Int      @id @default(autoincrement())
+  name          String
+  email         String   @unique
+  emailVerified Boolean  @default(false) @map("email_verified")
+  image         String?
+  role          Role     @default(STUDENT)
 
   createdAt           DateTime             @default(now())
   updatedAt           DateTime             @updatedAt @map("updated_at")
+  sessions            Session[]
+  accounts            Account[]
   courses             CourseOffering[]     @relation("CourseTeacher")
   enrollments         Enrollment[]
   homeworks           HomeworkGrade[]
@@ -71,12 +81,51 @@ model User {
   @@map("users")
 }
 
-model Role {
-  id    Int    @id @default(autoincrement())
-  name  String @unique
-  users User[]
+model Session {
+  id        Int      @id @default(autoincrement())
+  expiresAt DateTime @map("expires_at")
+  token     String   @unique
+  ipAddress String?  @map("ip_address")
+  userAgent String?  @map("user_agent")
+  userId    Int      @map("user_id")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
-  @@map("roles")
+  @@index([userId])
+  @@map("sessions")
+}
+
+model Account {
+  id                    Int       @id @default(autoincrement())
+  accountId             String    @map("account_id")
+  providerId            String    @map("provider_id")
+  userId                Int       @map("user_id")
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?   @map("access_token")
+  refreshToken          String?   @map("refresh_token")
+  idToken               String?   @map("id_token")
+  accessTokenExpiresAt  DateTime? @map("access_token_expires_at")
+  refreshTokenExpiresAt DateTime? @map("refresh_token_expires_at")
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now()) @map("created_at")
+  updatedAt             DateTime  @updatedAt @map("updated_at")
+
+  @@index([userId])
+  @@map("accounts")
+}
+
+model Verification {
+  id         Int      @id @default(autoincrement())
+  identifier String
+  value      String
+  expiresAt  DateTime @map("expires_at")
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  @@index([identifier])
+  @@map("verifications")
 }
 
 model Course {

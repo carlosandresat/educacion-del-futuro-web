@@ -1,10 +1,12 @@
-import { auth } from "@/auth";
+import { auth } from "@/lib/auth";
 import prisma from "@/lib/db";
+import type { UserRole } from "@/lib/roles";
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 // Keep this module free of "use server": these helpers must not become callable endpoints.
 
-export type UserRole = "ADMIN" | "TEACHER" | "STUDENT" | "PSYCHOLOGIST" | "GUEST";
+export type { UserRole };
 
 export type SessionUser = {
   id: number;
@@ -20,7 +22,7 @@ export class AuthorizationError extends Error {
 }
 
 async function getSessionUser(): Promise<SessionUser | null> {
-  const session = await auth();
+  const session = await auth.api.getSession({ headers: await headers() });
   const id = Number(session?.user?.id);
 
   if (!session?.user || !Number.isInteger(id)) return null;
