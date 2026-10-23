@@ -139,3 +139,58 @@ export const CreateLessonSchema = z.object({
         message: "Due date must be in the future.",
     }),
 })
+// Public enrollment forms: shared by the client forms and the API routes,
+// so the server never trusts client-side validation alone.
+const shortText = z.string().trim().min(1, { message: "Este campo es obligatorio." }).max(100, {
+    message: "Este campo debe tener menos de 100 caracteres.",
+});
+
+const phone = z.string().trim().min(7, {
+    message: "El número de telefono debe tener al menos 7 dígitos.",
+}).max(20, {
+    message: "El número de telefono debe tener menos de 20 dígitos.",
+});
+
+export const ClaseDemostrativaSchema = z.object({
+    curso: shortText,
+    horario: shortText,
+    nombres: z.string().trim().min(6, {
+        message: "Tu nombre debe tener al menos 6 caracteres.",
+    }).max(100, {
+        message: "Tu nombre debe tener menos de 100 caracteres.",
+    }),
+    cedula: z.string().trim().length(10, {
+        message: "El número de cédula debe tener 10 dígitos.",
+    }),
+    telefono: phone,
+    genero: shortText,
+    academic_year: shortText,
+    colegio: shortText,
+    condicion_salud: z.string().trim().max(100, {
+        message: "La condición de salud debe tener menos de 100 caracteres.",
+    }).default(""),
+    carrera: shortText,
+    no_examenes: shortText,
+    descubierto_por: shortText,
+});
+
+export const RegistroSchema = ClaseDemostrativaSchema.extend({
+    representante_nombres: z.string().trim().min(6, {
+        message: "Tu nombre debe tener al menos 6 caracteres.",
+    }).max(100, {
+        message: "Tu nombre debe tener menos de 100 caracteres.",
+    }),
+    representante_celular: phone,
+    representante_convencional: phone,
+    representante_email: z.string().trim().email({
+        message: "Correo inválido.",
+    }).max(100),
+    representante_direccion: z.string().trim().min(6, {
+        message: "La dirección debe tener al menos 6 caracteres.",
+    }).max(200, {
+        message: "La dirección debe tener menos de 200 caracteres.",
+    }),
+    expectativas: z.string().trim().max(100, {
+        message: "Las expectativas deben tener menos de 100 caracteres.",
+    }).default(""),
+});

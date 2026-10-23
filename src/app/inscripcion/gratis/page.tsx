@@ -3,6 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import { ClaseDemostrativaSchema } from "@/schemas";
 import { CaretSortIcon, CheckIcon } from "@radix-ui/react-icons";
 import { cn } from "@/lib/utils";
 
@@ -40,40 +41,13 @@ import {
 import { toast } from "@/components/ui/use-toast";
 import { colegios_riobamba } from "@/data/colegios_riobamba";
 
-const FormSchema = z.object({
-  curso: z.string(),
-  horario: z.string(),
-  nombres: z.string().min(6, {
-    message: "Tu nombre debe tener al menos 6 caracteres.",
-  }),
-  cedula: z
-    .string()
-    .min(10, {
-      message: "El número de cédula debe tener 10 dígitos.",
-    })
-    .max(10, {
-      message: "El número de cédula debe tener 10 dígitos.",
-    }),
-  telefono: z.string().min(7, {
-    message: "El número de telefono debe tener al menos 7 dígitos.",
-  }),
-  genero: z.string(),
-  academic_year: z.string(),
-  colegio: z.string(),
-  condicion_salud: z.string().max(100, {
-    message: "La condición de salud debe tener menos de 100 caracteres.",
-  }).optional(),
-  carrera: z.string(),
-  no_examenes: z.string(),
-  descubierto_por: z.string(),
-});
 
 export default function Gratis() {
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
+  const form = useForm<z.infer<typeof ClaseDemostrativaSchema>>({
+    resolver: zodResolver(ClaseDemostrativaSchema),
   });
 
-  async function onSubmit(data: z.infer<typeof FormSchema>) {
+  async function onSubmit(data: z.infer<typeof ClaseDemostrativaSchema>) {
     const res = await fetch("/api/clases-demostrativas", {
       method: "POST",
       body: JSON.stringify(data),
