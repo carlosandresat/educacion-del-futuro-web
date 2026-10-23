@@ -45,6 +45,7 @@ import {
   CommandGroup,
   CommandInput,
   CommandItem,
+  CommandList,
 } from "@/components/ui/command";
 import {
   Popover,
@@ -290,31 +291,33 @@ export function Inscripciones() {
                         placeholder="Buscar colegio..."
                         className="h-9"
                       />
-                      <CommandEmpty>No se ha encontrado colegio</CommandEmpty>
-                      <ScrollArea className="h-52">
-                        <CommandGroup>
-                          {colegios_riobamba.map((colegio) => (
-                            <CommandItem
-                              value={colegio.name}
-                              key={colegio.code}
-                              onSelect={() => {
-                                form.setValue("colegio", colegio.name);
-                              }}
-                            >
-                              {colegio.name}
-                              <CheckIcon
-                                className={cn(
-                                  "ml-auto h-4 w-4",
-                                  colegio.name === field.value
-                                    ? "opacity-100"
-                                    : "opacity-0"
-                                )}
-                              />
-                            </CommandItem>
-                          ))}
-                        </CommandGroup>
-                        <ScrollBar orientation="vertical" />
-                      </ScrollArea>
+                      <CommandList>
+                        <CommandEmpty>No se ha encontrado colegio</CommandEmpty>
+                        <ScrollArea className="h-52">
+                          <CommandGroup>
+                            {colegios_riobamba.map((colegio) => (
+                              <CommandItem
+                                value={colegio.name}
+                                key={colegio.code}
+                                onSelect={() => {
+                                  form.setValue("colegio", colegio.name);
+                                }}
+                              >
+                                {colegio.name}
+                                <CheckIcon
+                                  className={cn(
+                                    "ml-auto h-4 w-4",
+                                    colegio.name === field.value
+                                      ? "opacity-100"
+                                      : "opacity-0"
+                                  )}
+                                />
+                              </CommandItem>
+                            ))}
+                          </CommandGroup>
+                          <ScrollBar orientation="vertical" />
+                        </ScrollArea>
+                      </CommandList>
                     </Command>
                   </PopoverContent>
                 </Popover>
