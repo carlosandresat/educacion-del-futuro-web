@@ -1,7 +1,10 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaPg } from "@prisma/adapter-pg";
+import { PrismaClient } from "@/generated/prisma/client";
 
 const prismaClientSingleton = () => {
-  return new PrismaClient();
+  // Neon pooled connection over TCP (node-postgres); Prisma 7 requires a driver adapter
+  const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
+  return new PrismaClient({ adapter });
 }
 
 declare global {
