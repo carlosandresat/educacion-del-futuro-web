@@ -40,10 +40,10 @@ function Calendar({
           "text-muted-foreground rounded-md w-8 font-normal text-[0.8rem]",
         week: "flex w-full mt-2",
         day: cn(
-          "relative p-0 text-center text-sm focus-within:relative focus-within:z-20 [&:has([aria-selected])]:bg-accent",
+          "relative p-0 text-center text-sm focus-within:relative focus-within:z-20 has-aria-[selected]:bg-accent",
           props.mode === "range"
-            ? "[&:has(>.day-range-end)]:rounded-r-md [&:has(>.day-range-start)]:rounded-l-md first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md"
-            : "[&:has([aria-selected])]:rounded-md"
+            ? "[&:has(>.day-range-end)]:rounded-r-md [&:has(>.day-range-start)]:rounded-l-md first:has-aria-[selected]:rounded-l-md last:has-aria-[selected]:rounded-r-md"
+            : "has-aria-[selected]:rounded-md"
         ),
         day_button: cn(
           buttonVariants({ variant: "ghost" }),
@@ -52,7 +52,7 @@ function Calendar({
         range_start: "day-range-start",
         range_end: "day-range-end",
         selected:
-          "[&>button]:bg-primary [&>button]:text-primary-foreground [&>button]:hover:bg-primary [&>button]:hover:text-primary-foreground [&>button]:focus:bg-primary [&>button]:focus:text-primary-foreground",
+          "[&>button]:bg-primary [&>button]:text-primary-foreground hover:[&>button]:bg-primary hover:[&>button]:text-primary-foreground focus:[&>button]:bg-primary focus:[&>button]:text-primary-foreground",
         today: "[&>button]:bg-accent [&>button]:text-accent-foreground",
         outside:
           "day-outside text-muted-foreground opacity-50 aria-selected:bg-accent/50 aria-selected:text-muted-foreground aria-selected:opacity-30",

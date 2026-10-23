@@ -30,7 +30,7 @@ export function TerminosCondiciones({ text, style, variant }: { text: string, st
             TÉRMINOS Y CONDICIONES DE INSCRIPCIÓN DE LA ACADEMIA EDF
           </h2>
 
-          <p className="leading-6 [&:not(:first-child)]:mt-4">
+          <p className="leading-6 not-first:mt-4">
             Al llenar y enviar el presente formulario de inscripción,
             automáticamente usted acepta el siguiente acuerdo de términos y
             condiciones. Por lo que si usted está en desacuerdo parcial o total
@@ -38,7 +38,7 @@ export function TerminosCondiciones({ text, style, variant }: { text: string, st
             formulario de inscripción.
           </p>
 
-          <p className="leading-6 [&:not(:first-child)]:mt-4">
+          <p className="leading-6 not-first:mt-4">
             En Riobamba, a la fecha de suscripción, este contrato está formado
             entre:
           </p>
@@ -53,13 +53,13 @@ export function TerminosCondiciones({ text, style, variant }: { text: string, st
             </li>
           </ol>
 
-          <h3 className="leading-6 [&:not(:first-child)]:mt-4">
+          <h3 className="leading-6 not-first:mt-4">
             La realización del contrato de preparación académica se desarrollará
             bajo las siguientes cláusulas:
           </h3>
 
           <h4 className="text-lg font-semibold mt-6 croll-m-20 tracking-tight">PRIMERA: OBJETO.</h4>
-          <p className="leading-6 [&:not(:first-child)]:mt-4">
+          <p className="leading-6 not-first:mt-4">
             EDF ACADEMY, en su misión de mejorar los procesos de aprendizaje en
             Ecuador implementando una educación integral, innovadora y de
             calidad, está obligado a brindar sus servicios de preparación
@@ -69,7 +69,7 @@ export function TerminosCondiciones({ text, style, variant }: { text: string, st
           </p>
 
           <h4 className="text-lg font-semibold mt-4">SEGUNDA: DURACIÓN.</h4>
-          <p className="leading-6 [&:not(:first-child)]:mt-4">
+          <p className="leading-6 not-first:mt-4">
             El presente contrato de preparación académica tendrá una duración
             acorde al curso seleccionado por EL ESTUDIANTE en el presente
             formulario de inscripción y comenzará a partir del momento de
@@ -126,7 +126,7 @@ export function TerminosCondiciones({ text, style, variant }: { text: string, st
             </li>
           </ul>
 
-          <p className="leading-6 [&:not(:first-child)]:mt-4">
+          <p className="leading-6 not-first:mt-4">
             El incumplimiento de estas reglas será motivo suficiente para el no
             ingreso de los estudiantes hasta que EDF ACADEMY se pueda comunicar
             con EL REPRESENTANTE para buscar las soluciones adecuadas para que
@@ -167,7 +167,7 @@ export function TerminosCondiciones({ text, style, variant }: { text: string, st
             </li>
           </ul>
 
-          <p className="leading-6 [&:not(:first-child)]:mt-4">
+          <p className="leading-6 not-first:mt-4">
             Esta cláusula refleja la responsabilidad compartida entre EDF
             ACADEMY, EL ESTUDIANTE y El REPRESENTANTE, y subraya la importancia
             de la colaboración y la comunicación en el proceso educativo.
@@ -175,7 +175,7 @@ export function TerminosCondiciones({ text, style, variant }: { text: string, st
 
           <h4 className="text-lg font-semibold mt-6 croll-m-20 tracking-tight">
 SEXTA: VALOR A PAGAR</h4>
-          <p className="leading-6 [&:not(:first-child)]:mt-4">
+          <p className="leading-6 not-first:mt-4">
             Las partes dejan constancia de que el curso al cual asiste EL
             ESTUDIANTE es de carácter privado y se compromete a cancelar los
             valores totales establecidos en la página web de la institución y en
@@ -185,7 +185,7 @@ SEXTA: VALOR A PAGAR</h4>
           <h4 className="text-lg font-semibold mt-6 croll-m-20 tracking-tight">
             SÉPTIMA: FINALIZACIÓN DEL CONTRATO
           </h4>
-          <p className="leading-6 [&:not(:first-child)]:mt-4">
+          <p className="leading-6 not-first:mt-4">
             El contrato podrá resolverse, sin reembolso, por las siguientes
             causas:
           </p>
@@ -205,7 +205,7 @@ SEXTA: VALOR A PAGAR</h4>
           <h4 className="text-lg font-semibold mt-6 croll-m-20 tracking-tight">
             OCTAVA: NATURALEZA Y JURISDICCIÓN
           </h4>
-          <p className="leading-6 [&:not(:first-child)]:mt-4">
+          <p className="leading-6 not-first:mt-4">
             Este contrato tiene naturaleza privada y se regula por la
             legislación ecuatoriana. Las partes se comprometen a resolver de
             manera amistosa cualquier desacuerdo que pudiera surgir en el

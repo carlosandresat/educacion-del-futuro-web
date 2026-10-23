@@ -13,7 +13,7 @@ export default function Inscripcion() {
 
       <Separator className="mt-8" />
 
-      <div className="max-w-screen-xl w-full">
+      <div className="max-w-(--breakpoint-xl) w-full">
 
       <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 py-6 mt-5 md:self-start text-left w-max ">
         Clases Demostrativas
@@ -25,7 +25,7 @@ export default function Inscripcion() {
       </div>
 
       <Separator className="mt-4" />
-      <div className="max-w-screen-xl w-full">
+      <div className="max-w-(--breakpoint-xl) w-full">
 
       <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 py-6 mt-5 md:self-start text-left w-max">
         Inscríbete Ahora

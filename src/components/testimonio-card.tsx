@@ -59,7 +59,7 @@ export function TestimonioCard({
               {puntaje}
             </Button>
           </DialogTrigger>
-          <DialogContent className={pic_orientation === "horizontal" ? "sm:max-w-[425px] md:max-w-screen-lg" : "sm:max-w-[425px] md:max-w-screen-sm md:w-fit max-h-full py-6"}>
+          <DialogContent className={pic_orientation === "horizontal" ? "sm:max-w-[425px] md:max-w-(--breakpoint-lg)" : "sm:max-w-[425px] md:max-w-(--breakpoint-sm) md:w-fit max-h-full py-6"}>
             <Image
               src={`/${pic}.jpg`}
               alt="Logo"

@@ -52,7 +52,7 @@ export function MainMenu({isTransparent}: {isTransparent: boolean}) {
               <li className="row-span-3">
                 <NavigationMenuLink asChild>
                   <a
-                    className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                    className="flex h-full w-full select-none flex-col justify-end rounded-md bg-linear-to-b from-muted/50 to-muted p-6 no-underline outline-hidden focus:shadow-md"
                     href="/inicio"
                   >
                     <div className="mb-2 text-lg font-medium">
@@ -100,7 +100,7 @@ export function MainMenu({isTransparent}: {isTransparent: boolean}) {
         </NavigationMenuItem>
         <NavigationMenuItem>
           <Link href="/inscripcion" legacyBehavior passHref className="h-[60px] w-full">
-            {isTransparent ? <NavigationMenuLink className="bg-transparent group inline-flex h-[60px] w-max items-center justify-center rounded-md px-4 py-2  transition-colors hover:bg-background hover:text-accent-foreground focus:bg-background focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-background data-[state=open]:bg-background text-xl font-semibold text-primary-foreground data-[state=open]:text-primary ">
+            {isTransparent ? <NavigationMenuLink className="bg-transparent group inline-flex h-[60px] w-max items-center justify-center rounded-md px-4 py-2  transition-colors hover:bg-background hover:text-accent-foreground focus:bg-background focus:text-accent-foreground focus:outline-hidden disabled:pointer-events-none disabled:opacity-50 data-active:bg-background data-[state=open]:bg-background text-xl font-semibold text-primary-foreground data-[state=open]:text-primary ">
               Inscripciones
             </NavigationMenuLink> : <NavigationMenuLink className={navigationMenuTriggerStyle()}>
               Inscripciones
@@ -122,7 +122,7 @@ const ListItem = React.forwardRef<
         <a
           ref={ref}
           className={cn(
-            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-hidden transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
             className
           )}
           {...props}

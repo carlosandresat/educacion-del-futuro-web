@@ -28,7 +28,7 @@ export function CursosAccordion() {
 
   return (
     <>
-      <div className="flex items-center flex-wrap my-10 max-w-screen-xl w-full">
+      <div className="flex items-center flex-wrap my-10 max-w-(--breakpoint-xl) w-full">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
           <TestimonioCard
             video="https://storage.googleapis.com/edf-bucket/Joselyn.mp4"
@@ -58,7 +58,7 @@ export function CursosAccordion() {
 
         <Separator className="mt-10 mb-4" />
 
-        <div className="max-w-screen-xl w-full">
+        <div className="max-w-(--breakpoint-xl) w-full">
           <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 py-6 mt-5 md:self-start text-left w-max">
             Nuestros Cursos
           </h2>

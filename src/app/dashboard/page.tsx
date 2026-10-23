@@ -30,7 +30,7 @@ const Dashboard = async () => {
       <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 mb-6">
         Clases Demostrativas
       </h2>
-      <div className="w-full max-w-screen-2xl">
+      <div className="w-full max-w-(--breakpoint-2xl)">
         <Table>
           <TableCaption>
             Una lista de los registros de clases demostrativas.
@@ -54,7 +54,7 @@ const Dashboard = async () => {
       <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 mt-12 mb-6">
         Estudiantes
       </h2>
-      <div className="w-full max-w-screen-2xl">
+      <div className="w-full max-w-(--breakpoint-2xl)">
         <Table>
           <TableCaption>
             Una lista de los registros de los estudiantes que pagaron un curso.
@@ -78,7 +78,7 @@ const Dashboard = async () => {
       <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 mt-12 mb-6">
         Ausencias/Atrasos
       </h2>
-      <div className="w-full max-w-screen-2xl">
+      <div className="w-full max-w-(--breakpoint-2xl)">
         <Table>
           <TableCaption>
             Una lista de los registros de ausencias/atrasos de los estudiantes.

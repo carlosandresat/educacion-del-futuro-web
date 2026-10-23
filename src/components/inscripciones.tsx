@@ -90,7 +90,7 @@ export function Inscripciones() {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="w-full space-y-6 max-w-screen-xl"
+          className="w-full space-y-6 max-w-(--breakpoint-xl)"
         >
           <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
             Sección 1: Datos Generales

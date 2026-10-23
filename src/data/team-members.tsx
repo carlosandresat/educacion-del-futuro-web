@@ -8,7 +8,7 @@ export const teamMembers = [
         <h3 className="scroll-m-20 text-xl font-semibold tracking-tight">
           Experiencia profesional:
         </h3>
-        <p className="leading-7 [&:not(:first-child)]:mt-4">
+        <p className="leading-7 not-first:mt-4">
           Con más de 5 años de experiencia en liderazgo educativo, Ariel ha
           materializado su visión de una educación integral y enriquecedora.
           Bajo su dirección, la EDF Academy se convirtió en la primera
@@ -140,7 +140,7 @@ export const teamMembers = [
         <h3 className="scroll-m-20 text-xl font-semibold tracking-tight">
           Experiencia profesional:
         </h3>
-        <p className="leading-7 [&:not(:first-child)]:mt-4">
+        <p className="leading-7 not-first:mt-4">
           Con más de 5 años en el ámbito educativo, Marco ha trabajo de manera
           autónoma y grupal en diferentes centros de educación, ayudando a los
           estudiantes a alcanzar su máximo potencial. Ha sido participe de
@@ -200,7 +200,7 @@ export const teamMembers = [
         <h3 className="scroll-m-20 text-xl font-semibold tracking-tight">
           Experiencia profesional:
         </h3>
-        <p className="leading-7 [&:not(:first-child)]:mt-4">
+        <p className="leading-7 not-first:mt-4">
           Con un año de experiencia en el ámbito educativo, Jorge ha trabajado
           con estudiantes ayudándolos a prepararse para el examen de ingreso a
           la universidad. Su enfoque práctico y conocimientos en el área han

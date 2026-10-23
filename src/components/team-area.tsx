@@ -14,7 +14,7 @@ export function TeamArea() {
       opts={{
         align: "start",
       }}
-      className="w-full max-w-screen-xl p-6 mt-6"
+      className="w-full max-w-(--breakpoint-xl) p-6 mt-6"
     >
       <CarouselContent className="">
         {teamMembers.map((member) => (

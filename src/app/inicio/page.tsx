@@ -10,7 +10,7 @@ export default function Home() {
       <MissionVision></MissionVision>
       <Separator />
 
-      <div className="max-w-screen-xl w-full">
+      <div className="max-w-(--breakpoint-xl) w-full">
         <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 py-6 mt-5 md:self-start text-left w-max">
           ¿Quienes somos?
         </h2>
@@ -23,7 +23,7 @@ export default function Home() {
       <TeamArea></TeamArea>
 
       <Separator className="mt-4" />
-      <div className="max-w-screen-xl w-full">
+      <div className="max-w-(--breakpoint-xl) w-full">
         <h2
           className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 py-6 mt-5 md:self-start text-left w-max"
           id="recursos"
@@ -36,7 +36,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="my-8 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 max-w-screen-xl">
+      <div className="my-8 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 max-w-(--breakpoint-xl)">
         <NoticiaCard
           title="Lectura Rápida"
           description='Potencia tu lectura con "Superlectura" de Jim Kwik. Lee más rápido, absorbe mejor y únete al programa del principal entrenador cerebral que ha elevado el éxito de celebridades y profesionales.'
@@ -59,7 +59,7 @@ export default function Home() {
 
       <Separator />
 
-      <div className="max-w-screen-xl w-full">
+      <div className="max-w-(--breakpoint-xl) w-full">
         <h2
           className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 py-6 mt-5 md:self-start text-left w-max"
           id="puntajes_referenciales"
