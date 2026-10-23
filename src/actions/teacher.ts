@@ -180,7 +180,10 @@ export async function updateHomeworkGrades(
       for (const gradeEntry of grades) {
         const { homeworkId, grade } = gradeEntry;
 
-        if (grade !== null && grade !== undefined) {
+        if (grade === null) {
+          // An emptied input removes the grade instead of storing 0
+          await prisma.homeworkGrade.deleteMany({ where: { homeworkId, studentId } });
+        } else {
           // Proceed with upsert
           await prisma.homeworkGrade.upsert({
             where: {
