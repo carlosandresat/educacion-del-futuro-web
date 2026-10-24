@@ -1,5 +1,5 @@
 // Creates (or resets the password of) an email/password user, since public sign-up is disabled.
-// Usage: npm run user:create -- <email> "<name>" <ADMIN|TEACHER|STUDENT|PSYCHOLOGIST>
+// Usage: pnpm user:create <email> "<name>" <ADMIN|TEACHER|STUDENT|PSYCHOLOGIST>
 // The password comes from CREATE_USER_PASSWORD or is generated and printed once.
 // Targets whatever DATABASE_URL points to (.env = dev branch); export the production URL to use it there.
 import "dotenv/config";
@@ -11,7 +11,7 @@ import { PrismaClient, Role } from "../src/generated/prisma/client";
 const [email, name, role] = process.argv.slice(2);
 
 if (!email || !name || !role || !(role in Role)) {
-  console.error('Usage: npm run user:create -- <email> "<name>" <ADMIN|TEACHER|STUDENT|PSYCHOLOGIST>');
+  console.error('Usage: pnpm user:create <email> "<name>" <ADMIN|TEACHER|STUDENT|PSYCHOLOGIST>');
   process.exit(1);
 }
 

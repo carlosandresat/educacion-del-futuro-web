@@ -6,25 +6,25 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Sitio web y app interna de **Educación del Futuro**, academia preuniversitaria en Riobamba (Ecuador). Empezó como sitio informativo con formularios de inscripción y ahora se está extendiendo hacia una app para profesores, administración, estudiantes y psicología. La UI y los textos están en español; los comentarios del código, en inglés.
 
-Stack: Next.js 16 (App Router, Turbopack) + React 19 · Better Auth (email/contraseña, sesiones en DB con cookie cache) · Prisma 7 sobre PostgreSQL (Neon) · shadcn/ui (Radix, estilo `new-york`) + Tailwind 4 · react-hook-form + Zod 4 · Vitest · desplegado en Vercel (Node 24, `iad1`).
+Stack: Next.js 16 (App Router, Turbopack) + React 19 · Better Auth (email/contraseña, sesiones en DB con cookie cache) · Prisma 7 sobre PostgreSQL (Neon) · shadcn/ui (Radix, estilo `new-york`) + Tailwind 4 · react-hook-form + Zod 4 · Vitest · pnpm · desplegado en Vercel (Node 24, `iad1`).
 
 ## Comandos
 
 ```bash
-npm run dev          # servidor de desarrollo
-npm run build        # build de producción
-npm run lint         # ESLint 10 (configuración flat en eslint.config.mjs; el build ya no hace lint)
-npm run typecheck    # tsc --noEmit
-npm test             # Vitest (unit tests con Prisma/auth mockeados; no necesita base de datos)
-npx vitest run src/lib/auth-guards.test.ts  # un solo archivo de tests
-npx prisma generate  # también corre en postinstall; genera el cliente en src/generated/prisma (ignorado por git)
-npx prisma migrate dev --name <cambio>  # nueva migración contra la rama dev
-npx prisma db seed   # roles y cursos; con SEED_TEST_USERS=true, además un usuario de prueba por rol
+pnpm dev             # servidor de desarrollo
+pnpm build           # build de producción
+pnpm lint            # ESLint 10 (configuración flat en eslint.config.mjs; el build ya no hace lint)
+pnpm typecheck       # tsc --noEmit
+pnpm test            # Vitest (unit tests con Prisma/auth mockeados; no necesita base de datos)
+pnpm vitest run src/lib/auth-guards.test.ts  # un solo archivo de tests
+pnpm prisma generate # también corre en postinstall; genera el cliente en src/generated/prisma (ignorado por git)
+pnpm prisma migrate dev --name <cambio>  # nueva migración contra la rama dev
+pnpm prisma db seed  # roles y cursos; con SEED_TEST_USERS=true, además un usuario de prueba por rol
 ```
 
 Prisma 7: la configuración del CLI está en `prisma.config.ts` (carga `.env` con dotenv y usa `DIRECT_URL`), y en runtime `src/lib/db.ts` usa `@prisma/adapter-pg` con la `DATABASE_URL` pooled. Los tipos y el cliente se importan desde `@/generated/prisma/client`, no desde `@prisma/client`.
 
-CI (`.github/workflows/ci.yml`) corre lint, typecheck, tests y build en cada push a `main` y en cada PR. Las variables están documentadas en `.env.example`. El `.env` local apunta a la rama `dev` del proyecto de Neon "EDF Academy Web" (`aws-us-east-1`); producción es la rama `production` y solo recibe `prisma migrate deploy`. El registro público está desactivado: los usuarios se crean con `npm run user:create -- <email> "<nombre>" <ROL>` (o con el seed en dev). Better Auth limita los inicios de sesión en producción (unos pocos intentos cada 10 s por IP).
+CI (`.github/workflows/ci.yml`) corre lint, typecheck, tests y build en cada push a `main` y en cada PR. Las variables están documentadas en `.env.example`. El `.env` local apunta a la rama `dev` del proyecto de Neon "EDF Academy Web" (`aws-us-east-1`); producción es la rama `production` y solo recibe `prisma migrate deploy`. El registro público está desactivado: los usuarios se crean con `pnpm user:create <email> "<nombre>" <ROL>` (o con el seed en dev). Better Auth limita los inicios de sesión en producción (unos pocos intentos cada 10 s por IP).
 
 **Videos del sitio público (alojados fuera del repo):** el video de `src/app/page.tsx` y los de explicación de cada curso en `cursos-accordion.tsx` (Expedición Científica, Ruta del Genio, Sendero del Guerrero) están en Cloudinary (`res.cloudinary.com/djqqonsys`). Los de testimonio (`cursos-accordion.tsx`) y el de introducción (`mision-vision.tsx`) están en el bucket `edf-bucket` de Google Cloud Storage; si la billing account de GCP se cierra, esos videos dejan de cargar y los datos pueden borrarse. Mantener la facturación activa o migrarlos antes de la versión final.
 
@@ -49,7 +49,7 @@ Los schemas Zod compartidos están en `src/schemas/index.ts`. Los formularios p�
 
 - Funciona: sitio público, formularios de inscripción y clases demostrativas (validados en el servidor), login y logout por rol, ruleta (el premio se sortea en el servidor y queda en una cookie firmada), lista de cursos del profesor, notas de tareas (guardar y borrar), crear tarea, y la portada del estudiante (sus cursos).
 - A medias: **Lecciones** y **Asistencia** usan alumnos y datos de ejemplo fijos en el código y no persisten (`lessons-tab.tsx`, `assistance-tab.tsx`). Los formularios de crear lección y crear clase solo muestran un toast (`createLesson` existe pero nadie la llama, y no hay action para crear clases). El **Dashboard** admin tiene tablas vacías o falsas.
-- Solo placeholder: `/psicologia`. No existe interfaz para `AbsenceRegister`, `PsychologyRegister` y `Penaltie`, ni para gestionar usuarios y matrículas (por ahora se usa `npm run user:create`).
+- Solo placeholder: `/psicologia`. No existe interfaz para `AbsenceRegister`, `PsychologyRegister` y `Penaltie`, ni para gestionar usuarios y matrículas (por ahora se usa `pnpm user:create`).
 
 ## Pendientes
 
